@@ -1,0 +1,76 @@
+{% extends 'registration/registration_base.html' %}
+{% load i18n %}
+{% load crispy_forms_tags %}
+{% load static %}
+{% block title %}
+  {% trans 'Log in' %}
+{% endblock %}
+
+{% block content %}
+  <section class="log-in-section background-image-2 section-b-space mt-4">
+    <div class="container-fluid-lg w-100">
+      <div class="row">
+        <div class="col-xxl-6 col-xl-5 col-lg-6 d-lg-block d-none ms-auto">
+          <div class="image-contain">
+            <img src="{% static 'web/assets/images/inner-page/log-in.png' %}" class="img-fluid" alt="" />
+          </div>
+        </div>
+
+        <div class="col-xxl-4 col-xl-5 col-lg-6 col-sm-8 mx-auto">
+          <div class="log-in-box">
+            <div class="log-in-title">
+              <h3>Welcome To Blue Tower</h3>
+              <h4>Log In Your Account</h4>
+            </div>
+
+            <div class="input-box">
+              <form method="post" action="">
+                {% csrf_token %}
+                {{ form|crispy }}
+                <div class="col-12">
+                  <div class="forgot-box">
+                      <div class="form-check ps-0 m-0 remember-box">
+                          <input class="checkbox_animated check-box" type="checkbox"
+                              id="flexCheckDefault">
+                          <label class="form-check-label" for="flexCheckDefault">Remember me</label>
+                      </div>
+                      <a href="{% url 'auth_password_reset' %}" class="forgot-password">{% trans 'Forgot your password?' %}</a>
+                  </div>
+              </div>
+
+                <input type="submit" class="btn btn-animation w-100 justify-content-center mt-3" value="{% trans 'Log in' %}" />
+                <input type="hidden" name="next" value="{{ next }}" />
+              </form>
+            </div>
+
+            <div class="other-log-in d-none">
+              <h6>or</h6>
+            </div>
+
+            <div class="log-in-button d-none">
+              <ul>
+                <li>
+                  <a href="javascript:valid(0)" class="btn google-button w-100"><img src="{% static 'web/assets/images/inner-page/google.png' %}" class="blur-up lazyload" alt="" /> Log In with Google</a>
+                </li>
+                <li>
+                  <a href="javascript:valid(0)" class="btn google-button w-100"><img src="{% static 'web/assets/images/inner-page/facebook.png' %}" class="blur-up lazyload" alt="" /> Log In with Facebook</a>
+                </li>
+              </ul>
+            </div>
+
+            <div class="other-log-in d-none">
+              <h6></h6>
+            </div>
+
+            <div class="sign-up-box">
+              <h4>Don't have an account?</h4>
+              <a href="{% url 'registration_register' %}">Sign Up</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+{% endblock %}

@@ -1,0 +1,262 @@
+{% extends 'web/partials/base.html' %}
+{% load static %}
+
+{% block content %}
+  <!-- Breadcrumb Section Start -->
+  <section class="breadcrumb-section pt-0">
+    <div class="container">
+      <div class="row">
+        <div class="col-12">
+          <div class="breadcrumb-contain">
+            {% if title %}
+              <h2>Shop {{ title }}</h2>
+            {% endif %}
+            <nav>
+              <ol class="breadcrumb mb-0">
+                <li class="breadcrumb-item">
+                  <a href="index.html"><i class="fa-solid fa-house"></i></a>
+                </li>
+                {% if title %}
+                  <li class="breadcrumb-item active">Shop {{ title }}</li>
+                {% endif %}
+              </ol>
+            </nav>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <!-- Breadcrumb Section End -->
+
+  <!-- Category Section Start -->
+  <section class="wow fadeInUp pt-1">
+    <div class="container">
+      <div class="row">
+        <div class="col-12">
+          <div class="category-slider-1 no-space shop-box no-arrow">
+            {% for sub in subcategories %}
+              <div>
+                <div class="shop-category-box">
+                  <a href="{% url 'web:shop' %}?subcategories={{ sub.slug }}">
+                    <div class="shop-category-image">
+                      <img src="{{ sub.icon_image.url }}" class="blur-up lazyload" alt="" />
+                    </div>
+                    <div class="category-box-name">
+                      <h6>{{ sub.title }}</h6>
+                    </div>
+                  </a>
+                </div>
+              </div>
+            {% endfor %}
+          </div>
+        </div>
+      </div>
+    </div>
+  </section> 
+  <!-- Category Section End -->
+
+  <!-- Shop Section Start -->
+  <section class="section-shop-space shop-section">
+    <div class="container">
+      <div class="row">
+        <div class="col-custom-3 wow fadeInUp">
+          <div class="left-box">
+            <div class="shop-left-sidebar">
+              <div class="back-button">
+                <h3><i class="fa-solid fa-arrow-left"></i> Back</h3>
+              </div>
+
+              {% for category in categories %}
+                <div class="accordion custom-accordion" id="accordionExample">
+                  <a class="categories_title" href="{% url 'web:shop' %}?categories={{category.slug}}">
+                    <ul>
+                      <li class="list-group-item"><b>{{category.title}}</b></li>
+                    </ul>
+                  </a>
+                  {% for subcategory in category.subcategories.all %}
+                  {% if subcategory.active %}
+                  
+                  <div class="accordion-item">
+                    <h2 class="accordion-header" id="panelsStayOpen-headingOne">
+                      
+                        <button class="accordion-button " type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne">
+                            <span>{{ subcategory.title }}</span>
+                        </button>
+                    </h2>
+                    
+                    <div id="collapseOne" class="accordion-collapse collapse show">
+                      <div class="accordion-body">
+                        <ul class="category-list custom-padding custom-height">
+                          {% for producttype in subcategory.product_types.all %}
+                          {% if producttype.active %}
+                          <li>
+                            <div class="form-check ps-0 m-0 category-list-box">
+                              {% comment %} <input class="checkbox_animated" type="checkbox" id="{{producttype.id}}" /> {% endcomment %}
+                              <label class="form-check-label" for="{{producttype.id}}">
+                                <span class="name list-py-item"><a href="{% url 'web:shop' %}?product_type={{producttype.slug}}">{{ producttype.title }}</a></span>
+                                <span class="number">({{ producttype.get_sub_product_count }})</span>
+                              </label>
+                            </div>
+                          </li>
+                          {% endif %}
+                          {% endfor %}
+                        </ul>
+                      </div>
+                    </div>
+                  </div>
+                  {% endif %}
+                  {% endfor %}
+                  
+                </div>
+              {% endfor %}
+            </div>
+          </div>
+        </div>
+
+        <div class="col-custom- wow fadeInUp">
+          <div class="show-button">
+            <div class="filter-button-group mt-0">
+              <div class="filter-button d-inline-block d-lg-none">
+                <a><i class="fa-solid fa-filter"></i> Filter Menu</a>
+              </div>
+            </div>
+
+            <div class="top-filter-menu">
+              <div class="category-dropdown">
+                <h5 class="text-content">Sort By :</h5>
+                <form method="get" action="">
+                  <select name="sort_by" class="form-select " style="border: 1px solid #0baf9a;" onchange="this.form.submit()">
+                      <option  value="all_products" {% if request.GET.sort_by == 'all_products' %}selected{% endif %}>Sort by: All Products</option>
+                      <option value="low_to_high" {% if request.GET.sort_by == 'low_to_high' %}selected{% endif %}>Low - High</option>
+                      <option value="high_to_low" {% if request.GET.sort_by == 'high_to_low' %}selected{% endif %}>High - Low</option>
+                      <option value="rating" {% if request.GET.sort_by == 'rating' %}selected{% endif %}>Average Rating</option>
+                      <option value="a_to_z" {% if request.GET.sort_by == 'a_to_z' %}selected{% endif %}>A Z order</option>
+                      <option value="z_to_a" {% if request.GET.sort_by == 'z_to_a' %}selected{% endif %}>Z A order</option>
+                  </select>
+              </form>
+              </div>
+
+              <div class="grid-option d-none d-md-block">
+                <ul>
+                  <li class="three-grid">
+                    <a href="javascript:void(0)"><img src="{% static 'web/assets/svg/grid-3.svg' %}" class="blur-up lazyload" alt="" /></a>
+                  </li>
+                  <li class="grid-btn d-xxl-inline-block d-none active">
+                    <a href="javascript:void(0)">
+                      <img src="{% static 'web/assets/svg/grid-4.svg' %}" class="blur-up lazyload d-lg-inline-block d-none" alt="" />
+                      <img src="{% static 'web/assets/svg/grid.svg' %}" class="blur-up lazyload img-fluid d-lg-none d-inline-block" alt="" />
+                    </a>
+                  </li>
+                  <li class="list-btn">
+                    <a href="javascript:void(0)"><img src="{% static 'web/assets/svg/list.svg' %}" class="blur-up lazyload" alt="" /></a>
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
+          {% if television %}
+          <div class="row g-sm-3 g-3 row-cols-xxl-4 row-cols-xl-4 row-cols-lg-4 row-cols-md-4 row-cols-2 product-list-section">
+            {% for product in television %}
+              <div>
+                <div class="product-box-3 h-100 wow fadeInUp card-product">
+                  <div class="product-header">
+                    <div class="product-image">
+                      <a href="{{ product.get_absolute_url }}"><img src="{{ product.image.url }}" class="img-fluid blur-up lazyload" alt="" /></a>
+
+                      <ul class="product-option">
+                        <li data-bs-toggle="tooltip" data-bs-placement="top" title="View">
+                          <a href="javascript:void(0)" data-bs-toggle="modal"
+                            data-bs-target="#view-{{ product.id }}">
+                            <i data-feather="eye"></i>
+                        </a>
+                        </li>
+
+                        
+                        <li data-bs-toggle="tooltip" data-bs-placement="top" title="Wishlist">
+                          {% comment %} <a href="" class="notifi-wishlist btn-action-wishlist" data-id="{{ product.id }}" data-product_id="{{ product.id }}">
+                              <i data-feather="heart"></i>
+                          </a>  {% endcomment %}
+                          <button class="notifi-wishlist btn-action-wishlist" data-product_id="{{ product.id }}" data-bs-placement="top" data-bs-html="true">
+                               <i data-feather="heart"></i>
+                          </button>
+                      </li>
+                        
+                      </ul>
+                    </div>
+                  </div>
+                  <div class="product-footer">
+                    <div class="product-detail">
+                      <span class="span-name">{{ product.brand }}</span>
+                      <a href="{{ product.get_absolute_url }}"><h5 class="name">{{ product.product.title }}</h5></a>
+                      <p class="text-content mt-1 mb-2 product-content">{{product.display_title}}</p>
+                      <div class="product-rating mt-2">
+                        <ul class="rating">
+                          {% for star in "12345" %}
+                              {% if star|add:0 <= product.average_rating %}
+                              <li>
+                                  <i data-feather="star" class="fill"></i>
+                              </li>
+                              {% else %}
+                              <li>
+                                  <i data-feather="star"></i>
+                              </li>
+                              {% endif %}
+                          {% endfor %}
+                      </ul>
+                      <span>( {{ product.num_of_reviews }} )</span>
+                      </div>
+                      <h5 class="price">
+                        <span class="theme-color">AED {{ product.get_sale_price_t|floatformat:0 }}</span> 
+                        <del>AED {{ product.get_regular_price_t|floatformat:0 }}</del></h5>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              {% empty %}
+             <p>No refrigerators available.</p>
+             {% endfor %}
+          </div>
+          {% else %}
+            <div class="coming-box mt-5">
+                <div>
+                    <div class="coming-title">
+                        <h2>No products available.</h2>
+                    </div>
+                </div>
+            </div>
+          {% endif %}
+
+          {% if is_paginated %}
+          <nav class="custom-pagination">
+            <ul class="pagination justify-content-center">
+              <li class="page-item {% if not page_obj.has_previous %}action{% endif %}">
+                <a class="page-link" href="{% if page_obj.has_previous %}?page={{ page_obj.previous_page_number }}&subcategory={{ request.GET.subcategory }}{% else %}#{% endif %}" tabindex="-1">
+                  <i class="fa-solid fa-angles-left"></i></a>
+              </li>
+              {% for num in page_obj.paginator.page_range %}
+              <li class="page-item {% if page_obj.number == num %}active{% endif %}">
+                <a class="page-link" href="?page={{ num }}">{{ num }}</a>
+              </li>
+              {% endfor %}
+              <li class="page-item {% if not page_obj.has_next %}action{% endif %}">
+                <a class="page-link" href="{% if page_obj.has_next %}?page={{ page_obj.next_page_number }}&subcategory={{ request.GET.subcategory }}{% else %}#{% endif %}">
+                  <i class="fa-solid fa-angles-right"></i></a>
+              </li>
+            </ul>
+          </nav>
+          {% endif %}
+        </div>
+
+      </div>
+    </div>
+  </section>
+  <!-- Shop Section End -->
+{% endblock %}
+{% block js %}
+    <script src="{% static 'web/assets/js/index.js' %}"></script>
+    <script src="{% static 'web/assets/js/filter-checkout.js' %}"></script>
+    <!-- Price Range Js -->
+    <script src="{% static 'web/assets/js/ion.rangeSlider.min.js' %}"></script>
+  {% endblock %}
+
+{% include 'include/modal.html' %}

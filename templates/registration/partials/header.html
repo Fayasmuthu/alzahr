@@ -1,0 +1,90 @@
+{% load static %}
+<!-- Loader Start -->
+
+<!-- Header Start -->
+<header class="header-2">
+    
+    <div class="top-nav top-header sticky-header sticky-header-3">
+        <div class="container-fluid-lg">
+            <div class="row">
+                <div class="col-12">
+                    <div class="navbar-top">
+                        <button class="navbar-toggler d-xl-none d-block p-0 me-3" type="button"
+                            data-bs-toggle="offcanvas" data-bs-target="#primaryMenu">
+                            <span class="navbar-toggler-icon">
+                                <i class="iconly-Category icli theme-color"></i>
+                            </span>
+                        </button>
+                        <a href="{% url "web:index" %}" class="web-logo nav-logo">
+                            <img src="{% static 'web/assets/images/logo/logo-blue-png.png' %}" class="img-fluid blur-up lazyload" alt="">
+                        </a>
+                        <div class="rightside-menu">
+                            <div class="option-list">
+                                <ul>
+                                    <li>
+                                        <a href="javascript:void(0)" class="header-icon user-icon search-icon">
+                                            <i class="iconly-Profile icli"></i>
+                                        </a>
+                                    </li>
+
+                                    <li>
+                                        <a href="javascript:void(0)" class="header-icon search-box search-icon">
+                                            <i class="iconly-Search icli"></i>
+                                        </a>
+                                    </li>
+
+                                    <li class="onhover-dropdown">
+                                        <a href="{% url "orders:wishlist" %}" class="header-icon swap-icon">
+                                            <small class="badge-number" id="header_wishlist_count">{{ wishlist_count }}</small>
+                                            <i class="iconly-Heart icli"></i>
+                                        </a>
+
+                                    </li>
+
+                                    <li class="right-side onhover-dropdown">
+                                        <a href="javascript:volid(0)" class="header-icon bag-icon">
+                                            <i data-feather="user"></i>
+                                        </a>
+                                     {% if request.user.is_authenticated %} 
+                                        <div class="delivery-detail">
+                                            <h6>Hello,</h6>
+                                            <h5>My {{user.username}}</h5>
+                                        </div>
+                                        
+                                        <div class="onhover-div onhover-div-login">
+                                            <ul class="user-box-name">
+                                             
+                                                <li class="product-box-contain d-none">
+                                                    <a href="forgot.html">My Account</a>
+                                                </li>
+                                                <li class="product-box-contain">
+                                                <form action="{% url 'auth_logout' %}" method="post">
+                                                    {% csrf_token %}
+                                                    <i class="iconly-Logout icli"></i>
+                                                    <button type="submit" class="menu-link menu-link_us-s logout-btn">Logout</button>
+                                                </form>
+                                                {% else %}
+                                                    <i class="iconly-Login icli"></i>
+                                                        <a href="{% url 'auth_login' %}">Log In</a>
+                                                {% endif %}
+                                                
+                                                </li> 
+
+                                                <li class="product-box-contain d-none">
+                                                    <i class="iconly-Login icli"></i>
+                                                    <a href="sign-up.html">Register</a>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+</header>
+<!-- Header End -->
