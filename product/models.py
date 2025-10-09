@@ -144,6 +144,10 @@ class Product(models.Model):
     image = models.ImageField(
         upload_to="products/img", help_text=" The recommended size is 700x955 pixels."
     )
+    image_png = models.ImageField(
+    upload_to="products/png", help_text=" The recommended size is 700x955 pixels.",
+    blank=True, null=True,
+)
     # created_at = models.DateTimeField(default=timezone.now)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
@@ -155,11 +159,11 @@ class Product(models.Model):
     # meta
     meta_title = models.CharField(max_length=200, blank=True, null=True)
     meta_description = models.TextField(max_length=500, blank=True, null=True)
-    other1 = models.BooleanField(default=False)
-    other2 = models.BooleanField(default=False)
-    other3 = models.BooleanField(default=False)
-    other4 = models.BooleanField(default=False)
-    other5 = models.BooleanField(default=False)
+    dried = models.BooleanField(default=False)
+    powder = models.BooleanField(default=False)
+    whole = models.BooleanField(default=False)
+    Slice = models.BooleanField(default=False)
+    top = models.BooleanField(default=False)
     section1 = models.BooleanField(default=False)
     section2 = models.BooleanField(default=False)
     section3 = models.BooleanField(default=False)

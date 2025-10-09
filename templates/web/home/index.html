@@ -10,8 +10,8 @@
           <div class="row">
               <div class="col-12">
                   <div class="slider-animate">
-                    {% if is_special %}
-                    {% for i in is_special %}
+                    {% if banner %}
+                    {% for i in banner %}
                       <div>
                           <div class="home-contain rounded-0 p-0">
                               <img src="{{ i.image.url }}"
@@ -27,7 +27,7 @@
                                           </h5>
                                           <button
                                               class="btn theme-bg-color btn-md text-white fw-bold mt-md-4 mt-2 mend-auto"
-                                              onclick="location.href = '{% url "web:shop" %}';">Shop Now <i
+                                              onclick="location.href = '';">Shop Now <i
                                                   class="fa-solid fa-arrow-right icon"></i></button>
                                       </div>
                                   </div>
@@ -49,8 +49,8 @@
   {% comment %} <div class="container-fluid"> {% endcomment %}
       {% comment %} <div class="slider-4-banner arrow-slider slick-height"> {% endcomment %}
       <div class="slider-4-banner arrow-slider slick-height">
-        {% if is_special %}
-          {% for i in is_special %}
+        {% if banner %}
+          {% for i in banner %}
           <div>
               <div class=" banner-contain-3 hover-effect">
                   <a href="javascript:void(0)" class="banner-image">
@@ -60,7 +60,7 @@
                       <div>
                           <h5 class="fw-light mb-2">50% Discount</h5>
                           <h4 class="fw-bold mb-0">Washing Machine</h4>
-                          <button onclick="location.href = '{% url "web:coming_soon" %}';"
+                          <button onclick="location.href = '';"
                               class="btn shop-now-button mt-3 ps-0 mend-auto theme-color fw-bold">Shop Now <i
                                   class="fa-solid fa-chevron-right"></i></button>
                       </div>
@@ -75,778 +75,589 @@
 </section>
 
 <!-- Category Section Start -->
-<!-- ---------subcategory end-------------------------------->
-<section class="container section-all-image-cate">
-  <section class="category-section-3">
-    <div>
-    {% comment %} <div class="container-fluid-lg"> {% endcomment %}
-        <div class="title-cate">
-            <h2>Shop By Categories</h2>
-        </div>
+<section>
+    <div class="container-fluid-lg">
         <div class="row">
             <div class="col-12">
-                <div class="category-slider-1 arrow-slider wow fadeInUp">
-                    {% if deals %}
-                    {% for subcategory in deals %}
+                <div class="slider-9 mb-4">
+                    
                     <div>
-                        <div class="category-box-list">
-
-                            <div class="category-box-view">
-                                <a href="{% url "product:deals" %}">
-                                    <img src="{{ subcategory.image.url }}" class="img-fluid blur-up lazyload" alt="">
-                                </a>
-                                <button onclick="location.href = '{% url "product:deals" %}';" class="btn shop-button">
-                                    <span>Shop Now</span>
-                                    <i class="fas fa-angle-right"></i>
-                                </button>
+                        <a href="shop-left-sidebar.html" class="category-box category-box-2 category-dark"
+                            data-wow-delay="0.5s">
+                            <div>
+                                <img src="{% static 'web/assets/svg/2/5.svg' %}" class="blur-up lazyload" alt="">
+                                <h5>Bread</h5>
                             </div>
-                        </div>
-                        <h4 class="text-center text-light">{{ subcategory.title }}</h4>
+                        </a>
                     </div>
-                    {% endfor %}
-                    {% endif %}
 
-                    {% if is_bestseller %}
-                    {% for subcategory in is_bestseller %}
                     <div>
-                        <div class="category-box-list">
-
-                            <div class="category-box-view">
-                                <a href="{% url "product:bestseller" %}">
-                                    <img src="{{ subcategory.image.url }}" class="img-fluid blur-up lazyload" alt="">
-                                </a>
-                                <button onclick="location.href = '{% url "product:bestseller" %}';" class="btn shop-button">
-                                    <span>Shop Now</span>
-                                    <i class="fas fa-angle-right"></i>
-                                </button>
+                        <a href="shop-left-sidebar.html" class="category-box category-box-2 category-dark"
+                            data-wow-delay="0.6s">
+                            <div>
+                                <img src="{% static 'web/assets/svg/2/6.svg' %}" class="blur-up lazyload" alt="">
+                                <h5>Biscuits</h5>
                             </div>
-                        </div>
-                        <h4 class="text-center text-light">{{ subcategory.title }}</h4>
+                        </a>
                     </div>
-                    {% endfor %}
-                    {% endif %}
 
-                    {% if home_applications %}
-                    {% for subcategory in home_applications %}
                     <div>
-                        <div class="category-box-list">
-
-                            <div class="category-box-view">
-                                <a href="{% url "product:home_appliance" %}">
-                                    <img src="{{ subcategory.image.url }}" class="img-fluid blur-up lazyload" alt="">
-                                </a>
-                                <button onclick="location.href = '{% url "product:home_appliance" %}';" class="btn shop-button">
-                                    <span>Shop Now</span>
-                                    <i class="fas fa-angle-right"></i>
-                                </button>
+                        <a href="shop-left-sidebar.html" class="category-box category-box-2 category-dark"
+                            data-wow-delay="0.7s">
+                            <div>
+                                <img src="{% static 'web/assets/svg/2/7.svg' %}" class="blur-up lazyload" alt="">
+                                <h5>Bagel</h5>
                             </div>
-                        </div>
-                        <h4 class="text-center text-light">{{ subcategory.title }}</h4>
+                        </a>
                     </div>
-                    {% endfor %}
-                    {% endif %}
 
-                    {% if home_impover %}
-                    {% for subcategory in home_impover %}
                     <div>
-                        <div class="category-box-list">
-
-                            <div class="category-box-view">
-                                <a href="{% url "product:home_impover" %}">
-                                    <img src="{{ subcategory.image.url }}" class="img-fluid blur-up lazyload" alt="">
-                                </a>
-                                <button onclick="location.href = '{% url "product:home_impover" %}';" class="btn shop-button">
-                                    <span>Shop Now</span>
-                                    <i class="fas fa-angle-right"></i>
-                                </button>
+                        <a href="shop-left-sidebar.html" class="category-box category-box-2 category-dark"
+                            data-wow-delay="0.8s">
+                            <div>
+                                <img src="{% static 'web/assets/svg/2/8.svg' %}" class="blur-up lazyload" alt="">
+                                <h5>Croissant</h5>
                             </div>
-                        </div>
-                        <h4 class="text-center text-light">{{ subcategory.title }}</h4>
+                        </a>
                     </div>
-                    {% endfor %}
-                    {% endif %}
 
-                    {% if kitchen_dining %}
-                    {% for subcategory in kitchen_dining %}
                     <div>
-                        <div class="category-box-list">
-
-                            <div class="category-box-view">
-                                <a href="{% url "product:kitchen" %}">
-                                    <img src="{{ subcategory.image.url }}" class="img-fluid blur-up lazyload" alt="">
-                                </a>
-                                <button onclick="location.href = '{% url "product:kitchen" %}';" class="btn shop-button">
-                                    <span>Shop Now</span>
-                                    <i class="fas fa-angle-right"></i>
-                                </button>
+                        <a href="shop-left-sidebar.html" class="category-box category-box-2 category-dark"
+                            data-wow-delay="0.9s">
+                            <div>
+                                <img src="{% static 'web/assets/svg/2/9.svg' %}" class="blur-up lazyload" alt="">
+                                <h5>Cupcake</h5>
                             </div>
-                        </div>
-                        <h4 class="text-center text-light">{{ subcategory.title }}</h4>
+                        </a>
                     </div>
-                    {% endfor %}
-                    {% endif %}
-
-                    {% if home_decor %}
-                    {% for subcategory in home_decor %}
-                    <div>
-                        <div class="category-box-list">
-
-                            <div class="category-box-view">
-                                <a href="{% url "product:home_decor" %}">
-                                    <img src="{{ subcategory.image.url }}" class="img-fluid blur-up lazyload" alt="">
-                                </a>
-                                <button onclick="location.href = '{% url "product:home_decor" %}';" class="btn shop-button">
-                                    <span>Shop Now</span>
-                                    <i class="fas fa-angle-right"></i>
-                                </button>
-                            </div>
-                        </div>
-                        <h4 class="text-center text-light">{{ subcategory.title }}</h4>
-                    </div>
-                    {% endfor %}
-                    {% endif %}
-
-                    {% if electronics %}
-                    {% for subcategory in electronics %}
-                    <div>
-                        <div class="category-box-list">
-
-                            <div class="category-box-view">
-                                <a href="{% url "product:electronic" %}">
-                                    <img src="{{ subcategory.image.url }}" class="img-fluid blur-up lazyload" alt="">
-                                </a>
-                                <button onclick="location.href = '{% url "product:electronic" %}';" class="btn shop-button">
-                                    <span>Shop Now</span>
-                                    <i class="fas fa-angle-right"></i>
-                                </button>
-                            </div>
-                        </div>
-                        <h4 class="text-center text-light">{{ subcategory.title }}</h4>
-                    </div>
-                    {% endfor %}
-                    {% endif %}
-
-                    {% if large_applications %}
-                    {% for subcategory in large_applications %}
-                    <div>
-                        <div class="category-box-list">
-
-                            <div class="category-box-view">
-                                <a href="{% url "product:large_appliance" %}">
-                                    <img src="{{ subcategory.image.url }}" class="img-fluid blur-up lazyload" alt="">
-                                </a>
-                                <button onclick="location.href = '{% url "product:large_appliance" %}';" class="btn shop-button">
-                                    <span>Shop Now</span>
-                                    <i class="fas fa-angle-right"></i>
-                                </button>
-                            </div>
-                        </div>
-                        <h4 class="text-center text-light">{{ subcategory.title }}</h4>
-                    </div>
-                    {% endfor %}
-                    {% endif %}
-
-                    {% if televisions %}
-                    {% for subcategory in televisions %}
-                    <div>
-                        <div class="category-box-list">
-
-                            <div class="category-box-view">
-                                <a href="{% url "product:television" %}">
-                                    <img src="{{ subcategory.image.url }}" class="img-fluid blur-up lazyload" alt="">
-                                </a>
-                                <button onclick="location.href = '{% url "product:television" %}';" class="btn shop-button">
-                                    <span>Shop Now</span>
-                                    <i class="fas fa-angle-right"></i>
-                                </button>
-                            </div>
-                        </div>
-                        <h4 class="text-center text-light">{{ subcategory.title }}</h4>
-                    </div>
-                    {% endfor %}
-                    {% endif %}
-
-                    {% if bathrooms %}
-                    {% for subcategory in bathrooms %}
-                    <div>
-                        <div class="category-box-list">
-
-                            <div class="category-box-view">
-                                <a href="{% url "product:television" %}">
-                                    <img src="{{ subcategory.image.url }}" class="img-fluid blur-up lazyload" alt="">
-                                </a>
-                                <button onclick="location.href = '{% url "product:bathroom" %}';" class="btn shop-button">
-                                    <span>Shop Now</span>
-                                    <i class="fas fa-angle-right"></i>
-                                </button>
-                            </div>
-                        </div>
-                        <h4 class="text-center text-light">{{ subcategory.title }}</h4>
-                    </div>
-                    {% endfor %}
-                    {% endif %}
-
-                    {% if gardenings %}
-                    {% for subcategory in gardenings %}
-                    <div>
-                        <div class="category-box-list">
-
-                            <div class="category-box-view">
-                                <a href="{% url "product:garden" %}">
-                                    <img src="{{ subcategory.image.url }}" class="img-fluid blur-up lazyload" alt="">
-                                </a>
-                                <button onclick="location.href = '{% url "product:garden" %}';" class="btn shop-button">
-                                    <span>Shop Now</span>
-                                    <i class="fas fa-angle-right"></i>
-                                </button>
-                            </div>
-                        </div>
-                        <h4 class="text-center text-light">{{ subcategory.title }}</h4>
-                    </div>
-                    {% endfor %}
-                    {% endif %}
-
-                    {% if automative %}
-                    {% for subcategory in automative %}
-                    <div>
-                        <div class="category-box-list">
-
-                            <div class="category-box-view">
-                                <a href="{% url "product:automative" %}">
-                                    <img src="{{ subcategory.image.url }}" class="img-fluid blur-up lazyload" alt="">
-                                </a>
-                                <button onclick="location.href = '{% url "product:automative" %}';" class="btn shop-button">
-                                    <span>Shop Now</span>
-                                    <i class="fas fa-angle-right"></i>
-                                </button>
-                            </div>
-                        </div>
-                        <h4 class="text-center text-light">{{ subcategory.title }}</h4>
-                    </div>
-                    {% endfor %}
-                    {% endif %}
-
-                    {% if sport %}
-                    {% for subcategory in sport %}
-                    <div>
-                        <div class="category-box-list">
-
-                            <div class="category-box-view">
-                                <a href="{% url "product:sport" %}">
-                                    <img src="{{ subcategory.image.url }}" class="img-fluid blur-up lazyload" alt="">
-                                </a>
-                                <button onclick="location.href = '{% url "product:sport" %}';" class="btn shop-button">
-                                    <span>Shop Now</span>
-                                    <i class="fas fa-angle-right"></i>
-                                </button>
-                            </div>
-                        </div>
-                        <h4 class="text-center text-light">{{ subcategory.title }}</h4>
-                    </div>
-                    {% endfor %}
-                    {% endif %}
-
-                    {% if lighting %}
-                    {% for subcategory in lighting %}
-                    <div>
-                        <div class="category-box-list">
-
-                            <div class="category-box-view">
-                                <a href="{% url "product:lighting" %}">
-                                    <img src="{{ subcategory.image.url }}" class="img-fluid blur-up lazyload" alt="">
-                                </a>
-                                <button onclick="location.href = '{% url "product:lighting" %}';" class="btn shop-button">
-                                    <span>Shop Now</span>
-                                    <i class="fas fa-angle-right"></i>
-                                </button>
-                            </div>
-                        </div>
-                        <h4 class="text-center text-light">{{ subcategory.title }}</h4>
-                    </div>
-                    {% endfor %}
-                    {% endif %}
-
-                    {% if part_accessories %}
-                    {% for subcategory in part_accessories %}
-                    <div>
-                        <div class="category-box-list">
-
-                            <div class="category-box-view">
-                                <a href="{% url "product:part_accessories" %}">
-                                    <img src="{{ subcategory.image.url }}" class="img-fluid blur-up lazyload" alt="">
-                                </a>
-                                <button onclick="location.href = '{% url "product:part_accessories" %}';" class="btn shop-button">
-                                    <span>Shop Now</span>
-                                    <i class="fas fa-angle-right"></i>
-                                </button>
-                            </div>
-                        </div>
-                        <h4 class="text-center text-light">{{ subcategory.title }}</h4>
-                    </div>
-                    {% endfor %}
-                    {% endif %}
-
-                    {% if travel %}
-                    {% for subcategory in travel %}
-                    <div>
-                        <div class="category-box-list">
-
-                            <div class="category-box-view">
-                                <a href="{% url "product:travel" %}">
-                                    <img src="{{ subcategory.image.url }}" class="img-fluid blur-up lazyload" alt="">
-                                </a>
-                                <button onclick="location.href = '{% url "product:travel" %}';" class="btn shop-button">
-                                    <span>Shop Now</span>
-                                    <i class="fas fa-angle-right"></i>
-                                </button>
-                            </div>
-                        </div>
-                        <h4 class="text-center text-light">{{ subcategory.title }}</h4>
-                    </div>
-                    {% endfor %}
-                    {% endif %}
-
-                    {% if baby_products %}
-                    {% for subcategory in baby_products %}
-                    <div>
-                        <div class="category-box-list">
-
-                            <div class="category-box-view">
-                                <a href="{% url "product:baby_products" %}">
-                                    <img src="{{ subcategory.image.url }}" class="img-fluid blur-up lazyload" alt="">
-                                </a>
-                                <button onclick="location.href = '{% url "product:baby_products" %}';" class="btn shop-button">
-                                    <span>Shop Now</span>
-                                    <i class="fas fa-angle-right"></i>
-                                </button>
-                            </div>
-                        </div>
-                        <h4 class="text-center text-light">{{ subcategory.title }}</h4>
-                    </div>
-                    {% endfor %}
-                    {% endif %}
-
-                    {% if grooming %}
-                    {% for subcategory in grooming %}
-                    <div>
-                        <div class="category-box-list">
-
-                            <div class="category-box-view">
-                                <a href="{% url "product:grooming" %}">
-                                    <img src="{{ subcategory.image.url }}" class="img-fluid blur-up lazyload" alt="">
-                                </a>
-                                <button onclick="location.href = '{% url "product:grooming" %}';" class="btn shop-button">
-                                    <span>Shop Now</span>
-                                    <i class="fas fa-angle-right"></i>
-                                </button>
-                            </div>
-                        </div>
-                        <h4 class="text-center text-light">{{ subcategory.title }}</h4>
-                    </div>
-                    {% endfor %}
-                    {% endif %}
-
-                    {% if general %}
-                    {% for subcategory in general %}
-                    <div>
-                        <div class="category-box-list">
-
-                            <div class="category-box-view">
-                                <a href="{% url "product:general" %}">
-                                    <img src="{{ subcategory.image.url }}" class="img-fluid blur-up lazyload" alt="">
-                                </a>
-                                <button onclick="location.href = '{% url "product:general" %}';" class="btn shop-button">
-                                    <span>Shop Now</span>
-                                    <i class="fas fa-angle-right"></i>
-                                </button>
-                            </div>
-                        </div>
-                        <h4 class="text-center text-light">{{ subcategory.title }}</h4>
-                    </div>
-                    {% endfor %}
-                    {% endif %}
-
-                    {% if mobiles_tablets_accessories %}
-                    {% for subcategory in mobiles_tablets_accessories %}
-                    <div>
-                        <div class="category-box-list">
-
-                            <div class="category-box-view">
-                                <a href="{% url "product:mobiles_tablets_accessories" %}">
-                                    <img src="{{ subcategory.image.url }}" class="img-fluid blur-up lazyload" alt="">
-                                </a>
-                                <button onclick="location.href = '{% url "product:mobiles_tablets_accessories" %}';" class="btn shop-button">
-                                    <span>Shop Now</span>
-                                    <i class="fas fa-angle-right"></i>
-                                </button>
-                            </div>
-                        </div>
-                        <h4 class="text-center text-light">{{ subcategory.title }}</h4>
-                    </div>
-                    {% endfor %}
-                    {% endif %}
-
-                    {% if is_new %}
-                    {% for subcategory in is_new %}
-                    <div>
-                        <div class="category-box-list">
-
-                            <div class="category-box-view">
-                                <a href="{% url "product:is_new" %}">
-                                    <img src="{{ subcategory.image.url }}" class="img-fluid blur-up lazyload" alt="">
-                                </a>
-                                <button onclick="location.href = '{% url "product:is_new" %}';" class="btn shop-button">
-                                    <span>Shop Now</span>
-                                    <i class="fas fa-angle-right"></i>
-                                </button>
-                            </div>
-                        </div>
-                        <h4 class="text-center text-light">{{ subcategory.title }}</h4>
-                    </div>
-                    {% endfor %}
-                    {% endif %}
-
-                    {% if beverage %}
-                    {% for subcategory in beverage %}
-                    <div>
-                        <div class="category-box-list">
-
-                            <div class="category-box-view">
-                                <a href="{% url "product:beverage" %}">
-                                    <img src="{{ subcategory.image.url }}" class="img-fluid blur-up lazyload" alt="">
-                                </a>
-                                <button onclick="location.href = '{% url "product:beverage" %}';" class="btn shop-button">
-                                    <span>Shop Now</span>
-                                    <i class="fas fa-angle-right"></i>
-                                </button>
-                            </div>
-                        </div>
-                        <h4 class="text-center text-light">{{ subcategory.title }}</h4>
-                    </div>
-                    {% endfor %}
-                    {% endif %}
-
-                    {% if is_sale %}
-                    {% for subcategory in is_sale %}
-                    <div>
-                        <div class="category-box-list">
-
-                            <div class="category-box-view">
-                                <a href="{% url "product:is_sale" %}">
-                                    <img src="{{ subcategory.image.url }}" class="img-fluid blur-up lazyload" alt="">
-                                </a>
-                                <button onclick="location.href = '{% url "product:is_sale" %}';" class="btn shop-button">
-                                    <span>Shop Now</span>
-                                    <i class="fas fa-angle-right"></i>
-                                </button>
-                            </div>
-                        </div>
-                        <h4 class="text-center text-light">{{ subcategory.title }}</h4>
-                    </div>
-                    {% endfor %}
-                    {% endif %}
-
-                    {% if is_discounted %}
-                    {% for subcategory in is_discounted %}
-                    <div>
-                        <div class="category-box-list">
-
-                            <div class="category-box-view">
-                                <a href="{% url "product:is_discounted" %}">
-                                    <img src="{{ subcategory.image.url }}" class="img-fluid blur-up lazyload" alt="">
-                                </a>
-                                <button onclick="location.href = '{% url "product:is_discounted" %}';" class="btn shop-button">
-                                    <span>Shop Now</span>
-                                    <i class="fas fa-angle-right"></i>
-                                </button>
-                            </div>
-                        </div>
-                        <h4 class="text-center text-light">{{ subcategory.title }}</h4>
-                    </div>
-                    {% endfor %}
-                    {% endif %}
-
-                    {% if is_hot %}
-                    {% for subcategory in is_hot %}
-                    <div>
-                        <div class="category-box-list">
-
-                            <div class="category-box-view">
-                                <a href="{% url "product:is_hot" %}">
-                                    <img src="{{ subcategory.image.url }}" class="img-fluid blur-up lazyload" alt="">
-                                </a>
-                                <button onclick="location.href = '{% url "product:is_hot" %}';" class="btn shop-button">
-                                    <span>Shop Now</span>
-                                    <i class="fas fa-angle-right"></i>
-                                </button>
-                            </div>
-                        </div>
-                        <h4 class="text-center text-light">{{ subcategory.title }}</h4>
-                    </div>
-                    {% endfor %}
-                    {% endif %}
-
-                    {% if apparel %}
-                    {% for subcategory in apparel %}
-                    <div>
-                        <div class="category-box-list">
-
-                            <div class="category-box-view">
-                                <a href="{% url "product:apparel" %}">
-                                    <img src="{{ subcategory.image.url }}" class="img-fluid blur-up lazyload" alt="">
-                                </a>
-                                <button onclick="location.href = '{% url "product:apparel" %}';" class="btn shop-button">
-                                    <span>Shop Now</span>
-                                    <i class="fas fa-angle-right"></i>
-                                </button>
-                            </div>
-                        </div>
-                        <h4 class="text-center text-light">{{ subcategory.title }}</h4>
-                    </div>
-                    {% endfor %}
-                    {% endif %}
-
-
                 </div>
             </div>
         </div>
     </div>
-  </section>
-<!-- Category Section End -->
 </section>
+<!-- Category Section End -->
 
-<!-- Product New-Arrived Start -->
-  {% if recent_products %}
-    <section class="product-section-3 bg-arrived">
-      <div class="container-fluid-lg">
-        <div class="row">
-          <div class="col-12">
-            <div class="title-head">
-              <div class="titletitle-content text-center">
-                <h2 class="text-center">Recently <span class="title-red"> Added Products </span></h2>
-              </div>
+<!-- Banner Section Start -->
+<section class="ratio_60 mb-5">
+    <div class="container-fluid-lg">
+        <div class="row g-3">
+            <div class="col-xxl-3 col-sm-6">
+                <a href="shop-left-sidebar.html" class="banner-contain-2 hover-effect">
+                    <img src="{% static 'web/assets/images/cake/banner/5.jpg' %}" class="bg-img blur-up lazyload" alt="">
+                    <div class="banner-detail p-top-left">
+                        <div>
+                            <div class="banner-detail-box mb-md-3 mb-1">
+                                <h6 class="text-danger">5% OFF</h6>
+                                <h4 class="mt-2">New Items</h4>
+                                <h6 class="mt-2 text-content">Daily Essentials</h6>
+                            </div>
+                        </div>
+                    </div>
+                </a>
             </div>
-          </div>
+
+            <div class="col-xxl-3 col-sm-6">
+                <a href="shop-left-sidebar.html" class="banner-contain-2 hover-effect">
+                    <img src="{% static 'web/assets/images/cake/banner/6.jpg' %}" class="bg-img blur-up lazyload" alt="">
+                    <div class="banner-detail p-top-left">
+                        <div>
+                            <div class="banner-detail-box mb-md-3 mb-1">
+                                <h6 class="text-danger">5% OFF</h6>
+                                <h4 class="mt-2">Save More</h4>
+                                <h6 class="mt-2 text-content">Fresh Toast Rusk</h6>
+                            </div>
+                        </div>
+                    </div>
+                </a>
+            </div>
+
+            <div class="col-xxl-3 col-sm-6">
+                <a href="shop-left-sidebar.html" class="banner-contain-2 hover-effect">
+                    <img src="{% static 'web/assets/images/cake/banner/7.jpg' %}" class="bg-img blur-up lazyload" alt="">
+                    <div class="banner-detail p-top-left">
+                        <div>
+                            <div class="banner-detail-box mb-md-3 mb-1">
+                                <h6 class="text-danger">5% OFF</h6>
+                                <h4 class="mt-2">Fresh Every Day!</h4>
+                                <h6 class="mt-2 text-content">Delivered @ Home</h6>
+                            </div>
+                        </div>
+                    </div>
+                </a>
+            </div>
+
+            <div class="col-xxl-3 col-sm-6">
+                <a href="shop-left-sidebar.html" class="banner-contain-2 hover-effect">
+                    <img src="{% static 'web/assets/images/cake/banner/8.jpg' %}" class="bg-img blur-up lazyload" alt="">
+                    <div class="banner-detail p-top-left">
+                        <div>
+                            <div class="banner-detail-box mb-md-3 mb-1">
+                                <h6 class="text-danger">5% OFF</h6>
+                                <h4 class="mt-2">Hot Deals</h4>
+                                <h6 class="mt-2 text-content">Fresh Cake</h6>
+                            </div>
+                        </div>
+                    </div>
+                </a>
+            </div>
         </div>
+    </div>
+</section>
+<!-- Banner Section End -->
 
-        <div class="row">
-          <div class="col-12">
-            <div class="slider-7_1 arrow-slider img-slider">
-              {% for i in recent_products %}
-                <div>
-                  <div class="product-box-4 wow fadeInUp">
-                    <div class="product-image product-image-2">
-                      <img src="{{ i.image.url }}" class="img-fluid blur-up lazyload" alt="Arrived" />
-
-                      <ul class="option">
-                        <li data-bs-toggle="tooltip" data-bs-placement="top" title="Quick View">
-                          <a href="{{ i.get_absolute_url }}"><i class="iconly-Show icli"></i></a>
-                        </li>
-                        <li data-bs-toggle="tooltip" data-bs-placement="top" title="Wishlist">
-                          <a href="javascript:void(0)" class="notifi-wishlist btn-action-wishlist" data-product_id="{{ i.id }}"><i class="iconly-Heart icli"></i></a>
-                        </li>
-                      </ul>
+<!-- Product Section Start -->
+<section>
+    <div class="container-fluid-lg">
+        <div class="row g-3">
+            <div class="col-xxl-9 col-xl-8">
+                <div class="title title-flex">
+                    <div>
+                        <h2>Top Save Today</h2>
+                        <span class="title-leaf">
+                            <svg class="icon-width">
+                                <use xlink:href="{% static 'web/assets/svg/leaf.svg' %}#cake"></use>
+                            </svg>
+                        </span>
                     </div>
-
-                    <div class="product-detail">
-                      <ul class="rating d-none">
-                        <li>
-                          <i data-feather="star" class="fill"></i>
-                        </li>
-                        <li>
-                          <i data-feather="star" class="fill"></i>
-                        </li>
-                        <li>
-                          <i data-feather="star" class="fill"></i>
-                        </li>
-                        <li>
-                          <i data-feather="star" class="fill"></i>
-                        </li>
-                        <li>
-                          <i data-feather="star"></i>
-                        </li>
-                      </ul>
-                      <a href="{{ i.get_absolute_url }}"><h5 class="name text-title">{{ i.title }}</h5></a>
-                      <h5 class="price theme-color">AED {{ i.get_sale_price_t|floatformat:0 }}
-                        <del>AED {{ i.get_regular_price_t|floatformat:0 }}</del></h5>
-
-                      <div class="addtocart_btn d-none"></div>
+                    <div class="timing-box">
+                        <div class="timing theme-bg-color">
+                            <i data-feather="clock"></i>
+                            <h6 class="name">Expires in :</h6>
+                        </div>
                     </div>
-                  </div>
                 </div>
-              {% endfor %}
+
+                <div class="product-box-slider-2 no-arrow">
+                    
+                  {% for i in products %}
+                    <div>
+                        <div class="product-box product-box-bg wow fadeInUp">
+                            <div class="product-image">
+                                <a href="product-left-thumbnail.html">
+                                    {% comment %} <img src="{% static 'web/assets/images/cake/product/1.png' %}" {% endcomment %}
+                                    <img src="{{ i.image_png.url }}"
+                                        class="img-fluid blur-up lazyload" alt="">
+                                </a>
+                                <ul class="product-option">
+                                    <li data-bs-toggle="tooltip" data-bs-placement="top" title="View">
+                                        <a href="javascript:void(0)" data-bs-toggle="modal" data-bs-target="#view">
+                                            <i data-feather="eye"></i>
+                                        </a>
+                                    </li>
+
+                                    <li data-bs-toggle="tooltip" data-bs-placement="top" title="Compare">
+                                        <a href="compare.html">
+                                            <i data-feather="refresh-cw"></i>
+                                        </a>
+                                    </li>
+
+                                    <li data-bs-toggle="tooltip" data-bs-placement="top" title="Wishlist">
+                                        <a href="wishlist.html" class="notifi-wishlist">
+                                            <i data-feather="heart"></i>
+                                        </a>
+                                    </li>
+                                </ul>
+                            </div>
+                            <div class="product-detail">
+                                <a href="product-left-thumbnail.html">
+                                    <h6 class="name">
+                                        Muffets & Tuffets Whole Wheat Bread 400 g
+                                    </h6>
+                                </a>
+
+                                <h5 class="sold text-content">
+                                    <span class="theme-color price">$26.69</span>
+                                    <del>28.56</del>
+                                </h5>
+
+                                <div class="product-rating mt-2">
+                                    <ul class="rating">
+                                        <li>
+                                            <i data-feather="star" class="fill"></i>
+                                        </li>
+                                        <li>
+                                            <i data-feather="star" class="fill"></i>
+                                        </li>
+                                        <li>
+                                            <i data-feather="star" class="fill"></i>
+                                        </li>
+                                        <li>
+                                            <i data-feather="star" class="fill"></i>
+                                        </li>
+                                        <li>
+                                            <i data-feather="star"></i>
+                                        </li>
+                                    </ul>
+
+                                    <h6 class="theme-color">In Stock</h6>
+                                </div>
+
+                                <div class="add-to-cart-box bg-white">
+                                    <button class="btn btn-add-cart addcart-button">Whatsapp click
+                                        
+                                    </button>
+                                    
+                                </div>
+                            </div>
+                        </div>                       
+                    </div>
+                  {% endfor %}
+                   
+
+                </div>
+
+                <div class="title title-flex">
+                    <div>
+                        <h2>Dried Products</h2>
+                        <span class="title-leaf">
+                            <svg class="icon-width">
+                                <use xlink:href="{% static 'web/assets/svg/leaf.svg' %}#cake"></use>
+                            </svg>
+                        </span>
+                    </div>
+                    <div class="timing-box">
+                        <div class="timing theme-bg-color">
+                            <i data-feather="clock"></i>
+                            <h6 class="name">Expires in :</h6>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="product-box-slider-2 no-arrow">
+                    
+                  
+                  <div>
+                        <div class="product-box product-box-bg wow fadeIn">
+                            <div class="product-image">
+                                <a href="product-left-thumbnail.html">
+                                    <img src="{% static 'web/assets/images/cake/product/1.png' %}"
+                                        class="img-fluid blur-up lazyload" alt="">
+                                </a>
+                                <ul class="product-option">
+                                    <li data-bs-toggle="tooltip" data-bs-placement="top" title="View">
+                                        <a href="javascript:void(0)" data-bs-toggle="modal" data-bs-target="#view">
+                                            <i data-feather="eye"></i>
+                                        </a>
+                                    </li>
+
+                                    <li data-bs-toggle="tooltip" data-bs-placement="top" title="Compare">
+                                        <a href="compare.html">
+                                            <i data-feather="refresh-cw"></i>
+                                        </a>
+                                    </li>
+
+                                    <li data-bs-toggle="tooltip" data-bs-placement="top" title="Wishlist">
+                                        <a href="wishlist.html" class="notifi-wishlist">
+                                            <i data-feather="heart"></i>
+                                        </a>
+                                    </li>
+                                </ul>
+                            </div>
+                            <div class="product-detail">
+                                <a href="product-left-thumbnail.html">
+                                    <h6 class="name">
+                                        Muffets & Tuffets Whole Wheat Bread 400 g
+                                    </h6>
+                                </a>
+
+                                <div class="product-rating mt-2">
+                                    <ul class="rating">
+                                        <li>
+                                            <i data-feather="star" class="fill"></i>
+                                        </li>
+                                        <li>
+                                            <i data-feather="star" class="fill"></i>
+                                        </li>
+                                        <li>
+                                            <i data-feather="star" class="fill"></i>
+                                        </li>
+                                        <li>
+                                            <i data-feather="star" class="fill"></i>
+                                        </li>
+                                        <li>
+                                            <i data-feather="star"></i>
+                                        </li>
+                                    </ul>
+                                </div>
+
+                                <h6 class="sold weight text-content fw-normal">1 KG</h6>
+
+                                <h6 class="price theme-color">$ 80.00</h6>
+
+                                <div class="add-to-cart-box bg-white">
+                                    <button class="btn btn-add-cart addcart-button">Add
+                                        <span class="add-icon bg-light-orange">
+                                            <i class="fa-solid fa-plus"></i>
+                                        </span>
+                                    </button>
+                                    <div class="cart_qty qty-box">
+                                        <div class="input-group">
+                                            <button type="button" class="qty-left-minus" data-type="minus"
+                                                data-field="">
+                                                <i class="fa fa-minus"></i>
+                                            </button>
+                                            <input class="form-control input-number qty-input" type="text"
+                                                name="quantity" value="0">
+                                            <button type="button" class="qty-right-plus" data-type="plus"
+                                                data-field="">
+                                                <i class="fa fa-plus"></i>
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>                       
+                    </div>
+                    
+
+                </div>
+
+<div class="title title-flex">
+                    <div>
+                        <h2>Powder Products</h2>
+                        <span class="title-leaf">
+                            <svg class="icon-width">
+                                <use xlink:href="{% static 'web/assets/svg/leaf.svg' %}#cake"></use>
+                            </svg>
+                        </span>
+                    </div>
+                    <div class="timing-box">
+                        <div class="timing theme-bg-color">
+                            <i data-feather="clock"></i>
+                            <h6 class="name">Expires in :</h6>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="product-box-slider-2 no-arrow">
+                    
+                  
+                  <div>
+                        <div class="product-box product-box-bg wow fadeIn">
+                            <div class="product-image">
+                                <a href="product-left-thumbnail.html">
+                                    <img src="{% static 'web/assets/images/cake/product/1.png' %}"
+                                        class="img-fluid blur-up lazyload" alt="">
+                                </a>
+                                <ul class="product-option">
+                                    <li data-bs-toggle="tooltip" data-bs-placement="top" title="View">
+                                        <a href="javascript:void(0)" data-bs-toggle="modal" data-bs-target="#view">
+                                            <i data-feather="eye"></i>
+                                        </a>
+                                    </li>
+
+                                    <li data-bs-toggle="tooltip" data-bs-placement="top" title="Compare">
+                                        <a href="compare.html">
+                                            <i data-feather="refresh-cw"></i>
+                                        </a>
+                                    </li>
+
+                                    <li data-bs-toggle="tooltip" data-bs-placement="top" title="Wishlist">
+                                        <a href="wishlist.html" class="notifi-wishlist">
+                                            <i data-feather="heart"></i>
+                                        </a>
+                                    </li>
+                                </ul>
+                            </div>
+                            <div class="product-detail">
+                                <a href="product-left-thumbnail.html">
+                                    <h6 class="name">
+                                        Muffets & Tuffets Whole Wheat Bread 400 g
+                                    </h6>
+                                </a>
+
+                                <div class="product-rating mt-2">
+                                    <ul class="rating">
+                                        <li>
+                                            <i data-feather="star" class="fill"></i>
+                                        </li>
+                                        <li>
+                                            <i data-feather="star" class="fill"></i>
+                                        </li>
+                                        <li>
+                                            <i data-feather="star" class="fill"></i>
+                                        </li>
+                                        <li>
+                                            <i data-feather="star" class="fill"></i>
+                                        </li>
+                                        <li>
+                                            <i data-feather="star"></i>
+                                        </li>
+                                    </ul>
+                                </div>
+
+                                <h6 class="sold weight text-content fw-normal">1 KG</h6>
+
+                                <h6 class="price theme-color">$ 80.00</h6>
+
+                                <div class="add-to-cart-box bg-white">
+                                    <button class="btn btn-add-cart addcart-button">Add
+                                        <span class="add-icon bg-light-orange">
+                                            <i class="fa-solid fa-plus"></i>
+                                        </span>
+                                    </button>
+                                    <div class="cart_qty qty-box">
+                                        <div class="input-group">
+                                            <button type="button" class="qty-left-minus" data-type="minus"
+                                                data-field="">
+                                                <i class="fa fa-minus"></i>
+                                            </button>
+                                            <input class="form-control input-number qty-input" type="text"
+                                                name="quantity" value="0">
+                                            <button type="button" class="qty-right-plus" data-type="plus"
+                                                data-field="">
+                                                <i class="fa fa-plus"></i>
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>                       
+                    </div>
+                    
+
+                </div>
             </div>
-          </div>
+
+            
+
+            <div class="col-xxl-3 col-xl-4 d-none d-xl-block">
+                <div class="position-sticky top-0">
+                    <div class="ratio_209 rounded wow fadeIn">
+                        <div class="banner-contain-2 rounded hover-effect">
+                            <img src="{% static 'web/assets/images/cake/banner/10.jpg' %}" class="bg-img blur-up lazyload" alt="">
+                            <div class="banner-detail p-top-left">
+                                <div>
+                                    <h6 class="text-uppercase theme-color fw-500">seafood</h6>
+                                    <h3 class="text-uppercase">
+                                        special <span class="brand-name">brand</span>
+                                    </h3>
+                                    <p class="text-content fw-500 mt-3 lh-lg">Special offer on the discount very
+                                        hungry cake and sweets</p>
+
+                                    <div class="banner-detail-box banner-detail-box-2 mb-md-3 mb-1">
+                                        <h4 class="text-uppercase">up to</h4>
+                                        <h2 class="mt-2">50%</h2>
+                                        <h3 class="text-uppercase">off</h3>
+                                    </div>
+
+                                    <div>
+                                        <button onclick="location.href = 'shop-left-sidebar.html';"
+                                            class="btn text-white btn-md mt-xxl-4 mt-2 home-button mend-auto theme-bg-color">Shop
+                                            Now<i class="fa-solid fa-right-long icon ms-2"></i>
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="ratio_125 section-t-space wow fadeIn">
+                        <div class="banner-contain-2 rounded hover-effect">
+                            <img src="{% static 'web/assets/images/cake/banner/9.jpg' %}" class="bg-img blur-up lazyload" alt="">
+                            <div class="banner-detail p-top-left">
+                                <div>
+                                    <h6 class="text-uppercase theme-color fw-500">Freash Every Day!</h6>
+                                    <h3 class="text-pacifico mt-2">Delicioud <span class="theme-color">Bread</span>
+                                    </h3>
+                                    <p class="text-content fw-500 mt-3 w-75 mend-auto">Delicioud Bread and Brend new
+                                        fresh bread.</p>
+                                    <button onclick="location.href = 'shop-left-sidebar.html';"
+                                        class="btn text-white btn-md mt-2 home-button mend-auto theme-bg-color">
+                                        Shop Now <i class="fa-solid fa-right-long icon ms-2"></i>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    
+                </div>
+            </div>
         </div>
-      </div>
-    </section>
-  {% endif %}
-  <!-- Product New-Arrived End -->
-
-  
-
-
+    </div>
+</section>
+<!-- Product Section End -->
 
   <!-- Product New-Arrived Start -->
-  {% if new_arrvied %}
-    <section class="product-section-3 bg-arrived">
-      <div class="container-fluid-lg">
-        <div class="row">
-          <div class="col-12">
-            <div class="title-head">
-              <div class="titletitle-content text-center">
-                <h2 class="text-center">New <span class="title-red"> Arrived </span></h2>
+{% if new_arrvied %}
+<section class="product-section-3 bg-arrived">
+  <div class="container-fluid-lg">
+    <div class="row">
+      <div class="col-12">
+        <div class="title title-flex">
+          <div>
+              <h2>New Arried</h2>
+              <span class="title-leaf">
+                  <svg class="icon-width">
+                      <use xlink:href="{% static 'web/assets/svg/leaf.svg' %}#cake"></use>
+                  </svg>
+              </span>
+          </div>
+          <div class="timing-box">
+              <div class="timing theme-bg-color">
+                  <h6 class="name">More Products</h6>
               </div>
-            </div>
           </div>
         </div>
-
-        <div class="row">
-          <div class="col-12">
-            <div class="slider-7_1 arrow-slider img-slider">
-              {% for i in new_arrvied %}
-                <div>
-                  <div class="product-box-4 wow fadeInUp">
-                    <div class="product-image product-image-2">
-                      <a href="{{ i.get_absolute_url }}"><img src="{{ i.image.url }}" class="img-fluid blur-up lazyload" alt="Arrived" /></a>
-
-                      <ul class="option">
-                        <li data-bs-toggle="tooltip" data-bs-placement="top" title="Quick View">
-                          <a href="{{ i.get_absolute_url }}"><i class="iconly-Show icli"></i></a>
-                        </li>
-                        <li data-bs-toggle="tooltip" data-bs-placement="top" title="Wishlist">
-                          <a href="javascript:void(0)" class="notifi-wishlist btn-action-wishlist" data-product_id="{{ i.id }}"><i class="iconly-Heart icli"></i></a>
-                        </li>
-                      </ul>
-                    </div>
-
-                    <div class="product-detail">
-                      <ul class="rating d-none">
-                        <li>
-                          <i data-feather="star" class="fill"></i>
-                        </li>
-                        <li>
-                          <i data-feather="star" class="fill"></i>
-                        </li>
-                        <li>
-                          <i data-feather="star" class="fill"></i>
-                        </li>
-                        <li>
-                          <i data-feather="star" class="fill"></i>
-                        </li>
-                        <li>
-                          <i data-feather="star"></i>
-                        </li>
-                      </ul>
-                      <a href="{{ i.get_absolute_url }}"><h5 class="name text-title">{{ i.title }}</h5></a>
-                      <h5 class="price theme-color">AED {{ i.get_sale_price_t|floatformat:0 }}
-                        <del>AED {{ i.get_regular_price_t|floatformat:0 }}</del></h5>
-
-                      <div class="addtocart_btn d-none"></div>
-                    </div>
-                  </div>
-                </div>
-              {% endfor %}
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-  {% endif %}
-  <!-- Product New-Arrived End -->
-
-  {% if product_section %}
-  <!-- Product Section Start -->
-  <section class="product-section mt-5 mb-3">
-    <div class="container-fluid-lg">
-      <div class="title title-flex-2">
-        <h2>Our <span class="title-red"> Products</span></h2>
-        <ul class="nav nav-tabs tab-style-color-2 tab-style-color" id="myTab">
-          {% for section in product_section %}
-            <li class="nav-item">
-              <button class="nav-link btn{% if forloop.first %} active{% endif %}" id="{{ section.slug }}-tab" data-bs-toggle="tab" data-bs-target="#{{ section.slug }}" type="button">{{ section.name }}</button>
-            </li>
-          {% endfor %}
-        </ul>
-      </div>
-
-      <div class="tab-content" id="myTabContent">
-        {% for section in product_section %}
-          <div class="tab-pane fade {% if forloop.first %}show active{% endif %}" id="{{ section.slug }}" role="tabpanel">
-            <div class="row g-8">
-              {% for product in section.products %}
-                <div class="col-xxl-3 col-lg-4 col-md-4 col-6">
-                  <div class="product-box-4">
-                    <div class="product-image">
-                      <div class="label-flex">
-                        <button class="btn p-0 wishlist btn-action-wishlist d-none" data-product_id="{{ product.id }}" data-bs-placement="top" data-bs-html="true"><i class="iconly-Heart icli"></i></button>
-                      </div>
-
-                      <a href="{{ product.get_absolute_url }}"><img src="{{ product.image.url }}" class="img-fluid" alt="" /></a>
-
-                      <ul class="option">
-                        <li data-bs-toggle="tooltip" data-bs-placement="top" title="Quick View">
-                          <a href="{{ product.get_absolute_url }}" data-bs-toggle="modal" data-bs-target="#view"><i class="iconly-Show icli"></i></a>
-                        </li>
-                        <li data-bs-toggle="tooltip" data-bs-placement="top" title="Wishlist">
-                          <a href="javascript:void(0)" class="notifi-wishlist btn-action-wishlist" data-product_id="{{ product.id }}"><i class="iconly-Heart icli"></i></a>
-                        </li>
-                      </ul>
-                    </div>
-
-                    <div class="product-detail">
-                      <a href="{{ product.get_absolute_url }}"><h5 class="name">{{ product.title }}</h5></a>
-                      <div class="product-rating mt-2">
-                        <ul class="rating">
-                          {% for star in "12345" %}
-                              {% if star|add:0 <= product.average_rating %}
-                              <li>
-                                  <i data-feather="star" class="fill"></i>
-                              </li>
-                              {% else %}
-                              <li>
-                                  <i data-feather="star"></i>
-                              </li>
-                              {% endif %}
-                          {% endfor %}
-                      </ul>
-                      <span>( {{ product.num_of_reviews }} )</span>
-                      </div>
-                      <h5 class="price theme-color">AED {{ product.get_sale_price_t|floatformat:0 }}
-                        <del>AED {{ product.get_regular_price_t|floatformat:0 }}</del></h5>
-                      
-                      <div class="note-box product-package">
-                        <div class="cart_qty qty-box product-qty d-none">
-                          <div class="input-group">
-                              <button type="button" class="qty-left-minus" data-type="minus" data-field="">
-                                  <i class="fa fa-minus"></i>
-                              </button>
-                              <input class="form-control input-number qty-input" type="text" name="quantity" value="1" id="quantity">
-                              <button type="button" class="qty-right-plus" data-type="plus" data-field="">
-                                  <i class="fa fa-plus"></i>
-                              </button>
-                          </div>
-                        </div>
-
-                        <form action="{% url 'web:order_via_whatsapp' product.slug %}" method="POST">
-                          {% csrf_token %}
-                          <input type="hidden" name="product" value="{{ product.id }}" />
-                          <input type="hidden" name="quantity" id="hidden_quantity" value="1" />
-                          <button type="submit" class="btn mt-3 btn-md bg-green-wp cart-button text-white w-100">Order WhatsApp</button>
-                        </form>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              {% endfor %}
-            </div>
-          </div>
-        {% endfor %}
       </div>
     </div>
-  </section>
-  {% endif %}
-  <!-- Product Section End -->
+
+    
+
+    <div class="row">
+      <div class="col-12">
+        <div class="slider-7_1 arrow-slider img-slider">
+          {% for i in new_arrvied %}
+            <div>
+              <div class="product-box-4 wow fadeInUp">
+                <div class="product-image product-image-2">
+                  <a href="{{ i.get_absolute_url }}"><img src="{{ i.image.url }}" class="img-fluid blur-up lazyload" alt="Arrived" /></a>
+
+                  <ul class="option">
+                    <li data-bs-toggle="tooltip" data-bs-placement="top" title="Quick View">
+                      <a href="{{ i.get_absolute_url }}"><i class="iconly-Show icli"></i></a>
+                    </li>
+                    <li data-bs-toggle="tooltip" data-bs-placement="top" title="Wishlist">
+                      <a href="javascript:void(0)" class="notifi-wishlist btn-action-wishlist" data-product_id="{{ i.id }}"><i class="iconly-Heart icli"></i></a>
+                    </li>
+                  </ul>
+                </div>
+
+                <div class="product-detail">
+                  <ul class="rating d-none">
+                    <li>
+                      <i data-feather="star" class="fill"></i>
+                    </li>
+                    <li>
+                      <i data-feather="star" class="fill"></i>
+                    </li>
+                    <li>
+                      <i data-feather="star" class="fill"></i>
+                    </li>
+                    <li>
+                      <i data-feather="star" class="fill"></i>
+                    </li>
+                    <li>
+                      <i data-feather="star"></i>
+                    </li>
+                  </ul>
+                  <a href="{{ i.get_absolute_url }}"><h5 class="name text-title">{{ i.title }}</h5></a>
+                  <h5 class="price theme-color">AED {{ i.get_sale_price_t|floatformat:0 }}
+                    <del>AED {{ i.get_regular_price_t|floatformat:0 }}</del></h5>
+
+                  <div class="addtocart_btn d-none"></div>
+                </div>
+              </div>
+            </div>
+          {% endfor %}
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+{% endif %}
+  <!-- Product New-Arrived End -->
 
   <!-- Product Section Start -->
   {% if best_seller_products %}

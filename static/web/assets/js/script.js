@@ -1,12 +1,3 @@
-/*-----------------------------------------------------------------------------------
-
- Template Name: Fastkart
- Template URI: themes.pixelstrap.com/Fastkart
- Description: This is Ecommerce website
- Author: Pixelstrap
- Author URI: https://themeforest.net/user/pixelstrap
-
- ----------------------------------------------------------------------------------- */
 
 // 01. Image to background js
 // 02. Shop Page Grid Setting Js
@@ -56,6 +47,52 @@
             "background-size": "cover",
             "background-position": "center",
             "background-repeat": "no-repeat",
+            display: "block",
+        });
+        parent.addClass("bg-cover-parent");
+        el.hide();
+    });
+    
+    // // Responsive height adjustment
+    // function updateBackgroundHeight() {
+    //     if ($(window).width() <= 579) {
+    //         $(".bg-img").parent().css("height", "100px");
+    //     } else {
+    //         $(".bg-img").parent().css("height", "200px"); // Reset for larger screens
+    //     }
+    // }
+
+    //     // Run on load
+    //     updateBackgroundHeight();
+
+    //     // Run on window resize
+    //     $(window).resize(function () {
+    //         updateBackgroundHeight();
+    //     });
+    // });
+
+    /*=====================
+    02. Image to background js
+    ==========================*/
+    $(".bg-top").parent().addClass("b-top");
+    $(".bg-bottom").parent().addClass("b-bottom");
+    $(".bg-center").parent().addClass("b-center");
+    $(".bg-left").parent().addClass("b-left");
+    $(".bg-right").parent().addClass("b-right");
+    $(".bg_size_content").parent().addClass("b_size_content");
+    $(".bg-img1").parent().addClass("bg-size1");
+    $(".bg-img1.blur-up").parent().addClass("blur-up lazyload");
+    $(".bg-img1").each(function () {
+        var el = $(this),
+            src = el.attr("src"),
+            parent = el.parent();
+
+        parent.css({
+            "background-image": "url(" + src + ")",
+            "background-size": "cover",
+            "background-position": "center",
+            "background-repeat": "no-repeat",
+            "height":"300px",
             display: "block",
         });
 
@@ -217,12 +254,6 @@ var tooltipList = tooltipTriggerList.map(function (tooltipTriggerEl) {
     return new bootstrap.Tooltip(tooltipTriggerEl)
 })
 
-/*=====================
-   10. Cookie Bar Js
-   ==========================*/
-$(".ok-button").click(function () {
-    $(".cookie-bar-box").addClass("hide");
-});
 
 /*=====================
    11. Image To Background Js
@@ -242,7 +273,7 @@ $(".bg-img").each(function () {
 
     parent.css({
         "background-image": "url(" + src + ")",
-        "background-size": "cover",
+        
         "background-position": "center",
         "background-repeat": "no-repeat",
         display: "block",
@@ -272,43 +303,43 @@ $(window).on("load resize", function () {
 /*=====================
    13. Wishlist Js
    ==========================*/
-$(".notifi-wishlist").on("click", function () {
-    $.notify({
-        icon: "fa fa-check",
-        title: "Success!",
-        message: "Item Successfully added in wishlist",
-    }, {
-        element: "body",
-        position: null,
-        type: "info",
-        allow_dismiss: true,
-        newest_on_top: false,
-        showProgressbar: true,
-        placement: {
-            from: "top",
-            align: "right",
-        },
-        offset: 20,
-        spacing: 10,
-        z_index: 1031,
-        delay: 5000,
-        animate: {
-            enter: "animated fadeInDown",
-            exit: "animated fadeOutUp",
-        },
-        icon_type: "class",
-        template: '<div data-notify="container" class="col-xxl-3 col-lg-5 col-md-6 col-sm-7 col-12 alert alert-{0}" role="alert">' +
-            '<button type="button" aria-hidden="true" class="btn-close" data-notify="dismiss"></button>' +
-            '<span data-notify="icon"></span> ' +
-            '<span data-notify="title">{1}</span> ' +
-            '<span data-notify="message">{2}</span>' +
-            '<div class="progress" data-notify="progressbar">' +
-            '<div class="progress-bar progress-bar-info progress-bar-{0}" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" style="width: 0%;"></div>' +
-            "</div>" +
-            '<a href="{3}" target="{4}" data-notify="url"></a>' +
-            "</div>",
-    });
-});
+// $(".notifi-wishlist").on("click", function () {
+//     $.notify({
+//         icon: "fa fa-check",
+//         title: "Success!",
+//         message: "Item Successfully added in wishlist",
+//     }, {
+//         element: "body",
+//         position: null,
+//         type: "info",
+//         allow_dismiss: true,
+//         newest_on_top: false,
+//         showProgressbar: true,
+//         placement: {
+//             from: "top",
+//             align: "right",
+//         },
+//         offset: 20,
+//         spacing: 10,
+//         z_index: 1031,
+//         delay: 5000,
+//         animate: {
+//             enter: "animated fadeInDown",
+//             exit: "animated fadeOutUp",
+//         },
+//         icon_type: "class",
+//         template: '<div data-notify="container" class="col-xxl-3 col-lg-5 col-md-6 col-sm-7 col-12 alert alert-{0}" role="alert">' +
+//             '<button type="button" aria-hidden="true" class="btn-close" data-notify="dismiss"></button>' +
+//             '<span data-notify="icon"></span> ' +
+//             '<span data-notify="title">{1}</span> ' +
+//             '<span data-notify="message">{2}</span>' +
+//             '<div class="progress" data-notify="progressbar">' +
+//             '<div class="progress-bar progress-bar-info progress-bar-{0}" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" style="width: 0%;"></div>' +
+//             "</div>" +
+//             '<a href="{3}" target="{4}" data-notify="url"></a>' +
+//             "</div>",
+//     });
+// });
 
 /*=====================
    14. Loader Js
