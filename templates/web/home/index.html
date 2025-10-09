@@ -205,6 +205,86 @@
 </section>
 <!-- Banner Section End -->
 
+  <!-- Product New-Arrived Start -->
+{% if new_arrvied %}
+<section class="product-section-3 bg-arrived">
+  <div class="container-fluid-lg">
+    <div class="row">
+      <div class="col-12">
+        <div class="title title-flex">
+          <div>
+              <h2>New Arried</h2>
+              <span class="title-leaf">
+                  <svg class="icon-width">
+                      <use xlink:href="{% static 'web/assets/svg/leaf.svg' %}#cake"></use>
+                  </svg>
+              </span>
+          </div>
+          <div class="timing-box">
+              <div class="timing theme-bg-color">
+                  <h6 class="name">More Products</h6>
+              </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    
+
+    <div class="row">
+      <div class="col-12">
+        <div class="slider-7_1 arrow-slider img-slider">
+          {% for i in new_arrvied %}
+            <div>
+              <div class="product-box-4 wow fadeInUp">
+                <div class="product-image product-image-2">
+                  <a href="{{ i.get_absolute_url }}"><img src="{{ i.image.url }}" class="img-fluid blur-up lazyload" alt="Arrived" /></a>
+
+                  <ul class="option">
+                    <li data-bs-toggle="tooltip" data-bs-placement="top" title="Quick View">
+                      <a href="{{ i.get_absolute_url }}"><i class="iconly-Show icli"></i></a>
+                    </li>
+                    <li data-bs-toggle="tooltip" data-bs-placement="top" title="Wishlist">
+                      <a href="javascript:void(0)" class="notifi-wishlist btn-action-wishlist" data-product_id="{{ i.id }}"><i class="iconly-Heart icli"></i></a>
+                    </li>
+                  </ul>
+                </div>
+
+                <div class="product-detail">
+                  <ul class="rating d-none">
+                    <li>
+                      <i data-feather="star" class="fill"></i>
+                    </li>
+                    <li>
+                      <i data-feather="star" class="fill"></i>
+                    </li>
+                    <li>
+                      <i data-feather="star" class="fill"></i>
+                    </li>
+                    <li>
+                      <i data-feather="star" class="fill"></i>
+                    </li>
+                    <li>
+                      <i data-feather="star"></i>
+                    </li>
+                  </ul>
+                  <a href="{{ i.get_absolute_url }}"><h5 class="name text-title">{{ i.title }}</h5></a>
+                  <h5 class="price theme-color">AED {{ i.get_sale_price_t|floatformat:0 }}
+                    <del>AED {{ i.get_regular_price_t|floatformat:0 }}</del></h5>
+
+                  <div class="addtocart_btn d-none"></div>
+                </div>
+              </div>
+            </div>
+          {% endfor %}
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+{% endif %}
+  <!-- Product New-Arrived End -->
+
 <!-- Product Section Start -->
 <section>
     <div class="container-fluid-lg">
@@ -412,7 +492,7 @@
 
                 </div>
 
-<div class="title title-flex">
+                <div class="title title-flex">
                     <div>
                         <h2>Powder Products</h2>
                         <span class="title-leaf">
@@ -579,85 +659,6 @@
 </section>
 <!-- Product Section End -->
 
-  <!-- Product New-Arrived Start -->
-{% if new_arrvied %}
-<section class="product-section-3 bg-arrived">
-  <div class="container-fluid-lg">
-    <div class="row">
-      <div class="col-12">
-        <div class="title title-flex">
-          <div>
-              <h2>New Arried</h2>
-              <span class="title-leaf">
-                  <svg class="icon-width">
-                      <use xlink:href="{% static 'web/assets/svg/leaf.svg' %}#cake"></use>
-                  </svg>
-              </span>
-          </div>
-          <div class="timing-box">
-              <div class="timing theme-bg-color">
-                  <h6 class="name">More Products</h6>
-              </div>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    
-
-    <div class="row">
-      <div class="col-12">
-        <div class="slider-7_1 arrow-slider img-slider">
-          {% for i in new_arrvied %}
-            <div>
-              <div class="product-box-4 wow fadeInUp">
-                <div class="product-image product-image-2">
-                  <a href="{{ i.get_absolute_url }}"><img src="{{ i.image.url }}" class="img-fluid blur-up lazyload" alt="Arrived" /></a>
-
-                  <ul class="option">
-                    <li data-bs-toggle="tooltip" data-bs-placement="top" title="Quick View">
-                      <a href="{{ i.get_absolute_url }}"><i class="iconly-Show icli"></i></a>
-                    </li>
-                    <li data-bs-toggle="tooltip" data-bs-placement="top" title="Wishlist">
-                      <a href="javascript:void(0)" class="notifi-wishlist btn-action-wishlist" data-product_id="{{ i.id }}"><i class="iconly-Heart icli"></i></a>
-                    </li>
-                  </ul>
-                </div>
-
-                <div class="product-detail">
-                  <ul class="rating d-none">
-                    <li>
-                      <i data-feather="star" class="fill"></i>
-                    </li>
-                    <li>
-                      <i data-feather="star" class="fill"></i>
-                    </li>
-                    <li>
-                      <i data-feather="star" class="fill"></i>
-                    </li>
-                    <li>
-                      <i data-feather="star" class="fill"></i>
-                    </li>
-                    <li>
-                      <i data-feather="star"></i>
-                    </li>
-                  </ul>
-                  <a href="{{ i.get_absolute_url }}"><h5 class="name text-title">{{ i.title }}</h5></a>
-                  <h5 class="price theme-color">AED {{ i.get_sale_price_t|floatformat:0 }}
-                    <del>AED {{ i.get_regular_price_t|floatformat:0 }}</del></h5>
-
-                  <div class="addtocart_btn d-none"></div>
-                </div>
-              </div>
-            </div>
-          {% endfor %}
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-{% endif %}
-  <!-- Product New-Arrived End -->
 
   <!-- Product Section Start -->
   {% if best_seller_products %}
