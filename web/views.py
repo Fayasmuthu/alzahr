@@ -33,7 +33,16 @@ class indexView(TemplateView):
         context["best_seller_products"] = products.filter(is_best_seller=True)
         wishlist_count = Wishlist.objects.filter(user=self.request.user.id).count()
         context["wishlist_count"] = wishlist_count
-        context["products"] = Product.objects.all()
+        context["dried"] = Product.objects.filter(dried=True)
+        context["powder"] = Product.objects.filter(powder=True)
+        context["whole"] = Product.objects.filter(whole=True)
+        context["Slice"] = Product.objects.filter(Slice=True)
+        context["top"] = Product.objects.filter(top=True)
+        context["incense"] = Product.objects.filter(incense=True)
+        context["health"] = Product.objects.filter(health=True)
+        context["non_salt"] = Product.objects.filter(non_salt=True)
+        context["seeds"] = Product.objects.filter(seeds=True)
+        context["section5"] = Product.objects.filter(section5=True)
         context["banner"] = Banner.objects.all()
         # context["recent_products"] = products.order_by('-created_at')[:10]
         context["recent_products"] = products.order_by('-id')[:10]

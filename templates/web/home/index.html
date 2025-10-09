@@ -3,46 +3,6 @@
 
 {% block content %}
 
-    <!-- Banner Section End -->
-<section class="home-section-2 home-section-bg pt-0 overflow-hidden d-none">
-      {% comment %} <div class="container-fluid p-0"> {% endcomment %}
-      <div class="container p-0">
-          <div class="row">
-              <div class="col-12">
-                  <div class="slider-animate">
-                    {% if banner %}
-                    {% for i in banner %}
-                      <div>
-                          <div class="home-contain rounded-0 p-0">
-                              <img src="{{ i.image.url }}"
-                                  class="img-fluid bg-img blur-up lazyload" alt="">
-                              <div class="home-detail home-big-space p-center-left home-overlay position-relative">
-                                  <div class="container-fluid-lg">
-                                      <div>
-                                          <h6 class="ls-expanded theme-color text-uppercase">Weekend Special offer
-                                          </h6>
-                                          <h1 class="heding-2">Premium Quality All Products</h1>
-                                          <h2 class="content-2">All Products shopping made Easy</h2>
-                                          <h5 class="text-content">Qualitie!
-                                          </h5>
-                                          <button
-                                              class="btn theme-bg-color btn-md text-white fw-bold mt-md-4 mt-2 mend-auto"
-                                              onclick="location.href = '';">Shop Now <i
-                                                  class="fa-solid fa-arrow-right icon"></i></button>
-                                      </div>
-                                  </div>
-                              </div>
-                          </div>
-                      </div>
-                                          
-                    {% endfor %}
-                    {% endif %}
-                  </div>
-                  
-              </div>
-          </div>
-      </div>
-</section>
 
 <section class="banner-section banner-small ratio_65">
   <div class="container">
@@ -58,9 +18,7 @@
                   </a>
                   <div class="banner-detail p-center-left w-75 banner-p-sm mend-auto">
                       <div>
-                          <h5 class="fw-light mb-2">50% Discount</h5>
-                          <h4 class="fw-bold mb-0">Washing Machine</h4>
-                          <button onclick="location.href = '';"
+                          <button onclick="location.href = '{% url "web:shop" %}';"
                               class="btn shop-now-button mt-3 ps-0 mend-auto theme-color fw-bold">Shop Now <i
                                   class="fa-solid fa-chevron-right"></i></button>
                       </div>
@@ -75,7 +33,7 @@
 </section>
 
 <!-- Category Section Start -->
-<section>
+<section class="d-none">
     <div class="container-fluid-lg">
         <div class="row">
             <div class="col-12">
@@ -290,9 +248,11 @@
     <div class="container-fluid-lg">
         <div class="row g-3">
             <div class="col-xxl-9 col-xl-8">
+
+              {% if dried %}
                 <div class="title title-flex">
                     <div>
-                        <h2>Top Save Today</h2>
+                        <h2>Dried Products</h2>
                         <span class="title-leaf">
                             <svg class="icon-width">
                                 <use xlink:href="{% static 'web/assets/svg/leaf.svg' %}#cake"></use>
@@ -302,19 +262,106 @@
                     <div class="timing-box">
                         <div class="timing theme-bg-color">
                             <i data-feather="clock"></i>
-                            <h6 class="name">Expires in :</h6>
+                            <h6 class="name">More Products</h6>
                         </div>
                     </div>
                 </div>
-
                 <div class="product-box-slider-2 no-arrow">
                     
-                  {% for i in products %}
+                  {% for i in dried %}
                     <div>
                         <div class="product-box product-box-bg wow fadeInUp">
                             <div class="product-image">
                                 <a href="product-left-thumbnail.html">
                                     {% comment %} <img src="{% static 'web/assets/images/cake/product/1.png' %}" {% endcomment %}
+                                    <img src="{{ i.image_png.url }}" class="img-fluid blur-up lazyload" alt="">
+                                </a>
+                                <ul class="product-option">
+                                    <li data-bs-toggle="tooltip" data-bs-placement="top" title="View">
+                                        <a href="javascript:void(0)" data-bs-toggle="modal" data-bs-target="#view">
+                                            <i data-feather="eye"></i>
+                                        </a>
+                                    </li>
+
+                                    <li data-bs-toggle="tooltip" data-bs-placement="top" title="Compare">
+                                        <a href="compare.html">
+                                            <i data-feather="refresh-cw"></i>
+                                        </a>
+                                    </li>
+
+                                    <li data-bs-toggle="tooltip" data-bs-placement="top" title="Wishlist">
+                                        <a href="wishlist.html" class="notifi-wishlist">
+                                            <i data-feather="heart"></i>
+                                        </a>
+                                    </li>
+                                </ul>
+                            </div>
+                            <div class="product-detail">
+                                <a href="product-left-thumbnail.html">
+                                    <h6 class="name">
+                                        {{ i.title }}
+                                    </h6>
+                                </a>
+
+                                <h5 class="sold text-content">
+                                    <span class="theme-color price">dh {{ i.get_sale_price_t|floatformat:0 }}</span>
+                                    <del>dh {{ i.get_regular_price_t|floatformat:0 }}</del>
+                                </h5>
+
+                                <div class="product-rating mt-2">
+                                    <ul class="rating">
+                                      {% for star in "12345" %}
+                                        {% if star|add:0 <= product.average_rating %}
+                                         <li>
+                                          <i data-feather="star" class="fill"></i>
+                                         </li>
+                                      {% else %}
+                                         <li>
+                                          <i data-feather="star"></i>
+                                         </li>
+                                      {% endif %}
+                                      {% endfor %}
+                                     </ul>
+
+                                    <h6 class="theme-color">( {{ product.num_of_reviews }} )</h6>
+                                </div>
+
+                                <div class="add-to-cart-box bg-white">
+                                    <button class="btn btn-add-cart addcart-button">View
+                                        
+                                    </button>
+                                    
+                                </div>
+                            </div>
+                        </div>                       
+                    </div>
+                  {% endfor %}
+                </div>
+                {% endif %}
+
+                {% if powder %}
+                <div class="title title-flex">
+                    <div>
+                        <h2>Powder Products</h2>
+                        <span class="title-leaf">
+                            <svg class="icon-width">
+                                <use xlink:href="{% static 'web/assets/svg/leaf.svg' %}#cake"></use>
+                            </svg>
+                        </span>
+                    </div>
+                    <div class="timing-box">
+                        <div class="timing theme-bg-color">
+                            <i data-feather="clock"></i>
+                            <h6 class="name">More Products</h6>
+                        </div>
+                    </div>
+                </div>
+                <div class="product-box-slider-2 no-arrow"> 
+                  {% for i in powder %}                
+                  <div>
+                        <div class="product-box product-box-bg wow fadeIn">
+                            <div class="product-image">
+                                <a href="product-left-thumbnail.html">
                                     <img src="{{ i.image_png.url }}"
                                         class="img-fluid blur-up lazyload" alt="">
                                 </a>
@@ -341,39 +388,35 @@
                             <div class="product-detail">
                                 <a href="product-left-thumbnail.html">
                                     <h6 class="name">
-                                        Muffets & Tuffets Whole Wheat Bread 400 g
+                                        {{ i.title }}
                                     </h6>
                                 </a>
 
                                 <h5 class="sold text-content">
-                                    <span class="theme-color price">$26.69</span>
-                                    <del>28.56</del>
+                                    <span class="theme-color price">dh {{ i.get_sale_price_t|floatformat:0 }}</span>
+                                    <del>dh {{ i.get_regular_price_t|floatformat:0 }}</del>
                                 </h5>
 
                                 <div class="product-rating mt-2">
                                     <ul class="rating">
-                                        <li>
-                                            <i data-feather="star" class="fill"></i>
-                                        </li>
-                                        <li>
-                                            <i data-feather="star" class="fill"></i>
-                                        </li>
-                                        <li>
-                                            <i data-feather="star" class="fill"></i>
-                                        </li>
-                                        <li>
-                                            <i data-feather="star" class="fill"></i>
-                                        </li>
-                                        <li>
-                                            <i data-feather="star"></i>
-                                        </li>
-                                    </ul>
+                                      {% for star in "12345" %}
+                                        {% if star|add:0 <= product.average_rating %}
+                                         <li>
+                                          <i data-feather="star" class="fill"></i>
+                                         </li>
+                                      {% else %}
+                                         <li>
+                                          <i data-feather="star"></i>
+                                         </li>
+                                      {% endif %}
+                                      {% endfor %}
+                                     </ul>
 
-                                    <h6 class="theme-color">In Stock</h6>
+                                    <h6 class="theme-color">( {{ product.num_of_reviews }} )</h6>
                                 </div>
 
                                 <div class="add-to-cart-box bg-white">
-                                    <button class="btn btn-add-cart addcart-button">Whatsapp click
+                                    <button class="btn btn-add-cart addcart-button">View
                                         
                                     </button>
                                     
@@ -381,14 +424,14 @@
                             </div>
                         </div>                       
                     </div>
-                  {% endfor %}
-                   
-
+                  {% endfor %}  
                 </div>
+                {% endif %}
 
+                {% if incense %}
                 <div class="title title-flex">
                     <div>
-                        <h2>Dried Products</h2>
+                        <h2>Incense Products</h2>
                         <span class="title-leaf">
                             <svg class="icon-width">
                                 <use xlink:href="{% static 'web/assets/svg/leaf.svg' %}#cake"></use>
@@ -398,19 +441,104 @@
                     <div class="timing-box">
                         <div class="timing theme-bg-color">
                             <i data-feather="clock"></i>
-                            <h6 class="name">Expires in :</h6>
+                            <h6 class="name">More Products</h6>
                         </div>
                     </div>
                 </div>
+                <div class="product-box-slider-2 no-arrow">  
+                  {% for i in incense %}
+                      <div>
+                        <div class="product-box product-box-bg wow fadeIn card-product">
+                            <div class="product-image">
+                                <a href="product-left-thumbnail.html">
+                                    <img src="{{ i.image_png.url }}"
+                                        class="img-fluid blur-up lazyload" alt="">
+                                </a>
+                                <ul class="product-option">
+                        <li data-bs-toggle="tooltip" data-bs-placement="top" title="View">
+                          <a href="javascript:void(0)" data-bs-toggle="modal"
+                            data-bs-target="#view-{{ i.id }}">
+                            <i data-feather="eye"></i>
+                        </a>
+                        </li>
 
-                <div class="product-box-slider-2 no-arrow">
-                    
-                  
-                  <div>
+                        
+                        <li data-bs-toggle="tooltip" data-bs-placement="top" title="Wishlist">
+                          {% comment %} <a href="" class="notifi-wishlist btn-action-wishlist" data-id="{{ product.id }}" data-product_id="{{ product.id }}">
+                              <i data-feather="heart"></i>
+                          </a>  {% endcomment %}
+                          <button class="notifi-wishlist btn-action-wishlist" data-product_id="{{ i.id }}" data-bs-placement="top" data-bs-html="true">
+                               <i data-feather="heart"></i>
+                          </button>
+                      </li>
+                        
+                      </ul>
+                            </div>
+                            <div class="product-detail">
+                                <a href="product-left-thumbnail.html">
+                                    <h6 class="name">
+                                        {{ i.title }}
+                                    </h6>
+                                </a>
+
+                                <h5 class="sold text-content">
+                                    <span class="theme-color price">dh {{ i.get_sale_price_t|floatformat:0 }}</span>
+                                    <del>dh {{ i.get_regular_price_t|floatformat:0 }}</del>
+                                </h5>
+
+                                <div class="product-rating mt-2">
+                                    <ul class="rating">
+                                      {% for star in "12345" %}
+                                        {% if star|add:0 <= product.average_rating %}
+                                         <li>
+                                          <i data-feather="star" class="fill"></i>
+                                         </li>
+                                      {% else %}
+                                         <li>
+                                          <i data-feather="star"></i>
+                                         </li>
+                                      {% endif %}
+                                      {% endfor %}
+                                     </ul>
+
+                                    <h6 class="theme-color">( {{ product.num_of_reviews }} )</h6>
+                                </div>
+
+                                <div class="add-to-cart-box bg-white">
+                                    <button class="btn btn-add-cart addcart-button">View </button>
+                                    
+                                </div>
+                            </div>
+                        </div>                       
+                      </div>
+                    {% endfor %}
+                </div>
+                {% endif %}
+
+                {% if whole %}
+                <div class="title title-flex">
+                    <div>
+                        <h2>Whole Products</h2>
+                        <span class="title-leaf">
+                            <svg class="icon-width">
+                                <use xlink:href="{% static 'web/assets/svg/leaf.svg' %}#cake"></use>
+                            </svg>
+                        </span>
+                    </div>
+                    <div class="timing-box">
+                        <div class="timing theme-bg-color">
+                            <i data-feather="clock"></i>
+                            <h6 class="name">More</h6>
+                        </div>
+                    </div>
+                </div>
+                <div class="product-box-slider-2 no-arrow">  
+                  {% for i in whole %}
+                      <div>
                         <div class="product-box product-box-bg wow fadeIn">
                             <div class="product-image">
                                 <a href="product-left-thumbnail.html">
-                                    <img src="{% static 'web/assets/images/cake/product/1.png' %}"
+                                    <img src="{{ i.image_png.url }}"
                                         class="img-fluid blur-up lazyload" alt="">
                                 </a>
                                 <ul class="product-option">
@@ -436,7 +564,7 @@
                             <div class="product-detail">
                                 <a href="product-left-thumbnail.html">
                                     <h6 class="name">
-                                        Muffets & Tuffets Whole Wheat Bread 400 g
+                                        {{ i.title }}
                                     </h6>
                                 </a>
 
@@ -487,116 +615,10 @@
                                 </div>
                             </div>
                         </div>                       
-                    </div>
-                    
-
+                      </div>
+                    {% endfor %}
                 </div>
-
-                <div class="title title-flex">
-                    <div>
-                        <h2>Powder Products</h2>
-                        <span class="title-leaf">
-                            <svg class="icon-width">
-                                <use xlink:href="{% static 'web/assets/svg/leaf.svg' %}#cake"></use>
-                            </svg>
-                        </span>
-                    </div>
-                    <div class="timing-box">
-                        <div class="timing theme-bg-color">
-                            <i data-feather="clock"></i>
-                            <h6 class="name">Expires in :</h6>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="product-box-slider-2 no-arrow">
-                    
-                  
-                  <div>
-                        <div class="product-box product-box-bg wow fadeIn">
-                            <div class="product-image">
-                                <a href="product-left-thumbnail.html">
-                                    <img src="{% static 'web/assets/images/cake/product/1.png' %}"
-                                        class="img-fluid blur-up lazyload" alt="">
-                                </a>
-                                <ul class="product-option">
-                                    <li data-bs-toggle="tooltip" data-bs-placement="top" title="View">
-                                        <a href="javascript:void(0)" data-bs-toggle="modal" data-bs-target="#view">
-                                            <i data-feather="eye"></i>
-                                        </a>
-                                    </li>
-
-                                    <li data-bs-toggle="tooltip" data-bs-placement="top" title="Compare">
-                                        <a href="compare.html">
-                                            <i data-feather="refresh-cw"></i>
-                                        </a>
-                                    </li>
-
-                                    <li data-bs-toggle="tooltip" data-bs-placement="top" title="Wishlist">
-                                        <a href="wishlist.html" class="notifi-wishlist">
-                                            <i data-feather="heart"></i>
-                                        </a>
-                                    </li>
-                                </ul>
-                            </div>
-                            <div class="product-detail">
-                                <a href="product-left-thumbnail.html">
-                                    <h6 class="name">
-                                        Muffets & Tuffets Whole Wheat Bread 400 g
-                                    </h6>
-                                </a>
-
-                                <div class="product-rating mt-2">
-                                    <ul class="rating">
-                                        <li>
-                                            <i data-feather="star" class="fill"></i>
-                                        </li>
-                                        <li>
-                                            <i data-feather="star" class="fill"></i>
-                                        </li>
-                                        <li>
-                                            <i data-feather="star" class="fill"></i>
-                                        </li>
-                                        <li>
-                                            <i data-feather="star" class="fill"></i>
-                                        </li>
-                                        <li>
-                                            <i data-feather="star"></i>
-                                        </li>
-                                    </ul>
-                                </div>
-
-                                <h6 class="sold weight text-content fw-normal">1 KG</h6>
-
-                                <h6 class="price theme-color">$ 80.00</h6>
-
-                                <div class="add-to-cart-box bg-white">
-                                    <button class="btn btn-add-cart addcart-button">Add
-                                        <span class="add-icon bg-light-orange">
-                                            <i class="fa-solid fa-plus"></i>
-                                        </span>
-                                    </button>
-                                    <div class="cart_qty qty-box">
-                                        <div class="input-group">
-                                            <button type="button" class="qty-left-minus" data-type="minus"
-                                                data-field="">
-                                                <i class="fa fa-minus"></i>
-                                            </button>
-                                            <input class="form-control input-number qty-input" type="text"
-                                                name="quantity" value="0">
-                                            <button type="button" class="qty-right-plus" data-type="plus"
-                                                data-field="">
-                                                <i class="fa fa-plus"></i>
-                                            </button>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>                       
-                    </div>
-                    
-
-                </div>
+                {% endif %}
             </div>
 
             
