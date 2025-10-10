@@ -62,8 +62,7 @@
 
 
                                 <li class="right-side">
-                                    {% comment %} <a href="{% url "orders:wishlist" %}" {% endcomment %}
-                                    <a href="#"
+                                    <a href="{% url "orders:wishlist" %}"
                                         class="btn p-0 position-relative header-wishlist">
                                         <span class="position-absolute top-0 start-100 translate-middle badge"
                                             id="header_wishlist_count">{{ wishlist_count }}</span>
@@ -256,8 +255,7 @@
             </li>
 
             <li>
-                <a href="#" class="notifi-wishlist">
-                {% comment %} <a href="{% url "orders:wishlist" %}" class="notifi-wishlist"> {% endcomment %}
+                <a href="{% url "orders:wishlist" %}" class="notifi-wishlist">
                     <i class="iconly-Heart icli"></i>
                     <span>My Wish</span>
                 </a>

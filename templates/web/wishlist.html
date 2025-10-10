@@ -1,0 +1,137 @@
+{% extends 'web/partials/base.html' %}
+{% load static %}
+{% block title %}Wishlist{% endblock%} 
+{% block content %}
+
+   
+    <!-- mobile fix menu start -->
+    <div class="mobile-menu d-md-none d-block mobile-cart">
+        <ul>
+            <li class="active">
+                <a href="{% url "web:index" %}">
+                    <i class="iconly-Home icli"></i>
+                    <span>Home</span>
+                </a>
+            </li>
+
+            <li class="mobile-category ">
+                <a href="{% url "web:cn" %}">
+                    <i class="iconly-Category icli"></i>
+                    <span>Category</span>
+                </a>
+            </li>
+
+            <li>
+                <a href="{% url "web:search" %}" class="search-box">
+                    <i class="iconly-Search icli"></i>
+                    <span>Search</span>
+                </a>
+            </li>
+
+            <li>
+                <a href="{% url "orders:wishlist" %}" class="notifi-wishlist">
+                    <i class="iconly-Heart icli"></i>
+                    <span>My Wish</span>
+                </a>
+            </li>
+
+            <li>
+                <a href="{% url "web:shop" %}">
+                    <i class="iconly-Bag-2 icli fly-cate"></i>
+                    <span>Shop</span>
+                </a>
+            </li>
+        </ul>
+    </div>
+    <!-- mobile fix menu end -->
+
+    <!-- Breadcrumb Section Start -->
+    <section class="breadcrumb-section pt-0">
+        <div class="container-fluid-lg">
+            <div class="row">
+                <div class="col-12">
+                    <div class="breadcrumb-contain">
+                        <h2>Wishlist</h2>
+                        <nav>
+                            <ol class="breadcrumb mb-0">
+                                <li class="breadcrumb-item">
+                                    <a href="{% url "web:index" %}">
+                                        <i class="fa-solid fa-house"></i>
+                                    </a>
+                                </li>
+                                <li class="breadcrumb-item active">Wishlist</li>
+                            </ol>
+                        </nav>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- Breadcrumb Section End -->
+
+    <!-- Wishlist Section Start -->
+    <section class="wishlist-section section-b-space mt-3">
+        <div class="container-fluid-lg">
+            <div class="row g-sm-3 g-2" id="wishlist-table" data-shop-url="{% url 'web:shop' %}">
+                {% if wishlist_items %}
+                {% for item in wishlist_items %}
+                <div class="col-xxl-2 col-lg-3 col-md-4 col-6 product-box-contain">
+                    <div class="product-box-3 h-100">
+                        <div class="product-header">
+                            <div class="product-image">
+                                <a href="product-left-thumbnail.html">
+                                    <img src="{{item.product.product.image.url}}" class="img-fluid blur-up lazyload"
+                                        alt="">
+                                </a>
+
+                                <div class="product-header-top">
+                                    <button class="btn wishlist-button close_button remove-btn" data-product_id="{{ item.id }}">
+                                        <i data-feather="x"></i>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="product-footer">
+                            <div class="product-detail">
+                                <span class="span-name">{{ item.product.product.display_name }}</span>
+                                <a href="product-left-thumbnail.html">
+                                    <h5 class="name">{{ item.product.product.name|truncatechars:30 }}</h5>
+                                </a>
+                                <h6 class="unit mt-1">{{ item.product.weight }}  {{ item.product.unit }}</h6>
+                                <h5 class="price">
+                                    <span class="theme-color"> Aed {{ item.product.sale_price|floatformat:0 }}</span>
+                                    <del>Aed {{ item.product.regular_price|floatformat:0 }}</del>
+                                </h5>
+
+                                <form action="{% url 'web:order_via_whatsapp' item.product.product.slug %}" method="POST">
+                                    {% csrf_token %}
+                                    <input type="hidden" name="product" value="{{ item.product.product.id }}" />
+                                    <input type="hidden" name="quantity" id="hidden_quantity" value="1" />
+                                    <button type="submit" class="btn mt-3 btn-md bg-green-wp cart-button text-white w-100">Order WhatsApp</button>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                {% endfor %}
+                {% else %}
+                <div class="py-3">
+                  <div class="text-center">
+                    <img src="{% static 'web/assets/images/wishlist.png' %}" alt="bluetower" style="width: 20%;"  class="img-responsive img-fluid ">
+                    <h3>Your Wishlist is empty</h3>
+                    <div class="text-center">
+                      <a href="{% url 'web:shop' %}" class="btn btn-primary">Continue Shopping</a>
+                    </div>
+                  </div>
+                </div>
+                {% endif %}
+            </div>
+        </div>
+    </section>
+    <!-- Wishlist Section End -->
+
+    <!-- Location Modal Start -->
+{% endblock  %}
+{% block js %}
+<script src="{% static 'web/assets/js/wishlist.js' %}"></script>
+{% endblock %}

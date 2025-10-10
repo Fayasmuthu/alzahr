@@ -1,0 +1,187 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Responsive Categories Menu</title>
+  <link id="rtl-link" rel="stylesheet" type="text/css" href="{% static 'web/assets/css/vendors/bootstrap.css' %}">
+
+  <!-- wow css -->
+  <link rel="stylesheet" href="{% static 'web/assets/css/animate.min.css' %}">
+
+  <!-- Iconly css -->
+  <link rel="stylesheet" type="text/css" href="{% static 'web/assets/css/bulk-style.css' %}">
+  <link rel="stylesheet" type="text/css" href="{% static 'web/assets/css/vendors/animate.css' %}">
+
+  <!-- Template css -->
+  <link id="color-link" rel="stylesheet" type="text/css" href="{% static 'web/assets/css/style.css' %}">
+  <style>
+    .category-icon {
+      width: 60px;
+      height: 60px;
+      object-fit: cover;
+      border-radius: 50%;
+      border: 1px solid #ccc;
+      background-color: white;
+      padding: 5px;
+    }
+
+    .category-card {
+      text-align: center;
+      margin-bottom: 20px;
+    }
+
+    .category-card p{
+        color: #ccc;
+    }
+
+    .subcategory-card {
+      text-align: center;
+      margin-bottom: 15px;
+    }
+
+    .subcategory-card p{
+        color: #ccc;
+    }
+
+    .subcategory-container {
+      display: none;
+      margin-top: 20px;
+    }
+
+    .subcategory-container.active {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 15px;
+      justify-content: center;
+      flex-direction: column;
+    }
+
+    .back-btn {
+      cursor: pointer;
+      font-size: 1rem;
+      color: #ccc;
+    }
+    .color-body{
+        background-color: #a69080;
+    }
+  </style>
+</head>
+<body class="color-body">
+     <!-- mobile fix menu start -->
+     <div class="mobile-menu d-md-none d-block mobile-cart">
+        <ul>
+            <li class="active">
+                <a href="{% url "web:index" %}">
+                    <i class="iconly-Home icli"></i>
+                    <span>Home</span>
+                </a>
+            </li>
+
+            <li class="mobile-category ">
+                <a href="{% url "web:cn" %}">
+                    <i class="iconly-Category icli js-link"></i>
+                    <span>Category</span>
+                </a>
+            </li>
+
+            <li class="d-none">
+                <a href="{% url "web:search" %}" class="search-box">
+                    <i class="iconly-Search icli"></i>
+                    <span>Search</span>
+                </a>
+            </li>
+
+            <li>
+                <a href="{% url "orders:wishlist" %}" class="notifi-wishlist">
+                    <i class="iconly-Heart icli"></i>
+                    <span>My Wish</span>
+                </a>
+            </li>
+
+            <li>
+                <a href="{% url "web:shop" %}">
+                    <i class="iconly-Bag-2 icli fly-cate"></i>
+                    <span>Shop</span>
+                </a>
+            </li>
+        </ul>
+    </div>
+    <!-- mobile fix menu end -->
+
+  <div class="container mb-5">
+      <div id="categories" class="row">
+        <h2 class="my-3 text-light">Categories</h2>
+      <!-- Main Categories -->
+      {% for category in categories %}
+      <div class="col-4 category-card" onclick="showSubcategories('{{ category.slug }}')">
+        <img src="{{ category.icon_image.url }}" alt="{{ category.title }}" class="category-icon">
+        <p>{{ category.title }}</p>
+      </div>
+      {% endfor %}  
+    </div>
+
+    <!-- Subcategories -->
+    <div id="subcategories" class="subcategory-container">
+      <div class="back-btn" onclick="hideSubcategories()">&#8592; Back</div>
+
+      {% for category in categories %}
+      <div id="{{ category.slug }}" class="row subcategory-list">
+        {% for subcategory in category.subcategories.all %}
+        {% if subcategory.active %}
+        <div class="col-4 subcategory-card">
+        <a href="{% url 'web:shop' %}?subcategories={{ subcategory.slug }}">
+          <img src="{{ subcategory.icon_image.url }}" alt="{{ subcategory.title }}" class="category-icon">
+          <p>{{ subcategory.title }}</p>
+        </a>
+        </div>
+        {% endif %}
+        {% endfor %}
+      </div>
+      {% endfor %}
+      {% comment %} <div id="home-improvement" class="row subcategory-list">
+        <div class="col-4 subcategory-card">
+          <img src="{% static 'web/assets/images/about/elec.jpg' %}" alt="Tools" class="category-icon">
+          <p>Tools</p>
+        </div>
+        <div class="col-4 subcategory-card">
+          <img src="{% static 'web/assets/images/about/elec.jpg' %}" alt="Paints" class="category-icon">
+          <p>Paints</p>
+        </div>
+      </div>
+
+      <div id="kitchen" class="row subcategory-list">
+        <div class="col-4 subcategory-card">
+          <img src="{% static 'web/assets/images/about/elec.jpg' %}" alt="Cookware" class="category-icon">
+          <p>Cookware</p>
+        </div>
+        <div class="col-4 subcategory-card">
+          <img src="{% static 'web/assets/images/about/elec.jpg' %}" alt="Utensils" class="category-icon">
+          <p>Utensils</p>
+        </div>
+      </div>
+    </div> {% endcomment %}
+  </div>
+
+  
+
+  <script>
+    function showSubcategories(category) {
+      document.getElementById('categories').style.display = 'none';
+      const subcategoriesContainer = document.getElementById('subcategories');
+      subcategoriesContainer.classList.add('active');
+      const subcategories = document.querySelectorAll('.subcategory-list');
+      subcategories.forEach(sub => sub.style.display = 'none');
+      document.getElementById(category).style.display = 'flex';
+    }
+
+    function hideSubcategories() {
+      document.getElementById('categories').style.display = 'flex';
+      document.getElementById('subcategories').classList.remove('active');
+    }
+  </script>
+  <script src="{% static 'web/assets/js/script.js' %}"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

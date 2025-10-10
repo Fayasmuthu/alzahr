@@ -46715,3 +46715,11 @@ div.scrollmenu {
 .banner-image{
     height: 350px;
 }
+
+.timing .name{
+    color: #fff;
+}
+
+.timing .name:hover {
+    color: #000;
+}

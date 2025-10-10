@@ -1,0 +1,140 @@
+{% extends 'web/partials/base.html' %}
+{% load static %}
+
+{% block content %}
+  {% comment %} <h1>Search Results for "{{ query }}"</h1> {% endcomment %}
+
+  
+    <!-- Breadcrumb Section Start -->
+    <section class="breadcrumb-section pt-0">
+      <div class="container-fluid-lg">
+          <div class="row">
+              <div class="col-12">
+                  <div class="breadcrumb-contain">
+                      <h2>Search</h2>
+                      <nav>
+                          <ol class="breadcrumb mb-0">
+                              <li class="breadcrumb-item">
+                                  <a href="index.html">
+                                      <i class="fa-solid fa-house"></i>
+                                  </a>
+                              </li>
+                              <li class="breadcrumb-item active">Search</li>
+                          </ol>
+                      </nav>
+                  </div>
+              </div>
+          </div>
+      </div>
+  </section>
+  <!-- Breadcrumb Section End -->
+
+  <!-- Search Bar Section Start -->
+  <section class="search-section">
+      <div class="container-fluid-lg">
+          <div class="row">
+              <div class="col-xxl-6 col-xl-8 mx-auto">
+                  <div class="title d-block text-center">
+                      <h2>Search for products</h2>
+                      <span class="title-leaf">
+                          <svg class="icon-width">
+                              <use xlink:href="../assets/svg/leaf.svg#leaf"></use>
+                          </svg>
+                      </span>
+                  </div>
+
+                  <div class="search-box">
+                    <form method="GET" action="{% url 'web:search' %}">
+                      <div class="input-group">
+                          <input type="text" class="form-control" placeholder="serach" name="q" value="{{ query }}">
+                          <button class="btn theme-bg-color text-white m-0" type="button" id="button-addon1">Search</button>
+                      </div>
+                    </form>
+                  </div>
+              </div>
+          </div>
+      </div>
+  </section>
+  <!-- Search Bar Section End -->
+
+  {% if not query %}
+    <!-- Shop Section Start -->
+    <section class="section-b-space shop-section mt-5">
+      <div class="container">
+        <div class="row">
+          <div class="col-12">
+            <p>Please enter a search term.</p>
+            {% else %}
+            <h2 class="text-center my-5">Search Results for "{{ query }}"</h2>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-12">
+            <div class="row g-sm-4 g-3 row-cols-xxl-5 row-cols-xl-4 row-cols-lg-3 row-cols-md-3 row-cols-2 product-list-section m-x">
+              {% for product in products %}
+                <div>
+                  <div class="product-box-3 h-100 wow fadeInUp card-product">
+                    <div class="product-header">
+                      <div class="product-image">
+                        <a href="{{ product.get_absolute_url }}"><img src="{{ product.image.url }}" class="img-fluid blur-up lazyload" alt="" /></a>
+
+                        <ul class="product-option">
+                          <li data-bs-toggle="tooltip" data-bs-placement="top" title="View">
+                            <a href="javascript:void(0)" data-bs-toggle="modal" data-bs-target="#view-{{ product.id }}"><i data-feather="eye"></i></a>
+                          </li>
+
+                          <li data-bs-toggle="tooltip" data-bs-placement="top" title="Wishlist">
+                            {% comment %} <a href="" class="notifi-wishlist btn-action-wishlist" data-id="{{ product.id }}" data-product_id="{{ product.id }}"><i data-feather="heart"></i></a> {% endcomment %}
+                            <button class="notifi-wishlist btn-action-wishlist" data-product_id="{{ product.id }}" data-bs-placement="top" data-bs-html="true"><i data-feather="heart"></i></button>
+                          </li>
+                        </ul>
+                      </div>
+                    </div>
+                    <div class="product-footer">
+                      <div class="product-detail">
+                        <span class="span-name">Hardware</span>
+                        <a href="{{ product.get_absolute_url }}"><h5 class="name">{{ product.title }}</h5></a>
+                        <p class="text-content mt-1 mb-2 product-content">{{ product.display_title }}</p>
+                        <div class="product-rating mt-2">
+                          <ul class="rating">
+                            <li>
+                              <i data-feather="star" class="fill"></i>
+                            </li>
+                            <li>
+                              <i data-feather="star" class="fill"></i>
+                            </li>
+                            <li>
+                              <i data-feather="star" class="fill"></i>
+                            </li>
+                            <li>
+                              <i data-feather="star" class="fill"></i>
+                            </li>
+                            <li>
+                              <i data-feather="star"></i>
+                            </li>
+                          </ul>
+                          <span>(4.0)</span>
+                        </div>
+                        <h6 class="unit d-none">250 ml</h6>
+                        <h5 class="price"><span class="theme-color">AED 08.02</span> <del>AED 15.15</del></h5>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              {% empty %}
+                <li>No products found.</li>
+              {% endfor %}
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  {% endif %}
+  <!-- Shop Section End -->
+{% endblock %}
+{% block js %}
+  <script src="{% static 'web/assets/js/index.js' %}"></script>
+  <script src="{% static 'web/assets/js/filter-checkout.js' %}"></script>
+  <!-- Price Range Js -->
+  <script src="{% static 'web/assets/js/ion.rangeSlider.min.js' %}"></script>
+{% endblock %}
