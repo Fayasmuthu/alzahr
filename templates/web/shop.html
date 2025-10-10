@@ -182,8 +182,21 @@
                       <span>( {{ product.num_of_reviews }} )</span>
                       </div>
                       <h5 class="price">
-                        <span class="theme-color">AED {{ product.get_sale_price_t|floatformat:0 }}</span> 
-                        <del>AED {{ product.get_regular_price_t|floatformat:0 }}</del></h5>
+                        <span class="theme-color">
+                                        {% if product.get_sale_price %}
+                                            Dh {{ product.get_sale_price|floatformat:0 }}
+                                        {% elif product.get_sale_price_t %}
+                                            Dh {{ product.get_sale_price_t|floatformat:0 }}
+                                        {% endif %}
+                        </span> 
+                        <del>
+                                        {% if product.get_regular_price %}
+                                            Dh {{ product.get_regular_price|floatformat:0 }}
+                                        {% elif product.get_regular_price_t %}
+                                            Dh {{ product.get_regular_price_t|floatformat:0 }}
+                                        {% endif %}
+                        </del>
+                      </h5>
                     </div>
                   </div>
                 </div>

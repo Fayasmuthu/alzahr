@@ -198,7 +198,7 @@
 
                   <ul class="option">
                     <li data-bs-toggle="tooltip" data-bs-placement="top" title="Quick View">
-                      <a href="{{ i.get_absolute_url }}"><i class="iconly-Show icli"></i></a>
+                      <a href="{{ i.get_absolute_url }}><i class="iconly-Show icli"></i></a>
                     </li>
                     <li data-bs-toggle="tooltip" data-bs-placement="top" title="Wishlist">
                       <a href="javascript:void(0)" class="notifi-wishlist btn-action-wishlist" data-product_id="{{ i.id }}"><i class="iconly-Heart icli"></i></a>
@@ -224,9 +224,21 @@
                       <i data-feather="star"></i>
                     </li>
                   </ul>
-                  <a href="{{ i.get_absolute_url }}"><h5 class="name text-title">{{ i.title }}</h5></a>
-                  <h5 class="price theme-color">AED {{ i.get_sale_price_t|floatformat:0 }}
-                    <del>AED {{ i.get_regular_price_t|floatformat:0 }}</del></h5>
+                  <a href="{{ i.get_absolute_url }}><h5 class="name text-title">{{ i.title }}</h5></a>
+                  <h5 class="price theme-color">
+                      {% if i.get_sale_price %}
+                          Dh {{ i.get_sale_price|floatformat:0 }}
+                      {% elif i.get_sale_price_t %}
+                          Dh {{ i.get_sale_price_t|floatformat:0 }}
+                      {% endif %}
+                    <del>
+                      {% if i.get_regular_price %}
+                          Dh {{ i.get_regular_price|floatformat:0 }}
+                      {% elif i.get_regular_price_t %}
+                          Dh {{ i.get_regular_price_t|floatformat:0 }}
+                      {% endif %}
+                    </del>
+                  </h5>
 
                   <div class="addtocart_btn d-none"></div>
                 </div>
@@ -269,13 +281,13 @@
                     <div>
                         <div class="product-box product-box-bg wow fadeInUp">
                             <div class="product-image">
-                                <a href="product-left-thumbnail.html">
+                                <a href="{{ i.get_absolute_url }}">
                                     {% comment %} <img src="{% static 'web/assets/images/cake/product/1.png' %}" {% endcomment %}
                                     <img src="{{ i.image_png.url }}" class="img-fluid blur-up lazyload" alt="">
                                 </a>
                                 <ul class="product-option">
                                     <li data-bs-toggle="tooltip" data-bs-placement="top" title="View">
-                                        <a href="javascript:void(0)" data-bs-toggle="modal" data-bs-target="#view">
+                                        <a href="{{ i.get_absolute_url }} data-bs-toggle="modal" data-bs-target="#view">
                                             <i data-feather="eye"></i>
                                         </a>
                                     </li>
@@ -294,15 +306,26 @@
                                 </ul>
                             </div>
                             <div class="product-detail">
-                                <a href="product-left-thumbnail.html">
+                                <a href="{{ i.get_absolute_url }}">
                                     <h6 class="name">
                                         {{ i.title }}
                                     </h6>
                                 </a>
-
-                                <h5 class="sold text-content">
-                                    <span class="theme-color price">dh {{ i.get_sale_price_t|floatformat:0 }}</span>
-                                    <del>dh {{ i.get_regular_price_t|floatformat:0 }}</del>
+                                </h5 class="sold text-content">
+                                  <span class="theme-color price">
+                                    {% if i.get_sale_price %}
+                                        Dh {{ i.get_sale_price|floatformat:0 }}
+                                    {% elif i.get_sale_price_t %}
+                                        Dh {{ i.get_sale_price_t|floatformat:0 }}
+                                    {% endif %}
+                                  </span>
+                                  <del>
+                                    {% if i.get_regular_price %}
+                                        Dh {{ i.get_regular_price|floatformat:0 }}
+                                    {% elif i.get_regular_price_t %}
+                                        Dh {{ i.get_regular_price_t|floatformat:0 }}
+                                    {% endif %}
+                                  </del>
                                 </h5>
 
                                 <div class="product-rating mt-2">
@@ -346,8 +369,7 @@
                     </div>
                     <div class="timing-box">
                         <div class="timing theme-bg-color">
-                            <i data-feather="clock"></i>
-                            <h6 class="name">More Products</h6>
+                          <a href="{% url "web:powder" %}"><h6 class="name">More Products</h6></a>
                         </div>
                     </div>
                 </div>
@@ -356,7 +378,7 @@
                   <div>
                         <div class="product-box product-box-bg wow fadeIn">
                             <div class="product-image">
-                                <a href="product-left-thumbnail.html">
+                                <a href="{{ i.get_absolute_url }}">
                                     <img src="{{ i.image_png.url }}"
                                         class="img-fluid blur-up lazyload" alt="">
                                 </a>
@@ -381,15 +403,27 @@
                                 </ul>
                             </div>
                             <div class="product-detail">
-                                <a href="product-left-thumbnail.html">
+                                <a href="{{ i.get_absolute_url }}">
                                     <h6 class="name">
                                         {{ i.title }}
                                     </h6>
                                 </a>
 
-                                <h5 class="sold text-content">
-                                    <span class="theme-color price">dh {{ i.get_sale_price_t|floatformat:0 }}</span>
-                                    <del>dh {{ i.get_regular_price_t|floatformat:0 }}</del>
+                                </h5 class="sold text-content">
+                                  <span class="theme-color price">
+                                    {% if i.get_sale_price %}
+                                        Dh {{ i.get_sale_price|floatformat:0 }}
+                                    {% elif i.get_sale_price_t %}
+                                        Dh {{ i.get_sale_price_t|floatformat:0 }}
+                                    {% endif %}
+                                  </span>
+                                  <del>
+                                    {% if i.get_regular_price %}
+                                        Dh {{ i.get_regular_price|floatformat:0 }}
+                                    {% elif i.get_regular_price_t %}
+                                        Dh {{ i.get_regular_price_t|floatformat:0 }}
+                                    {% endif %}
+                                  </del>
                                 </h5>
 
                                 <div class="product-rating mt-2">
@@ -433,8 +467,8 @@
                     </div>
                     <div class="timing-box">
                         <div class="timing theme-bg-color">
-                            <i data-feather="clock"></i>
-                            <h6 class="name">More Products</h6>
+                          <a href="{% url "web:incense" %}">
+                            <h6 class="name">More Products</h6></a>
                         </div>
                     </div>
                 </div>
@@ -443,7 +477,7 @@
                       <div>
                         <div class="product-box product-box-bg wow fadeIn card-product">
                             <div class="product-image">
-                                <a href="product-left-thumbnail.html">
+                                <a href="{{ i.get_absolute_url }}">
                                     <img src="{{ i.image_png.url }}"
                                         class="img-fluid blur-up lazyload" alt="">
                                 </a>
@@ -468,15 +502,27 @@
                       </ul>
                             </div>
                             <div class="product-detail">
-                                <a href="product-left-thumbnail.html">
+                                <a href="{{ i.get_absolute_url }}">
                                     <h6 class="name">
                                         {{ i.title }}
                                     </h6>
                                 </a>
 
-                                <h5 class="sold text-content">
-                                    <span class="theme-color price">dh {{ i.get_sale_price_t|floatformat:0 }}</span>
-                                    <del>dh {{ i.get_regular_price_t|floatformat:0 }}</del>
+                                </h5 class="sold text-content">
+                                  <span class="theme-color price">
+                                    {% if i.get_sale_price %}
+                                        Dh {{ i.get_sale_price|floatformat:0 }}
+                                    {% elif i.get_sale_price_t %}
+                                        Dh {{ i.get_sale_price_t|floatformat:0 }}
+                                    {% endif %}
+                                  </span>
+                                  <del>
+                                    {% if i.get_regular_price %}
+                                        Dh {{ i.get_regular_price|floatformat:0 }}
+                                    {% elif i.get_regular_price_t %}
+                                        Dh {{ i.get_regular_price_t|floatformat:0 }}
+                                    {% endif %}
+                                  </del>
                                 </h5>
 
                                 <div class="product-rating mt-2">
@@ -518,8 +564,8 @@
                     </div>
                     <div class="timing-box">
                         <div class="timing theme-bg-color">
-                            <i data-feather="clock"></i>
-                            <h6 class="name">More</h6>
+                            <a href="{% url "web:whole" %}">
+                            <h6 class="name">More Products</h6></a>
                         </div>
                     </div>
                 </div>
@@ -528,7 +574,7 @@
                       <div>
                         <div class="product-box product-box-bg wow fadeIn">
                             <div class="product-image">
-                                <a href="product-left-thumbnail.html">
+                                <a href="{{ i.get_absolute_url }}">
                                     <img src="{{ i.image_png.url }}"
                                         class="img-fluid blur-up lazyload" alt="">
                                 </a>
@@ -553,7 +599,316 @@
                                 </ul>
                             </div>
                             <div class="product-detail">
-                                <a href="product-left-thumbnail.html">
+                                <a href="{{ i.get_absolute_url }}">
+                                    <h6 class="name">
+                                        {{ i.title }}
+                                    </h6>
+                                </a>
+
+                                <div class="product-rating mt-2">
+                                    <ul class="rating">
+                                        <li>
+                                            <i data-feather="star" class="fill"></i>
+                                        </li>
+                                        <li>
+                                            <i data-feather="star" class="fill"></i>
+                                        </li>
+                                        <li>
+                                            <i data-feather="star" class="fill"></i>
+                                        </li>
+                                        <li>
+                                            <i data-feather="star" class="fill"></i>
+                                        </li>
+                                        <li>
+                                            <i data-feather="star"></i>
+                                        </li>
+                                    </ul>
+                                </div>
+
+                                <h6 class="sold weight text-content fw-normal">1 KG</h6>
+
+                                <h6 class="price theme-color">$ 80.00</h6>
+
+                                <div class="add-to-cart-box bg-white">
+                                    <button class="btn btn-add-cart addcart-button">Add
+                                        <span class="add-icon bg-light-orange">
+                                            <i class="fa-solid fa-plus"></i>
+                                        </span>
+                                    </button>
+                                    <div class="cart_qty qty-box">
+                                        <div class="input-group">
+                                            <button type="button" class="qty-left-minus" data-type="minus"
+                                                data-field="">
+                                                <i class="fa fa-minus"></i>
+                                            </button>
+                                            <input class="form-control input-number qty-input" type="text"
+                                                name="quantity" value="0">
+                                            <button type="button" class="qty-right-plus" data-type="plus"
+                                                data-field="">
+                                                <i class="fa fa-plus"></i>
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>                       
+                      </div>
+                    {% endfor %}
+                </div>
+                {% endif %}
+
+                {% if health %}
+                <div class="title title-flex">
+                    <div>
+                        <h2>Health Products</h2>
+                        <span class="title-leaf">
+                          <img src="{% static 'web/assets/svg/zahr.jpg' %}" style="width: 35px; , height: 35px;" alt="">
+                        </span>
+                    </div>
+                    <div class="timing-box">
+                        <div class="timing theme-bg-color">
+                            <a href="{% url "web:health" %}">
+                            <h6 class="name">More Products</h6></a>
+                        </div>
+                    </div>
+                </div>
+                <div class="product-box-slider-2 no-arrow">  
+                  {% for i in whole %}
+                      <div>
+                        <div class="product-box product-box-bg wow fadeIn">
+                            <div class="product-image">
+                                <a href="{{ i.get_absolute_url }}">
+                                    <img src="{{ i.image_png.url }}"
+                                        class="img-fluid blur-up lazyload" alt="">
+                                </a>
+                                <ul class="product-option">
+                                    <li data-bs-toggle="tooltip" data-bs-placement="top" title="View">
+                                        <a href="javascript:void(0)" data-bs-toggle="modal" data-bs-target="#view">
+                                            <i data-feather="eye"></i>
+                                        </a>
+                                    </li>
+
+                                    <li data-bs-toggle="tooltip" data-bs-placement="top" title="Compare">
+                                        <a href="compare.html">
+                                            <i data-feather="refresh-cw"></i>
+                                        </a>
+                                    </li>
+
+                                    <li data-bs-toggle="tooltip" data-bs-placement="top" title="Wishlist">
+                                        <a href="wishlist.html" class="notifi-wishlist">
+                                            <i data-feather="heart"></i>
+                                        </a>
+                                    </li>
+                                </ul>
+                            </div>
+                            <div class="product-detail">
+                                <a href="{{ i.get_absolute_url }}">
+                                    <h6 class="name">
+                                        {{ i.title }}
+                                    </h6>
+                                </a>
+
+                                <div class="product-rating mt-2">
+                                    <ul class="rating">
+                                        <li>
+                                            <i data-feather="star" class="fill"></i>
+                                        </li>
+                                        <li>
+                                            <i data-feather="star" class="fill"></i>
+                                        </li>
+                                        <li>
+                                            <i data-feather="star" class="fill"></i>
+                                        </li>
+                                        <li>
+                                            <i data-feather="star" class="fill"></i>
+                                        </li>
+                                        <li>
+                                            <i data-feather="star"></i>
+                                        </li>
+                                    </ul>
+                                </div>
+
+                                <h6 class="sold weight text-content fw-normal">1 KG</h6>
+
+                                <h6 class="price theme-color">$ 80.00</h6>
+
+                                <div class="add-to-cart-box bg-white">
+                                    <button class="btn btn-add-cart addcart-button">Add
+                                        <span class="add-icon bg-light-orange">
+                                            <i class="fa-solid fa-plus"></i>
+                                        </span>
+                                    </button>
+                                    <div class="cart_qty qty-box">
+                                        <div class="input-group">
+                                            <button type="button" class="qty-left-minus" data-type="minus"
+                                                data-field="">
+                                                <i class="fa fa-minus"></i>
+                                            </button>
+                                            <input class="form-control input-number qty-input" type="text"
+                                                name="quantity" value="0">
+                                            <button type="button" class="qty-right-plus" data-type="plus"
+                                                data-field="">
+                                                <i class="fa fa-plus"></i>
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>                       
+                      </div>
+                    {% endfor %}
+                </div>
+                {% endif %}
+
+                {% if slice %}
+                <div class="title title-flex">
+                    <div>
+                        <h2>slice Products</h2>
+                        <span class="title-leaf">
+                          <img src="{% static 'web/assets/svg/zahr.jpg' %}" style="width: 35px; , height: 35px;" alt="">
+                        </span>
+                    </div>
+                    <div class="timing-box">
+                        <div class="timing theme-bg-color">
+                            <a href="{% url "web:slice" %}">
+                            <h6 class="name">More Products</h6></a>
+                        </div>
+                    </div>
+                </div>
+                <div class="product-box-slider-2 no-arrow">  
+                  {% for i in whole %}
+                      <div>
+                        <div class="product-box product-box-bg wow fadeIn">
+                            <div class="product-image">
+                                <a href="{{ i.get_absolute_url }}">
+                                    <img src="{{ i.image_png.url }}"
+                                        class="img-fluid blur-up lazyload" alt="">
+                                </a>
+                                <ul class="product-option">
+                                    <li data-bs-toggle="tooltip" data-bs-placement="top" title="View">
+                                        <a href="javascript:void(0)" data-bs-toggle="modal" data-bs-target="#view">
+                                            <i data-feather="eye"></i>
+                                        </a>
+                                    </li>
+
+                                    <li data-bs-toggle="tooltip" data-bs-placement="top" title="Compare">
+                                        <a href="compare.html">
+                                            <i data-feather="refresh-cw"></i>
+                                        </a>
+                                    </li>
+
+                                    <li data-bs-toggle="tooltip" data-bs-placement="top" title="Wishlist">
+                                        <a href="wishlist.html" class="notifi-wishlist">
+                                            <i data-feather="heart"></i>
+                                        </a>
+                                    </li>
+                                </ul>
+                            </div>
+                            <div class="product-detail">
+                                <a href="{{ i.get_absolute_url }}">
+                                    <h6 class="name">
+                                        {{ i.title }}
+                                    </h6>
+                                </a>
+
+                                <div class="product-rating mt-2">
+                                    <ul class="rating">
+                                        <li>
+                                            <i data-feather="star" class="fill"></i>
+                                        </li>
+                                        <li>
+                                            <i data-feather="star" class="fill"></i>
+                                        </li>
+                                        <li>
+                                            <i data-feather="star" class="fill"></i>
+                                        </li>
+                                        <li>
+                                            <i data-feather="star" class="fill"></i>
+                                        </li>
+                                        <li>
+                                            <i data-feather="star"></i>
+                                        </li>
+                                    </ul>
+                                </div>
+
+                                <h6 class="sold weight text-content fw-normal">1 KG</h6>
+
+                                <h6 class="price theme-color">$ 80.00</h6>
+
+                                <div class="add-to-cart-box bg-white">
+                                    <button class="btn btn-add-cart addcart-button">Add
+                                        <span class="add-icon bg-light-orange">
+                                            <i class="fa-solid fa-plus"></i>
+                                        </span>
+                                    </button>
+                                    <div class="cart_qty qty-box">
+                                        <div class="input-group">
+                                            <button type="button" class="qty-left-minus" data-type="minus"
+                                                data-field="">
+                                                <i class="fa fa-minus"></i>
+                                            </button>
+                                            <input class="form-control input-number qty-input" type="text"
+                                                name="quantity" value="0">
+                                            <button type="button" class="qty-right-plus" data-type="plus"
+                                                data-field="">
+                                                <i class="fa fa-plus"></i>
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>                       
+                      </div>
+                    {% endfor %}
+                </div>
+                {% endif %}
+
+                {% if non_salt %}
+                <div class="title title-flex">
+                    <div>
+                        <h2>Non Salt Products</h2>
+                        <span class="title-leaf">
+                          <img src="{% static 'web/assets/svg/zahr.jpg' %}" style="width: 35px; , height: 35px;" alt="">
+                        </span>
+                    </div>
+                    <div class="timing-box">
+                        <div class="timing theme-bg-color">
+                            <a href="{% url "web:non_salt" %}">
+                            <h6 class="name">More Products</h6></a>
+                        </div>
+                    </div>
+                </div>
+                <div class="product-box-slider-2 no-arrow">  
+                  {% for i in whole %}
+                      <div>
+                        <div class="product-box product-box-bg wow fadeIn">
+                            <div class="product-image">
+                                <a href="{{ i.get_absolute_url }}">
+                                    <img src="{{ i.image_png.url }}"
+                                        class="img-fluid blur-up lazyload" alt="">
+                                </a>
+                                <ul class="product-option">
+                                    <li data-bs-toggle="tooltip" data-bs-placement="top" title="View">
+                                        <a href="javascript:void(0)" data-bs-toggle="modal" data-bs-target="#view">
+                                            <i data-feather="eye"></i>
+                                        </a>
+                                    </li>
+
+                                    <li data-bs-toggle="tooltip" data-bs-placement="top" title="Compare">
+                                        <a href="compare.html">
+                                            <i data-feather="refresh-cw"></i>
+                                        </a>
+                                    </li>
+
+                                    <li data-bs-toggle="tooltip" data-bs-placement="top" title="Wishlist">
+                                        <a href="wishlist.html" class="notifi-wishlist">
+                                            <i data-feather="heart"></i>
+                                        </a>
+                                    </li>
+                                </ul>
+                            </div>
+                            <div class="product-detail">
+                                <a href="{{ i.get_absolute_url }}">
                                     <h6 class="name">
                                         {{ i.title }}
                                     </h6>
@@ -621,22 +976,22 @@
                             <img src="{% static 'web/assets/images/cake/banner/10.jpg' %}" class="bg-img blur-up lazyload" alt="">
                             <div class="banner-detail p-top-left">
                                 <div>
-                                    <h6 class="text-uppercase theme-color fw-500">seafood</h6>
+                                    <h6 class="text-uppercase theme-color fw-500">food beve</h6>
                                     <h3 class="text-uppercase">
-                                        special <span class="brand-name">brand</span>
+                                        special <span class="brand-name">Al Zahr</span>
                                     </h3>
-                                    <p class="text-content fw-500 mt-3 lh-lg">Special offer on the discount very
-                                        hungry cake and sweets</p>
+                                    <p class="text-content fw-500 mt-3 lh-lg d-none">Special offer on the discount very
+                                        hungry tea</p>
 
-                                    <div class="banner-detail-box banner-detail-box-2 mb-md-3 mb-1">
+                                    <div class="banner-detail-box banner-detail-box-2 mb-md-3 mb-1 d-none">
                                         <h4 class="text-uppercase">up to</h4>
                                         <h2 class="mt-2">50%</h2>
                                         <h3 class="text-uppercase">off</h3>
                                     </div>
 
                                     <div>
-                                        <button onclick="location.href = 'javascript:void(0)';"
-                                            class="btn text-white btn-md mt-xxl-4 mt-2 home-button mend-auto theme-bg-color">Shop
+                                        <button onclick="location.href = '{% url "web:shop" %}';"
+                                            class="btn text-white btn-md mt-xxl-4 mt-2 home-button mend-auto theme-bg-color d-none">Shop
                                             Now<i class="fa-solid fa-right-long icon ms-2"></i>
                                         </button>
                                     </div>
@@ -650,13 +1005,12 @@
                             <img src="{% static 'web/assets/images/cake/banner/9.jpg' %}" class="bg-img blur-up lazyload" alt="">
                             <div class="banner-detail p-top-left">
                                 <div>
-                                    <h6 class="text-uppercase theme-color fw-500">Freash Every Day!</h6>
-                                    <h3 class="text-pacifico mt-2">Delicioud <span class="theme-color">Bread</span>
+                                    <h6 class="text-uppercase theme-color fw-500 d-none">Freash Every Day!</h6>
+                                  <h3 class="text-pacifico mt-2">smell<span class="theme-color">incense</span>
                                     </h3>
-                                    <p class="text-content fw-500 mt-3 w-75 mend-auto">Delicioud Bread and Brend new
-                                        fresh bread.</p>
-                                    <button onclick="location.href = 'javascript:void(0)';"
-                                        class="btn text-white btn-md mt-2 home-button mend-auto theme-bg-color">
+                                    <p class="text-content fw-500 mt-3 w-75 mend-auto d-none">freash.</p>
+                                    <button onclick="location.href = '{% url "web:shop" %}';"
+                                        class="btn text-white btn-md mt-2 home-button mend-auto theme-bg-color d-none">
                                         Shop Now <i class="fa-solid fa-right-long icon ms-2"></i>
                                     </button>
                                 </div>
@@ -690,11 +1044,11 @@
                     <button class="btn p-0 wishlist btn-action-wishlist d-none" data-product_id="{{ i.id }}" data-bs-placement="top" data-bs-html="true"><i class="iconly-Heart icli"></i></button>
                   </div>
 
-                  <a href="{{ i.get_absolute_url }}"><img src="{{ i.image.url }}" class="img-fluid" alt="" /></a>
+                  <a href="{{ i.get_absolute_url }}><img src="{{ i.image.url }}" class="img-fluid" alt="" /></a>
 
                   <ul class="option">
                     <li data-bs-toggle="tooltip" data-bs-placement="top" title="Quick View">
-                      <a href="{{ i.get_absolute_url }}" data-bs-toggle="modal" data-bs-target="#view"><i class="iconly-Show icli"></i></a>
+                      <a href="{{ i.get_absolute_url }} data-bs-toggle="modal" data-bs-target="#view"><i class="iconly-Show icli"></i></a>
                     </li>
                     <li data-bs-toggle="tooltip" data-bs-placement="top" title="Wishlist">
                       <a href="javascript:void(0)" class="notifi-wishlist btn-action-wishlist" data-product_id="{{ i.id }}"><i class="iconly-Heart icli"></i></a>
@@ -703,7 +1057,7 @@
                 </div>
 
                 <div class="product-detail">
-                  <a href="{{ i.get_absolute_url }}"><h5 class="name">{{ i.title }}</h5></a>
+                  <a href="{{ i.get_absolute_url }}><h5 class="name">{{ i.title }}</h5></a>
                   <h5 class="price theme-color">AED {{ i.get_sale_price_t|floatformat:0 }}
                     <del>AED {{ i.get_regular_price_t|floatformat:0 }}</del></h5>
                 </div>

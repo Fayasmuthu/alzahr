@@ -23,8 +23,7 @@
 
 
                             <div class="search-box">
-                                {% comment %} <form method="GET" action="{% url 'web:search' %}"> {% endcomment %}
-                                <form method="GET" action="#">
+                                <form method="GET" action="{% url 'web:search' %}">
                                     <div class="input-group">
                                         <input type="search" class="form-control" name="q" value="{{ query }}"
                                             placeholder="I'm searching for...">

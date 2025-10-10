@@ -504,14 +504,14 @@ class powderView(ListView):
         context["sub_title"] = self.subcategory_title
         return context
     
-class IncenseView(ListView):
+class incenseView(ListView):
     model = Product
     template_name = "web/shop/Incense.html"
     context_object_name = "products"
     paginate_by = 16
 
     def get_queryset(self):
-            products = Product.objects.filter(is_active=True, Incense=True)
+            products = Product.objects.filter(is_active=True, incense=True)
             # subcategories = Subcategory.objects.filter(active=True)
             sort_by = self.request.GET.get("sort_by")
             category_slugs = self.request.GET.get("categories")  # Updated query parameter for consistency

@@ -8,8 +8,8 @@ $(document).ready(function () {
       var originalPrice = selectedRadio.data('original_price');
       var offerPercent = parseFloat(selectedRadio.data('offer_percent')).toFixed(2); 
       
-      card.find('.sale_price').text('₹' + salePrice);
-      card.find('.original_price').text('₹' + originalPrice);
+      card.find('.sale_price').text('Dh' + salePrice);
+      card.find('.original_price').text('Dh' + originalPrice);
       card.find('.offer_percent').text(offerPercent + '% OFF');
 
     }
