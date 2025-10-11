@@ -24,6 +24,6 @@ urlpatterns = (
     + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 )
 
-admin.site.site_header = "Blue Tower Group Administration"
-admin.site.site_title = "Blue Tower Group Admin Portal"
-admin.site.index_title = "Welcome to Blue Tower Group Admin Portal"
+admin.site.site_header = "Al Zahr Administration"
+admin.site.site_title = "Al Zahr Admin Portal"
+admin.site.index_title = "Welcome to Al Zahr Admin Portal"

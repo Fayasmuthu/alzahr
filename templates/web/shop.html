@@ -139,19 +139,8 @@
                     <div class="product-image">
                       <a href="{{ product.get_absolute_url }}"><img src="{{ product.image.url }}" class="img-fluid blur-up lazyload" alt="" /></a>
 
-                      <ul class="product-option">
-                        <li data-bs-toggle="tooltip" data-bs-placement="top" title="View">
-                          <a href="javascript:void(0)" data-bs-toggle="modal"
-                            data-bs-target="#view-{{ product.id }}">
-                            <i data-feather="eye"></i>
-                        </a>
-                        </li>
-
-                        
+                      <ul class="product-option">                        
                         <li data-bs-toggle="tooltip" data-bs-placement="top" title="Wishlist">
-                          {% comment %} <a href="" class="notifi-wishlist btn-action-wishlist" data-id="{{ product.id }}" data-product_id="{{ product.id }}">
-                              <i data-feather="heart"></i>
-                          </a>  {% endcomment %}
                           <button class="notifi-wishlist btn-action-wishlist" data-product_id="{{ product.id }}" data-bs-placement="top" data-bs-html="true">
                                <i data-feather="heart"></i>
                           </button>
@@ -197,6 +186,30 @@
                                         {% endif %}
                         </del>
                       </h5>
+
+                      {% if product.get_sizes %}
+                                  <div class="product-size-select no-size" style="margin-top:10px;">
+                                    <select name="product_size" 
+                                            style="padding:5px; border-radius:10px; background-color:#fff; border-color:#0aad0a;">
+                                      {% for size in product.get_sizes %}
+                                      <option 
+                                        value="{{ size.id }}" 
+                                        {% if product.get_sizes_t.first %}
+                                          data-available_id="{{ product.get_sizes_t.first.id }}"
+                                        {% else %}
+                                          data-available_id="{{ product.id }}"
+                                        {% endif %}
+                                        data-original_price="{{ size.regular_price|floatformat:0 }}" 
+                                        data-sale_price="{{ size.sale_price|floatformat:0 }}" 
+                                        data-offer_percent="{{ size.offer_percent|floatformat:2 }}" 
+                                        {% if forloop.first %}selected{% endif %}>
+                                        {{ size.weight }}{{ size.unit }}
+                                      </option>
+                                      {% endfor %}
+                                    </select>
+                                  </div>
+                                  {% endif %}
+
                     </div>
                   </div>
                 </div>

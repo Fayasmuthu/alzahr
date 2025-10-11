@@ -21529,7 +21529,7 @@ header .nav-about-2 {
 }
 
 header .top-nav {
-    padding: 0px 0 0px;
+    padding: 10px 0 10px;
     box-shadow: 0px 0px 33px -26px;
     background-color: #ffed00;
     /* background-color: #3E362E; */
@@ -31687,7 +31687,7 @@ body.rtl .menu-label {
 
 .product-box-3 .product-header .product-image img {
     width: 100%;
-    height: calc(315px + 60*(100vw - 320px)/1600);
+    height: calc(155px + 60*(100vw - 320px)/1600);
     -o-object-fit: contain;
     object-fit: contain;
     -webkit-transition: all .3s ease-in-out;

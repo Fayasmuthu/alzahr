@@ -184,6 +184,7 @@ class shopView(ListView):
         context["product_type"] = Producttype.objects.filter(active=True)
         context["title"] = self.category_title
         context["sub_title"] = self.subcategory_title
+
         return context
 
 
@@ -254,23 +255,26 @@ def coming_soon(request):
 @login_required
 def order_via_whatsapp(request, product_slug):
     product = get_object_or_404(Product, slug=product_slug)
+    user = request.user  # Logged in user
     if request.method == 'POST':
         form = WhatsAppOrderForm(request.POST)
         if form.is_valid():
             # Collect data
-            quantity = form.cleaned_data['quantity']
-            # customer_name = form.cleaned_data['customer_name']
-            # customer_phone = form.cleaned_data['customer_phone']
+            # quantity = form.cleaned_data['quantity']
+            # product_image_url = request.build_absolute_uri(product.image.url) if product.image else "No image available"
 
+            customer_name = user.get_full_name() if user.get_full_name() else user.username
+            # customer_phone = user.phone_number if user.phone_number else "Not provided"
             # Generate WhatsApp message
             message = f"""
-            BLUE TOWER BMT TR. LLC
+            Al Zahr
             Hello, I would like to order:
             Product: {product.title}
-            Quantity: {quantity}
+            Customer: {customer_name}
+
             """
             # WhatsApp API link
-            whatsapp_number = "+971503495411"
+            whatsapp_number = "+91628214881"
             whatsapp_url = f"https://wa.me/{whatsapp_number}?text={urllib.parse.quote(message)}"
 
             return redirect(whatsapp_url)

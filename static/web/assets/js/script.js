@@ -1,29 +1,3 @@
-
-// 01. Image to background js
-// 02. Shop Page Grid Setting Js
-// 03. Footer function js
-// 04. mobile menu active class js
-// 05. btn-cart open close js
-// 06. quantity js
-// 07. Tap to Top js
-// 08. User Dashboard Left Sidebar Show js
-// 09. Tooltip js
-// 10. Cookie Bar js
-// 11. Image To Background js
-// 12. search box function Js
-// 13. Wishlist Js
-// 14. Loader Js
-// 15. header Dropdown Js
-// 16. Add to Cart Show Js
-// 17. active class Js
-// 18. Scroll down header fix js
-// 19. setting - option open js
-// 20. user-dashboard profile change js
-// 21. Wishlist box remove js
-// 22. Category Box js
-// 23. remove notification bar js
-// 24. category box js
-
 (function ($) {
     "use strict";
     /*=====================
@@ -53,23 +27,6 @@
         el.hide();
     });
     
-    // // Responsive height adjustment
-    // function updateBackgroundHeight() {
-    //     if ($(window).width() <= 579) {
-    //         $(".bg-img").parent().css("height", "100px");
-    //     } else {
-    //         $(".bg-img").parent().css("height", "200px"); // Reset for larger screens
-    //     }
-    // }
-
-    //     // Run on load
-    //     updateBackgroundHeight();
-
-    //     // Run on window resize
-    //     $(window).resize(function () {
-    //         updateBackgroundHeight();
-    //     });
-    // });
 
     /*=====================
     02. Image to background js

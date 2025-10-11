@@ -79,7 +79,7 @@
                     <div class="product-box-3 h-100">
                         <div class="product-header">
                             <div class="product-image">
-                                <a href="product-left-thumbnail.html">
+                                <a href="{{ item.product.product.get_absolute_url }}">
                                     <img src="{{item.product.product.image.url}}" class="img-fluid blur-up lazyload"
                                         alt="">
                                 </a>
@@ -94,7 +94,7 @@
                         <div class="product-footer">
                             <div class="product-detail">
                                 <span class="span-name">{{ item.product.product.display_name }}</span>
-                                <a href="product-left-thumbnail.html">
+                                <a href="{{ item.product.product.get_absolute_url }}">
                                     <h5 class="name">{{ item.product.product.name|truncatechars:30 }}</h5>
                                 </a>
                                 <h6 class="unit mt-1">{{ item.product.weight }}  {{ item.product.unit }}</h6>

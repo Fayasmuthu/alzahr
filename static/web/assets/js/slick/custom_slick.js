@@ -1241,29 +1241,40 @@ $('.slider-7_1').slick({
     arrows: true,
     infinite: true,
     slidesToShow: 7,
-    slidesToScroll: 5,
+    slidesToScroll: 1,
+    autoplay: true,
+    autoplaySpeed: 3000,
     responsive: [{
         breakpoint: 1660,
         settings: {
             slidesToShow: 5,
+            autoplay: true,
+            autoplaySpeed: 3000,
         }
     },
     {
         breakpoint: 1501,
         settings: {
             slidesToShow: 5,
+            autoplay: true,
+            autoplaySpeed: 3000,
         }
     },
     {
         breakpoint: 1251,
         settings: {
             slidesToShow: 4,
+            autoplay: true,
+            autoplaySpeed: 3000,
         }
     },
     {
         breakpoint: 992,
         settings: {
             slidesToShow: 3,
+            slidesToScroll: 1,
+            autoplay: true,
+            autoplaySpeed: 3000,
         }
     },
     {
@@ -1271,7 +1282,8 @@ $('.slider-7_1').slick({
         settings: {
             slidesToShow: 2,
             autoplay: true,
-            autoplaySpeed: 2000,
+            autoplaySpeed: 3000,
+            slidesToScroll: 1,
         }
     },
     ]

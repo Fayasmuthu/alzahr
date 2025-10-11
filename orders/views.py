@@ -275,7 +275,7 @@ def order(request):
 
         message = (
             f"============================\n"
-            f"Welcome to BLUE TOWER.\n"
+            f"Welcome to Al Zahr.\n"
             f"============================\n\n"
             f'Name: {request.POST.get("name")}\n'
             f'Phone: {request.POST.get("phone")}\n'
@@ -470,11 +470,11 @@ def callback(request, pk):
                 f"Pincode: {order.pin_code}\n"
                 f"Mobile: {order.mobile_no}\n"
                 f"Email: {order.email}\n\n"
-                f"Thank you for placing your order with Blue Tower. Your order has been confirmed.\n\n"
+                f"Thank you for placing your order with Al Zahr. Your order has been confirmed.\n\n"
             )
 
             email = order.email
-            subject = "Order Confirmation - Blue Tower"
+            subject = "Order Confirmation - Al Zahr"
             message = message
             send_mail(
                 subject,
@@ -550,11 +550,11 @@ class CompleteOrderView(DetailView):
             f"Pincode: {order.pin_code}\n"
             f"Mobile: {order.mobile_no}\n"
             f"Email: {order.email}\n\n"
-            f"Thank you for placing your order with Blue Tower. Your order has been confirmed.\n\n"
+            f"Thank you for placing your order with Al Zahr. Your order has been confirmed.\n\n"
         )
 
         email = order.email
-        subject = "Order Confirmation - Blue Tower"
+        subject = "Order Confirmation - Al Zahr"
         message = message
         send_mail(
             subject,
