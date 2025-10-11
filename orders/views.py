@@ -160,25 +160,49 @@ def post(self, request, *args, **kwargs):
         return JsonResponse(response_data)
 
 
+# class AddToWishlistView(View):
+#     def get(self, request ):
+#         # if not request.user.is_authenticated:
+#         #     return JsonResponse({'message': 'User not authenticated'}, status=401)
+#         user = self.request.user
+#         product_id = request.GET.get("product_id",'')
+#         product = get_object_or_404(Available, pk=product_id)
+        
+#         if not Wishlist.objects.filter(user=user, product=product).exists():
+#             # Create a new Wishlist object
+#             Wishlist.objects.create(
+#                 user=user,
+#                 product=product
+#             )
+#             wishlist_count = Wishlist.objects.filter(user=request.user.id).count()
+#             return JsonResponse({'message': 'Product Added from Wishlist successfullyy',
+#                                  'wishlist_count': wishlist_count})
+#         else:
+#             return JsonResponse({'message': 'Product is already in the Wishlist.'})
+
+# from django.http import JsonResponse
+# from django.shortcuts import get_object_or_404
+# from django.views import View
+# from .models import Available, AvailableSize, Wishlist
+
 class AddToWishlistView(View):
-    def get(self, request ):
-        # if not request.user.is_authenticated:
-        #     return JsonResponse({'message': 'User not authenticated'}, status=401)
-        user = self.request.user
-        product_id = request.GET.get("product_id",'')
+    def get(self, request):
+        product_id = request.GET.get("product_id")
+        user = request.user
+
+        if not user.is_authenticated:
+            return JsonResponse({'message': 'You need to log in first.'}, status=401)
+
         product = get_object_or_404(Available, pk=product_id)
-        if not Wishlist.objects.filter(user=user, product=product).exists():
-            # Create a new Wishlist object
-            Wishlist.objects.create(
-                user=user,
-                product=product
-            )
-            wishlist_count = Wishlist.objects.filter(user=request.user.id).count()
-            return JsonResponse({'message': 'Product Added from Wishlist successfullyy',
-                                 'wishlist_count': wishlist_count})
-        else:
+
+        if Wishlist.objects.filter(user=user, product=product).exists():
             return JsonResponse({'message': 'Product is already in the Wishlist.'})
 
+        Wishlist.objects.create(user=user, product=product)
+        wishlist_count = Wishlist.objects.filter(user=user).count()
+
+        return JsonResponse({'message': 'Product added to Wishlist successfully.',
+                             'wishlist_count': wishlist_count})
 
 class RemoveFromWishlistView(LoginRequiredMixin, View):
     def get(self, request, *args, **kwargs):

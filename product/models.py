@@ -388,10 +388,38 @@ class ProductImage(models.Model):
         storage, path = self.image.storage, self.image.path
         super(ProductImage, self).delete(*args, **kwargs)
         storage.delete(path)
+        
+class Available(models.Model):
+    product = models.ForeignKey(Product, on_delete=models.CASCADE)
+    sale_price = models.DecimalField(max_digits=10, decimal_places=2, default=0.00)
+    regular_price  = models.DecimalField(max_digits=10, decimal_places=2, blank=True, null=True)
+    barcode = models.CharField(max_length=100, blank=True, null=True, unique=True)
+    is_stock = models.BooleanField(default=True)
+ 
+    class Meta:
+        verbose_name = _("Available ")
+        verbose_name_plural = _("Available")
+        ordering = ("sale_price",)
+    
+    def offer_percent_t(self):
+        if self.regular_price is not None and self.sale_price is not None:
+            if self.regular_price != self.sale_price:
+                return ((self.regular_price - self.sale_price) / self.regular_price) * 100
+        return 0
 
+
+    def save(self, *args, **kwargs):
+        if self.regular_price is None:
+            self.regular_price = self.sale_price
+        super().save(*args, **kwargs)
+
+    def __str__(self):
+        return f"{self.product}"
+    
 
 class AvailableSize(models.Model):
     product = models.ForeignKey(Product, on_delete=models.CASCADE)
+    available = models.ForeignKey(Available, on_delete=models.CASCADE, null=True, blank=True)
     weight = models.IntegerField(blank=True, null=True)
     unit = models.CharField(max_length=10, choices=UNIT_CHOICES,blank=True, null=True)
     sale_price = models.DecimalField(max_digits=10, decimal_places=2, default=0.00)
@@ -443,30 +471,5 @@ class Review(models.Model):
         super().save(*args, **kwargs)
         self.product.update_rating()
    
-class Available(models.Model):
-    product = models.ForeignKey(Product, on_delete=models.CASCADE)
-    sale_price = models.DecimalField(max_digits=10, decimal_places=2, default=0.00)
-    regular_price  = models.DecimalField(max_digits=10, decimal_places=2, blank=True, null=True)
-    barcode = models.CharField(max_length=100, blank=True, null=True, unique=True)
-    is_stock = models.BooleanField(default=True)
- 
-    class Meta:
-        verbose_name = _("Available ")
-        verbose_name_plural = _("Available")
-        ordering = ("sale_price",)
-    
-    def offer_percent_t(self):
-        if self.regular_price is not None and self.sale_price is not None:
-            if self.regular_price != self.sale_price:
-                return ((self.regular_price - self.sale_price) / self.regular_price) * 100
-        return 0
 
-
-    def save(self, *args, **kwargs):
-        if self.regular_price is None:
-            self.regular_price = self.sale_price
-        super().save(*args, **kwargs)
-
-    def __str__(self):
-        return f"{self.product}"
     

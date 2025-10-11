@@ -422,6 +422,8 @@ class driedView(ListView):
         context["product_type"] = Producttype.objects.filter(active=True)
         context["title"] = self.category_title
         context["sub_title"] = self.subcategory_title
+        wishlist_count = Wishlist.objects.filter(user=self.request.user.id).count()
+        context["wishlist_count"] = wishlist_count
         return context
     
 class powderView(ListView):
