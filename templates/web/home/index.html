@@ -7,10 +7,7 @@
 </div>
 
 <section class="banner-section banner-small ratio_65">
-  <div class="container-fluid">
-    
-  {% comment %} <div class="container-fluid"> {% endcomment %}
-      {% comment %} <div class="slider-4-banner arrow-slider slick-height"> {% endcomment %}
+  <div class="container-fluid-lg">
       <div class="slider-4-banner arrow-slider slick-height">
         {% if banner %}
           {% for i in banner %}
@@ -159,10 +156,12 @@
         <div class="slider-7_1 arrow-slider img-slider">
           {% for product in new_arrvied %}
             <div>
-              <div class="product-box-4 wow fadeInUp card card-product">
-  
+              <div class="product-box-4 wow fadeInUp card card-product"> 
                 <!-- 🖼️ Product Image & Wishlist Button -->
                 <div class="product-image product-image-2">
+                  <button data-product_id="{{ product.id }}" class="wishlist-btn btn-action-wishlist">
+                     <i class="iconly-Heart icli"></i></i>
+                  </button>
                   <a href="{{ product.get_absolute_url }}">
                     <img src="{{ product.image.url }}" class="img-fluid blur-up lazyload" alt="{{ product.title }}">
                   </a>
@@ -260,10 +259,13 @@
                     {% for i in dried %}
                       <div>
                           <div class="product-box product-box-bg wow fadeInUp card-product">
-                              <div class="product-image">
+                              <div class="product-image ">
+                                <button data-product_id="{{ i.id }}" class="wishlist-btn btn-action-wishlist">
+                                  <i class="fa fa-heart"></i>
+                                </button>
                                   <a href="{{ i.get_absolute_url }}">
                                       {% comment %} <img src="{% static 'web/assets/images/cake/product/1.png' %}" {% endcomment %}
-                                      <img src="{{ i.image_png.url }}" class="img-fluid blur-up lazyload" alt="">
+                                      <img src="{{ i.image.url }}" class="img-fluid blur-up lazyload" alt="">
                                   </a>
                                   <ul class="product-option">
                                       <li data-bs-toggle="tooltip" data-bs-placement="top" title="Wishlist">
@@ -365,9 +367,11 @@
                     <div>
                           <div class="product-box product-box-bg wow fadeInUp card-product">
                               <div class="product-image">
+                                                                <button data-product_id="{{ i.id }}" class="wishlist-btn btn-action-wishlist">
+                                  <i class="fa fa-heart"></i>
+                                </button>
                                   <a href="{{ i.get_absolute_url }}">
-                                      {% comment %} <img src="{% static 'web/assets/images/cake/product/1.png' %}" {% endcomment %}
-                                      <img src="{{ i.image_png.url }}" class="img-fluid blur-up lazyload" alt="">
+                                      <img src="{{ i.image.url }}" class="img-fluid blur-up lazyload" alt="">
                                   </a>
                                   <ul class="product-option">
                                       <li data-bs-toggle="tooltip" data-bs-placement="top" title="Wishlist">
@@ -469,10 +473,13 @@
                     {% for i in incense %}
                         <div>
                           <div class="product-box product-box-bg wow fadeInUp card-product">
+                            <button data-product_id="{{ i.id }}" class="wishlist-btn btn-action-wishlist">
+                              <i class="fa fa-heart"></i>
+                            </button>
                               <div class="product-image">
                                   <a href="{{ i.get_absolute_url }}">
                                       {% comment %} <img src="{% static 'web/assets/images/cake/product/1.png' %}" {% endcomment %}
-                                      <img src="{{ i.image_png.url }}" class="img-fluid blur-up lazyload" alt="">
+                                      <img src="{{ i.image.url }}" class="img-fluid blur-up lazyload" alt="">
                                   </a>
                                   <ul class="product-option">
                                       <li data-bs-toggle="tooltip" data-bs-placement="top" title="Wishlist">
@@ -577,7 +584,7 @@
                               <div class="product-image">
                                   <a href="{{ i.get_absolute_url }}">
                                       {% comment %} <img src="{% static 'web/assets/images/cake/product/1.png' %}" {% endcomment %}
-                                      <img src="{{ i.image_png.url }}" class="img-fluid blur-up lazyload" alt="">
+                                      <img src="{{ i.image.url }}" class="img-fluid blur-up lazyload" alt="">
                                   </a>
                                   <ul class="product-option">
                                       <li data-bs-toggle="tooltip" data-bs-placement="top" title="Wishlist">
@@ -682,7 +689,7 @@
                               <div class="product-image">
                                   <a href="{{ i.get_absolute_url }}">
                                       {% comment %} <img src="{% static 'web/assets/images/cake/product/1.png' %}" {% endcomment %}
-                                      <img src="{{ i.image_png.url }}" class="img-fluid blur-up lazyload" alt="">
+                                      <img src="{{ i.image.url }}" class="img-fluid blur-up lazyload" alt="">
                                   </a>
                                   <ul class="product-option">
                                       <li data-bs-toggle="tooltip" data-bs-placement="top" title="Wishlist">
@@ -787,7 +794,7 @@
                               <div class="product-image">
                                   <a href="{{ i.get_absolute_url }}">
                                       {% comment %} <img src="{% static 'web/assets/images/cake/product/1.png' %}" {% endcomment %}
-                                      <img src="{{ i.image_png.url }}" class="img-fluid blur-up lazyload" alt="">
+                                      <img src="{{ i.image.url }}" class="img-fluid blur-up lazyload" alt="">
                                   </a>
                                   <ul class="product-option">
                                       <li data-bs-toggle="tooltip" data-bs-placement="top" title="Wishlist">
@@ -892,7 +899,7 @@
                               <div class="product-image">
                                   <a href="{{ i.get_absolute_url }}">
                                       {% comment %} <img src="{% static 'web/assets/images/cake/product/1.png' %}" {% endcomment %}
-                                      <img src="{{ i.image_png.url }}" class="img-fluid blur-up lazyload" alt="">
+                                      <img src="{{ i.image.url }}" class="img-fluid blur-up lazyload" alt="">
                                   </a>
                                   <ul class="product-option">
                                       <li data-bs-toggle="tooltip" data-bs-placement="top" title="Wishlist">

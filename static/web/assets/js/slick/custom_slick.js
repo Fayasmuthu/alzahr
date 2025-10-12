@@ -1240,8 +1240,8 @@ $('.category-slider-1').slick({
 $('.slider-7_1').slick({
     arrows: true,
     infinite: true,
-    slidesToShow: 7,
-    slidesToScroll: 1,
+    slidesToShow: 5,
+    slidesToScroll: 2,
     autoplay: true,
     autoplaySpeed: 3000,
     responsive: [{
@@ -1272,7 +1272,7 @@ $('.slider-7_1').slick({
         breakpoint: 992,
         settings: {
             slidesToShow: 3,
-            slidesToScroll: 1,
+            slidesToScroll: 2,
             autoplay: true,
             autoplaySpeed: 3000,
         }

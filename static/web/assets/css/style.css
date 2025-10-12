@@ -12296,7 +12296,7 @@ summary {
     top: 50%;
     -webkit-transform: translate(0, -50%);
     transform: translate(0, -50%);
-    padding: 0;
+    padding: 8px;
     border: none;
     outline: none
 }
@@ -16252,8 +16252,8 @@ body.rtl .product-section-box .review-box .review-people .review-list li .people
 }
 
 .arrow-slider .slick-prev {
-    /* left: unset; */
-    /* right: 60px */
+    left: unset;
+    /* right: 60px; */
     z-index: 2;
 }
 
@@ -16273,7 +16273,7 @@ body.rtl .product-section-box .review-box .review-people .review-list li .people
 }
 
 .arrow-slider .slick-next {
-    /* right: 5px */
+    right: 5px
 }
 
 [dir=rtl] .arrow-slider .slick-next {
@@ -17591,11 +17591,13 @@ body.rtl .product-section-box .review-box .review-people .review-list li .people
 
 .section-t-space {
     padding-top: calc(30px + 20*(100vw - 320px)/1600)
+
 }
 
 .banner-section{
-    padding: calc(15px + 20*(100vw - 320px)/1600);
+    /* padding: calc(15px + 20*(100vw - 320px)/1600); */
     /* background-image: url(../images/banner-tools.jpg); */
+    padding:10px 0 10px 0px ;
 
 }
 
@@ -21541,7 +21543,7 @@ header .top-nav {
 
 @media(max-width: 767px) {
     header .top-nav {
-        padding: 5px 0 5px
+        padding: 10px 0 10px
     }
 }
 
@@ -21570,7 +21572,7 @@ header .top-nav .navbar-top {
     header .top-nav .navbar-top {
         -webkit-box-pack: justify;
         -ms-flex-pack: justify;
-        justify-content: space-between
+        justify-content: space-between;
     }
 }
 
@@ -21583,7 +21585,9 @@ header .top-nav .navbar-top .web-logo img {
 
 @media(max-width: 767px) {
     header .top-nav .navbar-top .web-logo img {
-        margin: 0 auto
+        margin: 0 auto;
+        position: relative;
+        left: -25px;
     }
 }
 
@@ -28038,7 +28042,7 @@ header .navbar.navbar-expand-xl .navbar-nav .nav-link {
     -webkit-box-pack: center;
     -ms-flex-pack: center;
     justify-content: center;
-    font-size: 8px;
+    font-size: 15px;
     font-weight: normal;
     position: relative
 }
@@ -28196,8 +28200,8 @@ header .navbar-toggler-icon {
     -ms-flex-pack: center;
     justify-content: center;
     font-size: 20px;
-    color: #fff;
-    -webkit-text-fill-color: #fff;
+    color: #000;
+    -webkit-text-fill-color: #000;
     -webkit-opacity: 1
 }
 
@@ -28432,7 +28436,7 @@ header .offcanvas-header {
     justify-content: space-between;
     -ms-flex-negative: 0;
     flex-shrink: 0;
-    padding: 0px 15px;
+    padding: 15px 15px;
     z-index: 1
 }
 
@@ -32260,7 +32264,8 @@ body.rtl .menu-label {
 .product-box-4 .product-detail {
     text-align: left;
     margin-top: 0px;
-    position: relative
+    position: relative;
+    left: 5px;
 }
 
 .product-box-4 .product-detail .addtocart_btn .add-button, .product-box-4 .product-detail .addtocart_btn .add_cart {
@@ -47042,3 +47047,43 @@ input[type="radio"] + .zoom img {
         width: 50% !important;
     }
 }
+
+/* Product card container should be relative */
+.product-image {
+  position: relative;
+  overflow: hidden;
+}
+
+/* Wishlist icon button */
+.wishlist-btn {
+  position: absolute;
+  top: 10px;         /* distance from top */
+  right: 10px;       /* distance from right */
+  background: #fff;  /* white background */
+  border-radius: 50%;
+  padding: 8px;
+  cursor: pointer;
+  font-size: 18px;
+  color: #bababa;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.15);
+  transition: all 0.3s ease;
+  z-index: 10;
+}
+
+@media (min-width: 499px) {
+    .wishlist-btn {
+        display: none;
+    }
+}
+
+.wishlist-btn:hover {
+  background: #f1f0f0;
+  color: red;
+}
+
+/* Optional — when active */
+.wishlist-btn.active {
+  background: #ff4d4d;
+  color: red;
+}
+
