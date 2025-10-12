@@ -195,13 +195,15 @@ class AddToWishlistView(View):
 
         product = get_object_or_404(Available, pk=product_id)
 
+        product_name = product.product.title if product.product else 'Unknown Product'
+
         if Wishlist.objects.filter(user=user, product=product).exists():
-            return JsonResponse({'message': 'Product is already in the Wishlist.'})
+            return JsonResponse({'message': f'{product_name} is already in the Wishlist.'})
 
         Wishlist.objects.create(user=user, product=product)
         wishlist_count = Wishlist.objects.filter(user=user).count()
 
-        return JsonResponse({'message': 'Product added to Wishlist successfully.',
+        return JsonResponse({'message': f'{product_name} added to Wishlist successfully.',
                              'wishlist_count': wishlist_count})
 
 class RemoveFromWishlistView(LoginRequiredMixin, View):

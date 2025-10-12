@@ -2,10 +2,13 @@
 {% load static %}
 
 {% block content %}
-
+<div id="alert-message" class="alert d-none alert-dismissible fixed-top text-center mx-auto" style="max-width: 400px; z-index: 9999; margin-top: 80px;" role="alert">
+  <span id="alert-text"></span>
+</div>
 
 <section class="banner-section banner-small ratio_65">
-  <div class="container">
+  <div class="container-fluid">
+    
   {% comment %} <div class="container-fluid"> {% endcomment %}
       {% comment %} <div class="slider-4-banner arrow-slider slick-height"> {% endcomment %}
       <div class="slider-4-banner arrow-slider slick-height">
@@ -98,64 +101,28 @@
 <!-- Banner Section Start -->
 <section class="ratio_60 mb-5">
     <div class="container-fluid-lg">
-        <div class="row g-3">
-            <div class="col-xxl-3 col-sm-6">
+        <div class="row g-3 ">
+            <div class="col-xxl-3 col-sm-6 width-banner">
                 <a href="javascript:void(0)" class="banner-contain-2 hover-effect">
                     <img src="{% static 'web/assets/images/cake/banner/5.jpg' %}" class="bg-img blur-up lazyload" alt="">
-                    <div class="banner-detail p-top-left">
-                        <div>
-                            <div class="banner-detail-box mb-md-3 mb-1">
-                                <h6 class="text-danger">5% OFF</h6>
-                                <h4 class="mt-2">New Items</h4>
-                                <h6 class="mt-2 text-content">Daily Essentials</h6>
-                            </div>
-                        </div>
-                    </div>
                 </a>
             </div>
 
-            <div class="col-xxl-3 col-sm-6">
+            <div class="col-xxl-3 col-sm-6 width-banner">
                 <a href="javascript:void(0)" class="banner-contain-2 hover-effect">
                     <img src="{% static 'web/assets/images/cake/banner/6.jpg' %}" class="bg-img blur-up lazyload" alt="">
-                    <div class="banner-detail p-top-left">
-                        <div>
-                            <div class="banner-detail-box mb-md-3 mb-1">
-                                <h6 class="text-danger">5% OFF</h6>
-                                <h4 class="mt-2">Save More</h4>
-                                <h6 class="mt-2 text-content">Fresh Toast Rusk</h6>
-                            </div>
-                        </div>
-                    </div>
                 </a>
             </div>
 
-            <div class="col-xxl-3 col-sm-6">
+            <div class="col-xxl-3 col-sm-6 width-banner">
                 <a href="javascript:void(0)" class="banner-contain-2 hover-effect">
                     <img src="{% static 'web/assets/images/cake/banner/7.jpg' %}" class="bg-img blur-up lazyload" alt="">
-                    <div class="banner-detail p-top-left">
-                        <div>
-                            <div class="banner-detail-box mb-md-3 mb-1">
-                                <h6 class="text-danger">5% OFF</h6>
-                                <h4 class="mt-2">Fresh Every Day!</h4>
-                                <h6 class="mt-2 text-content">Delivered @ Home</h6>
-                            </div>
-                        </div>
-                    </div>
                 </a>
             </div>
 
-            <div class="col-xxl-3 col-sm-6">
+            <div class="col-xxl-3 col-sm-6 width-banner">
                 <a href="javascript:void(0)" class="banner-contain-2 hover-effect">
                     <img src="{% static 'web/assets/images/cake/banner/8.jpg' %}" class="bg-img blur-up lazyload" alt="">
-                    <div class="banner-detail p-top-left">
-                        <div>
-                            <div class="banner-detail-box mb-md-3 mb-1">
-                                <h6 class="text-danger">5% OFF</h6>
-                                <h4 class="mt-2">Hot Deals</h4>
-                                <h6 class="mt-2 text-content">Fresh Cake</h6>
-                            </div>
-                        </div>
-                    </div>
                 </a>
             </div>
         </div>
@@ -709,7 +676,7 @@
                       </div>
                   </div>
                   <div class="product-box-slider-2 no-arrow">  
-                    {% for i in whole %}
+                    {% for i in health %}
                         <div>
                           <div class="product-box product-box-bg wow fadeInUp card-product">
                               <div class="product-image">
@@ -814,7 +781,7 @@
                       </div>
                   </div>
                   <div class="product-box-slider-2 no-arrow">  
-                    {% for i in whole %}
+                    {% for i in slice %}
                         <div>
                           <div class="product-box product-box-bg wow fadeInUp card-product">
                               <div class="product-image">
@@ -919,7 +886,7 @@
                       </div>
                   </div>
                   <div class="product-box-slider-2 no-arrow">  
-                    {% for i in whole %}
+                    {% for i in non_salt %}
                         <div>
                           <div class="product-box product-box-bg wow fadeInUp card-product">
                               <div class="product-image">

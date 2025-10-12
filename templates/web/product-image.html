@@ -159,6 +159,8 @@
                         </div>
 
                         <div class="col-xl-6 wow fadeInUp cart-div">
+                            <form action="{% url 'web:order_via_whatsapp' product.slug %}" method="POST">
+                             {% csrf_token %}
                             <div class="right-box-contain ">
                                 <h2 class="name mt-5">{{product.brand}}</h2>
 
@@ -262,7 +264,7 @@
                                 <!-- cart end -->
 
                                 <div class="note-box product-package">
-                                    <div class="cart_qty qty-box product-qty">
+                                    {% comment %} <div class="cart_qty qty-box product-qty">
                                         <div class="input-group">
                                             <button type="button" class="qty-left-minus" data-type="minus" data-field="">
                                                 <i class="fa fa-minus"></i>
@@ -272,16 +274,26 @@
                                                 <i class="fa fa-plus"></i>
                                             </button>
                                         </div>
-                                    </div>
+                                    </div> {% endcomment %}
                                 
-                                    <form action="{% url 'web:order_via_whatsapp' product.slug %}" method="POST">
-                                        {% csrf_token %}
+
+                                      <div class="note-box product-package">
+                                            <div class="cart_qty qty-box product-qty">
+                                            <div class="input-group">
+                                                <button type="button" class="qty-left-minus"><i class="fa fa-minus"></i></button>
+                                                <input class="form-control input-number qty-input" type="text" name="quantity" value="1" id="quantity">
+                                                <button type="button" class="qty-right-plus"><i class="fa fa-plus"></i></button>
+                                            </div>
+                                            </div>
+                                        </div>
+                                    {% comment %} <form action="{% url 'web:order_via_whatsapp' product.slug %}" method="POST">
+                                        {% csrf_token %} {% endcomment %}
                                         <input type="hidden" name="product" value="{{ product.id }}">
                                         <input type="hidden" name="quantity" id="hidden_quantity" value="1">
                                         <button type="submit" class="btn btn-md bg-green-wp cart-button text-white w-100">
                                             Order WhatsApp
                                         </button>
-                                    </form>
+                                    {% comment %} </form> {% endcomment %}
                                 </div>
                                 
 
@@ -304,6 +316,7 @@
                                     </div>
                                 </div>
                             </div>
+                            </form>
                         </div>
                     </div>
                 </div>

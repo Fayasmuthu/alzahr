@@ -16181,7 +16181,7 @@ body.rtl .product-section-box .review-box .review-people .review-list li .people
 
 @media(max-width: 575px) {
     .slick-slider .slick-list .slick-slide>* {
-        margin: 0 6px
+        margin: 0 0px
     }
 }
 
@@ -17155,7 +17155,8 @@ body.rtl .product-section-box .review-box .review-people .review-list li .people
 .title h2 {
     font-weight: 700;
     color: #000000;
-    position: relative
+    position: relative;
+    margin-top: 5px;
 }
 @media(max-width: 767px) {
     .title-cate h2 {
@@ -17189,12 +17190,13 @@ body.rtl .product-section-box .review-box .review-people .review-list li .people
     align-items: center;
     -webkit-box-pack: justify;
     -ms-flex-pack: justify;
-    justify-content: space-between
+    justify-content: space-between;
+    margin-top: 10px;
 }
 
 @media(max-width: 1265px) {
     .title-flex {
-        display: block
+        display: block;
     }
 }
 
@@ -19920,7 +19922,8 @@ span {
 footer {
     background-color: #fff464;
     position: relative;
-    z-index: 0
+    z-index: 0;
+    margin-top: 30px;
 }
 
 footer::after {
@@ -32333,7 +32336,8 @@ body.rtl .menu-label {
     overflow: hidden;
     -webkit-transition: all .3s ease-in-out;
     transition: all .3s ease-in-out;
-    text-align: left
+    text-align: left;
+    font-size: 16px;
 }
 
 [dir=rtl] .product-box-4 .product-detail a .name {
@@ -32343,7 +32347,7 @@ body.rtl .menu-label {
 @media(max-width: 480px) {
     .product-box-4 .product-detail a .name {
         width: 100%;
-        font-size: 10px !important;
+        font-size: 12px !important;
     }
 }
 
@@ -32366,7 +32370,7 @@ body.rtl .menu-label {
     margin-left: 10px;
     color: #4a5568;
     font-weight: 400;
-    font-size: 10px;
+    font-size: 15px;
 }
 
 [dir=rtl] .product-box-4 .product-detail .price del {
@@ -46716,6 +46720,13 @@ div.scrollmenu {
     height: 350px;
 }
 
+
+@media (max-width: 489px) {
+    .banner-image{
+        height: 150px !important;
+    }
+}
+
 .timing .name{
     color: #fff;
 }
@@ -46960,4 +46971,74 @@ input[type="radio"] + .zoom img {
 
 .product-size-select.no-size {
   display: none;
+}
+
+
+
+/* Base styles for alert container */
+#alert-container {
+  position: fixed;
+  top: 5%; 
+  right: 5%; 
+  transform: translateX(0);
+  width: 300px; 
+  z-index: 1000;
+  text-align: center;
+}
+
+.alert {
+  padding: 15px;
+  margin-bottom: 20px;
+  border: 1px solid transparent;
+  border-radius: 5px;
+  animation: fadeInOut 2s ease;
+}
+
+
+.alert-success {
+  background-color: rgba(57, 75, 131, 0.8);
+  color: #ffffff;
+}
+
+
+.alert-danger {
+  background-color: #f8d7da;
+  border-color: #f5c6cb;
+  color: #721c24;
+}
+
+@media (max-width: 768px) {
+  #alert-container {
+    width: 70%; 
+    top: 3%; 
+    right: 0%; 
+  }
+  .alert-success {
+      font-size: 11px;
+  }
+}
+
+@keyframes fadeInOut {
+  0% {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+  25% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  75% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  100% {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+}
+
+@media (max-width: 478px) {
+    .width-banner{
+        width: 50% !important;
+    }
 }

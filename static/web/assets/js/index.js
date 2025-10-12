@@ -263,6 +263,31 @@ $(".btn-action-wishlist").click(function () {
     });
 });
 
+function showAlert(message, alertType = "alert-success") {
+    var $alertBox = $("#alert-message");
+    var $alertText = $("#alert-text");
+
+    // Remove all alert classes & hide state
+    $alertBox.removeClass("d-none alert-success alert-danger alert-warning alert-info");
+
+    // Add the type (success, danger, etc.)
+    $alertBox.addClass(alertType);
+
+    // Set the message
+    $alertText.text(message);
+
+    // Show the alert
+    $alertBox.stop(true, true).fadeIn(300);
+
+    // Hide after 2.5s
+    setTimeout(function () {
+        $alertBox.fadeOut(400, function () {
+            $alertBox.addClass("d-none");
+        });
+    }, 2500);
+}
+
+
 
 // $(".btn-action-wishlist").click(function () {
 //     var product_Id = $(this).data("product_id");
@@ -316,7 +341,7 @@ function showAlert(message, alertClass) {
     // Automatically hide the alert after 5 seconds
     setTimeout(function () {
         alertDiv.remove();
-    }, 800);
+    }, 2500);
 }
 });
 

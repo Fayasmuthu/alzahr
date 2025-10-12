@@ -15,7 +15,7 @@ from web.forms import ContactForm
 from orders.models import Wishlist
 from orders.forms import WhatsAppOrderForm
 from product.forms import ReviewForm
-from product.models import Banner, Brand, Category,Product,Producttype,Subcategory
+from product.models import AvailableSize, Banner, Brand, Category,Product,Producttype,Subcategory
 from django.db.models import Q
 
 
@@ -255,29 +255,45 @@ def coming_soon(request):
 @login_required
 def order_via_whatsapp(request, product_slug):
     product = get_object_or_404(Product, slug=product_slug)
-    user = request.user  # Logged in user
+    user = request.user
+
     if request.method == 'POST':
         form = WhatsAppOrderForm(request.POST)
         if form.is_valid():
-            # Collect data
-            # quantity = form.cleaned_data['quantity']
-            # product_image_url = request.build_absolute_uri(product.image.url) if product.image else "No image available"
+            quantity = int(form.cleaned_data['quantity'])
+            size_id = request.POST.get('product_size')  # 👈 get selected variant ID
 
-            customer_name = user.get_full_name() if user.get_full_name() else user.username
-            # customer_phone = user.phone_number if user.phone_number else "Not provided"
-            # Generate WhatsApp message
+            # If a size/variant is selected
+            if size_id:
+                size = get_object_or_404(AvailableSize, id=size_id)
+                weight = size.weight
+                unit = size.unit
+                price = size.sale_price or size.regular_price
+            else:
+                # fallback to main product
+                weight = getattr(product, 'weight', 'N/A')
+                unit = getattr(product, 'unit', 'N/A')
+                price = getattr(product, 'get_sale_price', lambda: 'N/A')()
+
+            total_price = float(price) * quantity if price not in [None, 'N/A'] else 'N/A'
+
+            customer_name = user.get_full_name() or user.username
+
             message = f"""
             Al Zahr
             Hello, I would like to order:
             Product: {product.title}
             Customer: {customer_name}
-
+            ⚖️ Weight: {weight} {unit}
+            💰 Price: {price} AED
+            🔢 Quantity: {quantity}
+            💵 Total: {total_price} AED
             """
             # WhatsApp API link
             whatsapp_number = "+91628214881"
             whatsapp_url = f"https://wa.me/{whatsapp_number}?text={urllib.parse.quote(message)}"
 
-            return redirect(whatsapp_url)
+            return redirect(whatsapp_url)   
     else:
         form = WhatsAppOrderForm(initial={'product': product})
 
