@@ -136,6 +136,9 @@
               <div>
                 <div class="product-box-3 h-100 wow fadeInUp card-product">
                   <div class="product-header">
+                      <button data-product_id="{{ product.get_sizes_t.first.id|default:product.id }}" class="wishlist-btn btn-action-wishlist">
+                        <i class="fa fa-heart"></i>
+                      </button>                   
                     <div class="product-image">
                       <a href="{{ product.get_absolute_url }}"><img src="{{ product.image.url }}" class="img-fluid blur-up lazyload" alt="" /></a>
 

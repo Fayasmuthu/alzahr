@@ -37,15 +37,17 @@
 
                         <div class="rightside-box">
                             <div class="search-full">
+                                <form method="GET" action="{% url 'web:search' %}">
                                 <div class="input-group">
                                     <span class="input-group-text">
                                         <i data-feather="search" class="font-light"></i>
                                     </span>
-                                    <input type="text" class="form-control search-type" placeholder="Search here..">
+                                    <input type="text" class="form-control search-type" placeholder="Search here.." name="q" value="{{ query }}">
                                     <span class="input-group-text close-search">
                                         <i data-feather="x" class="font-light"></i>
                                     </span>
                                 </div>
+                            </form>
                             </div>
                             <ul class="right-side-menu">
                                 <li class="right-side">
@@ -239,7 +241,7 @@
             <li>
                 <a href="{% url "web:search" %}" class="search-box">
                     <i class="iconly-Search icli"></i>
-                    <span>Search</span>
+                    <span type="button">Search</span>
                 </a>
             </li>
 

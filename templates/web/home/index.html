@@ -96,7 +96,7 @@
 <!-- Category Section End -->
 
 <!-- Banner Section Start -->
-<section class="ratio_60 mb-5">
+<section class="ratio_60 mb-5 none-mobile">
     <div class="container-fluid-lg">
         <div class="row g-3 ">
             <div class="col-xxl-3 col-sm-6 width-banner">
@@ -129,106 +129,106 @@
 
   <!-- Product New-Arrived Start -->
 {% if new_arrvied %}
-<section class="product-section-3 bg-arrived">
-  <div class="container-fluid-lg">
-    <div class="row">
-      <div class="col-12">
-        <div class="title title-flex">
-          <div>
-              <h2>New Arried</h2>
-              <span class="title-leaf">
-                    <img src="{% static 'web/assets/svg/zahr.jpg' %}" style="width: 35px; , height: 35px;" alt="">
-              </span>
-          </div>
-          <div class="timing-box">
-              <div class="timing theme-bg-color">
-                  <a href="{% url "web:shop" %}"><h6 class="name">More Products</h6></a>
-              </div>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    
-
-    <div class="row">
-      <div class="col-12">
-        <div class="slider-7_1 arrow-slider img-slider">
-          {% for product in new_arrvied %}
+  <section class="product-section-3 bg-arrived">
+    <div class="container-fluid-lg">
+      <div class="row">
+        <div class="col-12">
+          <div class="title title-flex">
             <div>
-              <div class="product-box-4 wow fadeInUp card card-product"> 
-                <!-- 🖼️ Product Image & Wishlist Button -->
-                <div class="product-image product-image-2">
-                  <button data-product_id="{{ product.id }}" class="wishlist-btn btn-action-wishlist">
-                     <i class="iconly-Heart icli"></i></i>
-                  </button>
-                  <a href="{{ product.get_absolute_url }}">
-                    <img src="{{ product.image.url }}" class="img-fluid blur-up lazyload" alt="{{ product.title }}">
-                  </a>
-
-                  <ul class="option">
-                    <!-- 👇 Wishlist Button -->
-                    <li data-bs-toggle="tooltip" data-bs-placement="top" title="Wishlist">
-                      <a href="javascript:void(0)" 
-                        class="notifi-wishlist btn-action-wishlist" 
-                        data-product_id="{{ product.id }}">
-                        <i class="iconly-Heart icli"></i>
-                      </a>
-                    </li>
-                  </ul>
-                </div>               
-
-                <!-- 🛍️ Product Detail -->
-
-                <div class="product-detail">
-                  <a href="{{ product.get_absolute_url }}">
-                    <h5 class="name text-title">{{ product.title }}</h5>
-                  </a>
-                  <div class="content-flex">
-                  <h5 class="price theme-color sale_price">
-                    AED {{ product.get_sale_price_t|floatformat:0 }}
-                    <del class="original_price">
-                      AED {{ product.get_regular_price_t|floatformat:0 }}
-                    </del>
-                  </h5>
-
-                  <!-- 📝 Product Size Dropdown -->
-                  {% if product.get_sizes %}
-                  <div class="product-size-select no-size" style="margin-top:10px;">
-                    <select name="product_size" 
-                            style="padding:5px; border-radius:10px; background-color:#fff; border-color:#0aad0a;">
-                      {% for size in product.get_sizes %}
-                      <option 
-                        value="{{ size.id }}" 
-                        {% if product.get_sizes_t.first %}
-                          data-available_id="{{ product.get_sizes_t.first.id }}"
-                        {% else %}
-                          data-available_id="{{ product.id }}"
-                        {% endif %}
-                        data-original_price="{{ size.regular_price|floatformat:0 }}" 
-                        data-sale_price="{{ size.sale_price|floatformat:0 }}" 
-                        data-offer_percent="{{ size.offer_percent|floatformat:2 }}" 
-                        {% if forloop.first %}selected{% endif %}>
-                        {{ size.weight }}{{ size.unit }}
-                      </option>
-                      {% endfor %}
-                    </select>
-                  </div>
-                  {% endif %}
+                <h2>New Arried</h2>
+                <span class="title-leaf">
+                      <img src="{% static 'web/assets/svg/zahr.jpg' %}" style="width: 35px; , height: 35px;" alt="">
+                </span>
+            </div>
+            <div class="timing-box">
+                <div class="timing theme-bg-color">
+                    <a href="{% url "web:shop" %}"><h6 class="name">More Products</h6></a>
                 </div>
+            </div>
+          </div>
+        </div>
+      </div>
 
+      
+
+      <div class="row">
+        <div class="col-12">
+          <div class="slider-7_1 arrow-slider img-slider">
+            {% for product in new_arrvied %}
+              <div>
+                <div class="product-box-4 wow fadeInUp card card-product"> 
+                  <!-- 🖼️ Product Image & Wishlist Button -->
+                  <div class="product-image product-image-2">
+                    <button data-product_id="{{ product.id }}" class="wishlist-btn btn-action-wishlist">
+                      <i class="fa fa-heart"></i>
+                    </button>
+                    <a href="{{ product.get_absolute_url }}">
+                      <img src="{{ product.image.url }}" class="img-fluid blur-up lazyload" alt="{{ product.title }}">
+                    </a>
+
+                    <ul class="option">
+                      <!-- 👇 Wishlist Button -->
+                      <li data-bs-toggle="tooltip" data-bs-placement="top" title="Wishlist">
+                        <a href="javascript:void(0)" 
+                          class="notifi-wishlist btn-action-wishlist" 
+                          data-product_id="{{ product.id }}">
+                          <i class="iconly-Heart icli"></i>
+                        </a>
+                      </li>
+                    </ul>
+                  </div>               
+
+                  <!-- 🛍️ Product Detail -->
+
+                  <div class="product-detail">
+                    <a href="{{ product.get_absolute_url }}">
+                      <h5 class="name text-title">{{ product.title }}</h5>
+                    </a>
+                    <div class="content-flex">
+                    <h5 class="price theme-color sale_price">
+                      AED {{ product.get_sale_price_t|floatformat:0 }}
+                      <del class="original_price">
+                        AED {{ product.get_regular_price_t|floatformat:0 }}
+                      </del>
+                    </h5>
+
+                    <!-- 📝 Product Size Dropdown -->
+                    {% if product.get_sizes %}
+                    <div class="product-size-select no-size" style="margin-top:10px;">
+                      <select name="product_size" 
+                              style="padding:5px; border-radius:10px; background-color:#fff; border-color:#0aad0a;">
+                        {% for size in product.get_sizes %}
+                        <option 
+                          value="{{ size.id }}" 
+                          {% if product.get_sizes_t.first %}
+                            data-available_id="{{ product.get_sizes_t.first.id }}"
+                          {% else %}
+                            data-available_id="{{ product.id }}"
+                          {% endif %}
+                          data-original_price="{{ size.regular_price|floatformat:0 }}" 
+                          data-sale_price="{{ size.sale_price|floatformat:0 }}" 
+                          data-offer_percent="{{ size.offer_percent|floatformat:2 }}" 
+                          {% if forloop.first %}selected{% endif %}>
+                          {{ size.weight }}{{ size.unit }}
+                        </option>
+                        {% endfor %}
+                      </select>
+                    </div>
+                    {% endif %}
+                  </div>
+
+
+                  </div>
 
                 </div>
 
               </div>
-
-            </div>
-          {% endfor %}
+            {% endfor %}
+          </div>
         </div>
       </div>
     </div>
-  </div>
-</section>
+  </section>
 {% endif %}
   <!-- Product New-Arrived End -->
 
@@ -260,7 +260,7 @@
                       <div>
                           <div class="product-box product-box-bg wow fadeInUp card-product">
                               <div class="product-image ">
-                                <button data-product_id="{{ i.id }}" class="wishlist-btn btn-action-wishlist">
+                                <button data-product_id="{{ i.get_sizes_t.first.id|default:i.id }}" class="wishlist-btn btn-action-wishlist">
                                   <i class="fa fa-heart"></i>
                                 </button>
                                   <a href="{{ i.get_absolute_url }}">
@@ -367,7 +367,7 @@
                     <div>
                           <div class="product-box product-box-bg wow fadeInUp card-product">
                               <div class="product-image">
-                                                                <button data-product_id="{{ i.id }}" class="wishlist-btn btn-action-wishlist">
+                                <button class="wishlist-btn btn-action-wishlist" data-product_id="{{ i.get_sizes_t.first.id|default:i.id }}">
                                   <i class="fa fa-heart"></i>
                                 </button>
                                   <a href="{{ i.get_absolute_url }}">
@@ -473,7 +473,7 @@
                     {% for i in incense %}
                         <div>
                           <div class="product-box product-box-bg wow fadeInUp card-product">
-                            <button data-product_id="{{ i.id }}" class="wishlist-btn btn-action-wishlist">
+                            <button class="wishlist-btn btn-action-wishlist" data-product_id="{{ i.get_sizes_t.first.id|default:i.id }}">
                               <i class="fa fa-heart"></i>
                             </button>
                               <div class="product-image">
@@ -581,6 +581,9 @@
                     {% for i in whole %}
                         <div>
                           <div class="product-box product-box-bg wow fadeInUp card-product">
+                            <button class="wishlist-btn btn-action-wishlist" data-product_id="{{ i.get_sizes_t.first.id|default:i.id }}">
+                              <i class="fa fa-heart"></i>
+                            </button>
                               <div class="product-image">
                                   <a href="{{ i.get_absolute_url }}">
                                       {% comment %} <img src="{% static 'web/assets/images/cake/product/1.png' %}" {% endcomment %}
@@ -686,6 +689,9 @@
                     {% for i in health %}
                         <div>
                           <div class="product-box product-box-bg wow fadeInUp card-product">
+                            <button class="wishlist-btn btn-action-wishlist" data-product_id="{{ i.get_sizes_t.first.id|default:i.id }}">
+                              <i class="fa fa-heart"></i>
+                            </button>                            
                               <div class="product-image">
                                   <a href="{{ i.get_absolute_url }}">
                                       {% comment %} <img src="{% static 'web/assets/images/cake/product/1.png' %}" {% endcomment %}
@@ -791,6 +797,9 @@
                     {% for i in slice %}
                         <div>
                           <div class="product-box product-box-bg wow fadeInUp card-product">
+                            <button class="wishlist-btn btn-action-wishlist" data-product_id="{{ i.get_sizes_t.first.id|default:i.id }}">
+                              <i class="fa fa-heart"></i>
+                            </button>
                               <div class="product-image">
                                   <a href="{{ i.get_absolute_url }}">
                                       {% comment %} <img src="{% static 'web/assets/images/cake/product/1.png' %}" {% endcomment %}
@@ -896,6 +905,9 @@
                     {% for i in non_salt %}
                         <div>
                           <div class="product-box product-box-bg wow fadeInUp card-product">
+                            <button class="wishlist-btn btn-action-wishlist" data-product_id="{{ i.get_sizes_t.first.id|default:i.id }}">
+                              <i class="fa fa-heart"></i>
+                            </button>
                               <div class="product-image">
                                   <a href="{{ i.get_absolute_url }}">
                                       {% comment %} <img src="{% static 'web/assets/images/cake/product/1.png' %}" {% endcomment %}
