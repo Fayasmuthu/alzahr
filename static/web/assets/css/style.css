@@ -31726,8 +31726,8 @@ body.rtl .menu-label {
     position: absolute;
     bottom: -5px;
     background-color: #fff;
-    width: 100%;
-    padding: 10px 5px;
+    width: 20%;
+    padding: 10px 25px 10px 2px;
     border-radius: 7px;
     -webkit-box-shadow: 0 0 8px rgba(34, 34, 34, .12);
     box-shadow: 0 0 8px rgba(34, 34, 34, .12);
