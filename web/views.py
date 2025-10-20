@@ -290,7 +290,7 @@ def order_via_whatsapp(request, product_slug):
             💵 Total: {total_price} AED
             """
             # WhatsApp API link
-            whatsapp_number = "+91628214881"
+            whatsapp_number = "+971583330297"
             whatsapp_url = f"https://wa.me/{whatsapp_number}?text={urllib.parse.quote(message)}"
 
             return redirect(whatsapp_url)   

@@ -21588,7 +21588,15 @@ header .top-nav .navbar-top .web-logo img {
     header .top-nav .navbar-top .web-logo img {
         margin: 0 auto;
         position: relative;
-        left: -40px;
+        left: -30px;
+    }
+}
+
+@media(max-width: 420px) {
+    header .top-nav .navbar-top .web-logo img {
+        margin: 0 auto;
+        position: relative;
+        left: -10px;
     }
 }
 
@@ -21596,7 +21604,7 @@ header .top-nav .navbar-top .web-logo img {
     header .top-nav .navbar-top .web-logo img {
         margin: 0 auto;
         position: relative;
-        left: -25px;
+        left: 1px;
     }
 }
 
@@ -21986,7 +21994,7 @@ header .top-nav .navbar-top .rightside-box .right-side-menu .right-side .header-
 
 header .top-nav .navbar-top .rightside-box .right-side-menu .right-side .header-wishlist .feather {
     stroke-width: 1.5;
-    color: #fff
+    color: #000
 }
 
 @media(max-width: 1660px) {
@@ -47107,5 +47115,44 @@ input[type="radio"] + .zoom img {
     .none-mobile{
         display: none;
     }
+}
+
+.lang-btn {
+  position: relative;
+  color: #000;           /* normal text color */
+  border-color: #007bff;    /* normal border color */
+  transition: all 0.3s ease;
+  background: transparent;
+  margin-right: 15px;
+  border-color: #f48200;
+  
+}
+
+/* On hover or active state */
+.lang-btn:hover,
+.lang-btn.active {
+  color: yellow;
+  border-color: yellow;
+  background-color: #f48200;
+
+}
+
+/* Create yellow underline when active */
+.lang-btn::before {
+  content: "";
+  position: absolute;
+  bottom: -4px;             /* adjust as needed */
+  left: 50%;
+  transform: translateX(-50%) scaleX(0);
+  width: 60%;
+  height: 2px;
+  background-color: yellow;
+  transition: transform 0.3s ease;
+  background-color: #007f86;
+}
+
+/* Show the line when active */
+.lang-btn.active::before {
+  transform: translateX(-50%) scaleX(1);
 }
 
