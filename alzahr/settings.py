@@ -1,6 +1,7 @@
 # Define config vars and Register app in INSTALLED APPS
 from pathlib import Path
 from decouple import config
+import os
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -23,6 +24,8 @@ INSTALLED_PLUGINS = [
     'registration',
     'crispy_forms',
     'crispy_bootstrap5',
+    "modeltranslation",
+    "rosetta",
 ]
 
 DJANGO_APPS = [
@@ -60,6 +63,8 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     "django.contrib.admindocs.middleware.XViewMiddleware",
+    "django.middleware.locale.LocaleMiddleware",
+
 ]
 
 ROOT_URLCONF = 'alzahr.urls'
@@ -121,10 +126,26 @@ AUTH_PASSWORD_VALIDATORS = [
 # https://docs.djangoproject.com/en/3.1/topics/i18n/
 
 LANGUAGE_CODE = "en-us"
-TIME_ZONE = "Asia/Kolkata"
+
+LANGUAGES = [
+    ("en", "English"),
+    ("ar", "Arabic"),
+]
+
+IS_MONOLINGUAL = False
+MODELTRANSLATION_DEFAULT_LANGUAGE = "en"
+
 USE_I18N = True
 USE_L10N = True
 USE_TZ = True
+
+TIME_ZONE = "Asia/Kolkata"
+
+LOCALE_PATHS = [
+    os.path.join(BASE_DIR, "locale"),
+]
+
+ROSETTA_SHOW_AT_ADMIN_PANEL = True
 
 
 USE_L10N = False

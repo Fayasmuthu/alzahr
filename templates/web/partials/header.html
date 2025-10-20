@@ -1,4 +1,4 @@
-{% load static %}
+{% load static i18n %}
 
 <!-- Header Start -->
 <header class="pb-md-0 pb-0">
@@ -71,8 +71,9 @@
                                     </a>
                                 </li>
 
-
-
+                                <li><button id="rightLangBtn" class="btn btn-outline-primary lang-btn">
+                                  عربي
+                                </button></li> 
                                 <li class="right-side onhover-dropdown">
                                     <a class="logo-white" href="javascript:volid(0)" class="header-icon bag-icon">
                                         <i data-feather="user"></i>
@@ -121,7 +122,7 @@
                     <div class="header-nav-left my-1">
                         <button class="dropdown-category">
                             <i data-feather="align-left"></i>
-                            <span>Categories</span>
+                            <span>{% trans "Categories" %}</span>
                         </button>
 
                         <div class="category-dropdown">

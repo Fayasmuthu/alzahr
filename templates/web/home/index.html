@@ -1,5 +1,5 @@
 {% extends 'web/partials/base.html' %}
-{% load static %}
+{% load static i18n %}
 
 {% block content %}
 <div id="alert-message" class="alert d-none alert-dismissible fixed-top text-center mx-auto" style="max-width: 400px; z-index: 9999; margin-top: 80px;" role="alert">
@@ -135,7 +135,7 @@
         <div class="col-12">
           <div class="title title-flex">
             <div>
-                <h2>New Arried</h2>
+                <h2>{% trans "New Arried" %}</h2>
                 <span class="title-leaf">
                       <img src="{% static 'web/assets/svg/zahr.jpg' %}" style="width: 35px; , height: 35px;" alt="">
                 </span>
