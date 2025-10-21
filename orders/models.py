@@ -172,11 +172,27 @@ class Coupon(models.Model):
     
 
 class WhatsAppOrder(models.Model):
+    STATUS_CHOICES = [
+        ('pending', 'Pending'),
+        ('shipping', 'Shipping'),
+        ('delivered', 'Delivered'),
+        ('cancelled', 'Cancelled'),
+    ]
     product = models.ForeignKey(Product, on_delete=models.CASCADE, related_name="whatsapp_orders")
     quantity = models.PositiveIntegerField(default=1)
+    selected_size = models.CharField(max_length=50, blank=True, null=True)
     customer_name = models.CharField(max_length=200)
     customer_phone = models.CharField(max_length=15)
     order_date = models.DateTimeField(auto_now_add=True)
+    status = models.CharField(
+        max_length=20,
+        choices=STATUS_CHOICES,
+        default='pending'
+    )
 
     def __str__(self):
-        return f"Order for {self.product.title} by {self.customer_name}"
+        return f"Order for {self.product.title} ({self.selected_size}) x {self.quantity}"
+    class Meta:
+        # unique_together = ("user", "product")
+        verbose_name = _("Whatsapp order")
+        verbose_name_plural = _("Whatsapp Order")

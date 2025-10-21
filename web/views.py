@@ -15,9 +15,14 @@ from web.forms import ContactForm
 from orders.models import Wishlist
 from orders.forms import WhatsAppOrderForm
 from product.forms import ReviewForm
-from product.models import AvailableSize, Banner, Brand, Category,Product,Producttype,Subcategory
+from product.models import Available, AvailableSize, Banner, Brand, Category,Product,Producttype,Subcategory
 from django.db.models import Q
-
+from django.shortcuts import render, redirect, get_object_or_404
+from django.contrib.auth.decorators import login_required
+import urllib
+from orders.models import WhatsAppOrder
+from django.views.decorators.csrf import csrf_exempt
+from django.views.decorators.http import require_POST
 
 class indexView(TemplateView):
     template_name = "web/home/index.html"
@@ -252,53 +257,112 @@ def coming_soon(request):
     context = {'is_contact': True} 
     return render(request, 'web/coming-soon.html', context)
 
-@login_required
-def order_via_whatsapp(request, product_slug):
-    product = get_object_or_404(Product, slug=product_slug)
-    user = request.user
+# @login_required
+# def order_via_whatsapp(request, product_slug):
+#     product = get_object_or_404(Product, slug=product_slug)
+#     user = request.user
 
+#     if request.method == 'POST':
+#         form = WhatsAppOrderForm(request.POST)
+#         if form.is_valid():
+#             quantity = int(form.cleaned_data['quantity'])
+#             size_id = request.POST.get('product_size')  # 👈 get selected variant ID
+
+#             # If a size/variant is selected
+#             if size_id:
+#                 size = get_object_or_404(AvailableSize, id=size_id)
+#                 weight = size.weight
+#                 unit = size.unit
+#                 price = size.sale_price or size.regular_price
+#             else:
+#                 # fallback to main product
+#                 weight = getattr(product, 'weight', 'N/A')
+#                 unit = getattr(product, 'unit', 'N/A')
+#                 price = getattr(product, 'get_sale_price', lambda: 'N/A')()
+
+#             total_price = float(price) * quantity if price not in [None, 'N/A'] else 'N/A'
+
+#             customer_name = user.get_full_name() or user.username
+
+#             message = f"""
+#             Al Zahr
+#             Hello, I would like to order:
+#             Product: {product.title}
+#             Customer: {customer_name}
+#             ⚖️ Weight: {weight} {unit}
+#             💰 Price: {price} AED
+#             🔢 Quantity: {quantity}
+#             💵 Total: {total_price} AED
+#             """
+#             # WhatsApp API link
+#             whatsapp_number = "+916282134481"
+#             whatsapp_url = f"https://wa.me/{whatsapp_number}?text={urllib.parse.quote(message)}"
+
+#             return redirect(whatsapp_url)   
+#     else:
+#         form = WhatsAppOrderForm(initial={'product': product})
+
+#     return render(request, 'web/order_whatsapp.html', {'product': product, 'form': form})
+
+
+
+# @csrf_exempt
+# def save_whatsapp_order(request):
+#     if request.method == 'POST':
+#         product_id = request.POST.get('product_id')
+#         quantity = request.POST.get('quantity')
+#         selected_size = request.POST.get('selected_size')
+#         customer_name = request.POST.get('customer_name', '')
+#         customer_phone = request.POST.get('customer_phone', '')
+
+#         product = get_object_or_404(Product, id=product_id)
+#         WhatsAppOrder.objects.create(
+#             product=product,
+#             quantity=int(quantity),
+#             selected_size=selected_size,
+#             customer_name=customer_name,
+#             customer_phone=customer_phone
+#         )
+
+#         return JsonResponse({'status': 'success'})
+#     return JsonResponse({'status': 'failed'}, status=400)
+
+@csrf_exempt
+def save_whatsapp_order(request):
     if request.method == 'POST':
-        form = WhatsAppOrderForm(request.POST)
-        if form.is_valid():
-            quantity = int(form.cleaned_data['quantity'])
-            size_id = request.POST.get('product_size')  # 👈 get selected variant ID
+        product_id = request.POST.get('product_id')
+        quantity = request.POST.get('quantity')
+        variant_type = request.POST.get('variant_type')
+        variant_id = request.POST.get('variant_id')
 
-            # If a size/variant is selected
-            if size_id:
-                size = get_object_or_404(AvailableSize, id=size_id)
-                weight = size.weight
-                unit = size.unit
-                price = size.sale_price or size.regular_price
-            else:
-                # fallback to main product
-                weight = getattr(product, 'weight', 'N/A')
-                unit = getattr(product, 'unit', 'N/A')
-                price = getattr(product, 'get_sale_price', lambda: 'N/A')()
+        product = get_object_or_404(Product, id=product_id)
+        variant_label = None
 
-            total_price = float(price) * quantity if price not in [None, 'N/A'] else 'N/A'
+        if variant_type == 'size':
+            size_obj = get_object_or_404(AvailableSize, id=variant_id)
+            variant_label = f"{size_obj.weight}{size_obj.unit}"
+        elif variant_type == 'available':
+            available_obj = get_object_or_404(Available, id=variant_id)
+            variant_label = f"Price AED {available_obj.sale_price}"
 
-            customer_name = user.get_full_name() or user.username
+        WhatsAppOrder.objects.create(
+            product=product,
+            quantity=int(quantity),
+            selected_size=variant_label
+        )
 
-            message = f"""
-            Al Zahr
-            Hello, I would like to order:
-            Product: {product.title}
-            Customer: {customer_name}
-            ⚖️ Weight: {weight} {unit}
-            💰 Price: {price} AED
-            🔢 Quantity: {quantity}
-            💵 Total: {total_price} AED
-            """
-            # WhatsApp API link
-            whatsapp_number = "+971583330297"
-            whatsapp_url = f"https://wa.me/{whatsapp_number}?text={urllib.parse.quote(message)}"
+        return JsonResponse({'status': 'success'})
+    return JsonResponse({'status': 'failed'}, status=400)
 
-            return redirect(whatsapp_url)   
-    else:
-        form = WhatsAppOrderForm(initial={'product': product})
-
-    return render(request, 'web/order_whatsapp.html', {'product': product, 'form': form})
-
+@require_POST
+@csrf_exempt
+def update_order_status(request):
+    order_id = request.POST.get('order_id')
+    status = request.POST.get('status')
+    order = get_object_or_404(WhatsAppOrder, id=order_id)
+    order.status = status
+    order.save()
+    return JsonResponse({'success': True})
 
 def search_view(request):
     query = request.GET.get('q', '').strip()

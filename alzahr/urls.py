@@ -17,10 +17,15 @@ urlpatterns = i18n_patterns(
     path("sitemap.xml", TemplateView.as_view(template_name="sitemap.xml", content_type="text/xml")),
     path("robots.txt", TemplateView.as_view(template_name="robots.txt", content_type="text/plain")),
     path('accounts/', include('registration.backends.simple.urls')),
+    path('tinymce/', include('tinymce.urls')),
     prefix_default_language=True,
 ) + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT) \
   + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+   
 
+admin.site.site_header = "Al Zahr Administration"
+admin.site.site_title = "Al Zahr Admin Portal"
+admin.site.index_title = "Welcome to Al Zahr Admin Portal"
 
 
 # from django.conf import settings

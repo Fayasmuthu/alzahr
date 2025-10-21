@@ -2,7 +2,7 @@
 $(document).ready(function () {
   // Function to update prices and offer percent for a specific card
   function updatePricesAndOffer(card) {
-    var selectedRadio = card.find('input[name="product_size"]:checked');
+    var selectedRadio = card.find('input[name="variant"]:checked');
     if (selectedRadio.length > 0) {
       var salePrice = selectedRadio.data('sale_price');
       var originalPrice = selectedRadio.data('original_price');
@@ -16,7 +16,7 @@ $(document).ready(function () {
   }
 
   // Event listener for radio button click within each card
-  $('input[name="product_size"]').off('click').on('click', function () {
+  $('input[name="variant"]').off('click').on('click', function () {
     var card = $(this).closest('.cart-div');
     updatePricesAndOffer(card);
   });

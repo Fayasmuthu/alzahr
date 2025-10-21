@@ -159,8 +159,9 @@
                         </div>
 
                         <div class="col-xl-6 wow fadeInUp cart-div">
-                            <form action="{% url 'web:order_via_whatsapp' product.slug %}" method="POST">
-                             {% csrf_token %}
+
+                            <form onsubmit="return false;">
+                                <input type="hidden" id="product_id" value="{{ product.id }}">
                             <div class="right-box-contain ">
                                 <h2 class="name mt-5">{{product.brand}}</h2>
 
@@ -212,30 +213,41 @@
 
                                 <div class="mb-4">                                  
                                     <div class="d-flex flex-wrap">
-                                        {% if not product.subcategory.is_combo %}
+                        
+                                        
+                                        {% if product.get_sizes %}
                                         {% for item in product.get_sizes %}
-                                        <div class="form-check" style="{% if forloop.first %} margin-left: -20px; {% endif %}">
-                                            {% comment %} <input class="form-check-input product-size " value="{{item.id}}" type="radio" name="product_size"  id="flexRadioDefault{{item.id}}"
-                                            data-sale_price="{{item.sale_price|floatformat:0 }}" 
-                                            data-original_price="{{item.regular_price|floatformat:0}}"
-                                            data-offer_percent="{{item.offer_percent|floatformat:0 }}"
-                                            {% if forloop.first %} checked {% endif %}> {% endcomment %}
-                                            <input 
-                                                class="form-check-input product-size" 
-                                                value="{{ item.id }}" 
-                                                type="radio" 
-                                                name="product_size"  
-                                                id="flexRadioDefault{{item.id}}"
-                                                data-sale_price="{{ item.sale_price|floatformat:0 }}" 
-                                                data-original_price="{{ item.regular_price|floatformat:0 }}" 
-                                                data-offer_percent="{{ item.offer_percent|floatformat:0 }}" 
-                                                {% if forloop.first %} checked {% endif %}>
-
-                                            <label class="form-check-labelbtn px-3 py-2 rounded border" for="flexRadioDefault{{item.id}}">
-                                            {{item.weight}}{{item.unit}}
-                                            </label>
-                                        </div>
+                                            <div class="form-check" style="{% if forloop.first %} margin-left: -20px; {% endif %}">
+                                                <input class="form-check-input product-size " 
+                                                    value="size-{{ item.id }}" 
+                                                    type="radio" 
+                                                    name="variant" 
+                                                    id="variantSize{{ item.id }}"
+                                                    data-sale_price="{{ item.sale_price|floatformat:0 }}"
+                                                    data-label="{{ item.weight }}{{ item.unit }}"
+                                                    {% if forloop.first %}checked{% endif %}>
+                                                <label class="form-check-label px-3 py-2 rounded border" for="variantSize{{ item.id }}">
+                                                    {{ item.weight }}{{ item.unit }}
+                                                </label>
+                                            </div>
                                         {% endfor %}
+                                        {% elif product.get_sizes_t %}
+                                            <!-- For Available -->
+                                            {% for item in product.get_sizes_t %}
+                                            <div class="form-check">
+                                                <input class="form-check-input product-size" 
+                                                    value="available-{{ item.id }}" 
+                                                    type="radio" 
+                                                    name="variant" 
+                                                    id="variantAvailable{{ item.id }}"
+                                                    data-sale_price="{{ item.sale_price|floatformat:0 }}"
+                                                    data-label="Default"
+                                                    {% if forloop.first %}checked{% endif %}>
+                                                <label class="form-check-label px-3 py-2 rounded border" for="variantAvailable{{ item.id }}">
+                                                    AED {{ item.sale_price|floatformat:0 }}
+                                                </label>
+                                            </div>
+                                            {% endfor %}
                                         {% endif %}
                                         </div>
                                     </div>
@@ -290,7 +302,7 @@
                                         {% csrf_token %} {% endcomment %}
                                         <input type="hidden" name="product" value="{{ product.id }}">
                                         <input type="hidden" name="quantity" id="hidden_quantity" value="1">
-                                        <button type="submit" class="btn btn-md bg-green-wp cart-button text-white w-100">
+                                        <button type="button" onclick="orderAndOpenWhatsApp()" class="btn btn-md bg-green-wp cart-button text-white w-100">
                                             Order WhatsApp
                                         </button>
                                     {% comment %} </form> {% endcomment %}
@@ -752,6 +764,68 @@
         });
         
       </script>
+
+    <script>
+        function orderAndOpenWhatsApp() {
+            const productId = document.getElementById('product_id').value;
+            const quantity = document.getElementById('quantity').value;
+            const selected = document.querySelector('input[name="variant"]:checked');
+            const selectedValue = selected.value;
+            const salePrice = selected.dataset.sale_price;
+            const label = selected.dataset.label;
+            const productName = "{{ product.title|escapejs }}";
+            const number = "971583330297";  // ✅ your WhatsApp number
+
+            let variantType = '';
+            let variantId = '';
+
+            // detect type
+            if (selectedValue.startsWith('size-')) {
+                variantType = 'size';
+                variantId = selectedValue.replace('size-', '');
+            } else if (selectedValue.startsWith('available-')) {
+                variantType = 'available';
+                variantId = selectedValue.replace('available-', '');
+            }
+
+            // 1️⃣ Save order in Django
+            fetch("{% url 'web:save_whatsapp_order' %}", {
+                method: 'POST',
+                headers: {
+                    'X-CSRFToken': '{{ csrf_token }}',
+                    'Content-Type': 'application/x-www-form-urlencoded',
+                },
+                body: new URLSearchParams({
+                    'product_id': productId,
+                    'quantity': quantity,
+                    'variant_type': variantType,
+                    'variant_id': variantId
+                })
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.status === 'success') {
+                    // 2️⃣ Open WhatsApp
+                    const total = parseFloat(salePrice) * parseInt(quantity);
+                    const message = `Hello, I want to order:
+        Product: ${productName}
+        Variant: ${label}
+        Price: AED ${salePrice}
+        Quantity: ${quantity}
+        Total: AED ${total}`;
+                    const whatsappUrl = `https://wa.me/${number}?text=${encodeURIComponent(message)}`;
+                    window.open(whatsappUrl, '_blank');
+                } else {
+                    alert('❌ Failed to save order');
+                }
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                alert('⚠️ Something went wrong');
+            });
+        }
+    </script>
+
 
       {% block js %}
       <script src="{% static 'web/assets/js/index.js' %}"></script>

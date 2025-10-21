@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-10-20 16:11+0530\n"
+"POT-Creation-Date: 2025-10-21 10:16+0530\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -29,7 +29,7 @@ msgstr ""
 
 #: orders/models.py:30
 msgid "Notification"
-msgstr ""
+msgstr "إشعار"
 
 #: orders/models.py:31
 msgid "Notifications"
@@ -59,7 +59,7 @@ msgstr ""
 msgid "Category"
 msgstr ""
 
-#: product/models.py:67 templates/web/partials/header.html:125
+#: product/models.py:67 templates/web/partials/header.html:128
 msgid "Categories"
 msgstr "فئات"
 
@@ -417,3 +417,31 @@ msgstr ""
 #: templates/web/home/index.html:138
 msgid "New Arried"
 msgstr "متزوج جديد"
+
+#: templates/web/home/index.html:244
+msgid "Dried Products"
+msgstr "المنتجات المجففة"
+
+#: templates/web/home/index.html:355
+msgid "Powder Products"
+msgstr "منتجات البودرة"
+
+#: templates/web/home/index.html:461
+msgid "Incense Products"
+msgstr "منتجات البخور"
+
+#: templates/web/home/index.html:570
+msgid "Whole Products"
+msgstr "المنتجات الكاملة"
+
+#: templates/web/home/index.html:679
+msgid "Health Products"
+msgstr "المنتجات الصحية"
+
+#: templates/web/home/index.html:788
+msgid "slice Products"
+msgstr "منتجات شريحة"
+
+#: templates/web/home/index.html:897
+msgid "Non Salt Products"
+msgstr "منتجات خالية من الملح"

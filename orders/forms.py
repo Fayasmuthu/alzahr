@@ -78,9 +78,16 @@ class OrderForm(forms.ModelForm):
 class WhatsAppOrderForm(forms.ModelForm):
     class Meta:
         model = WhatsAppOrder
-        # fields = ['product', 'quantity', 'customer_name', 'customer_phone']
-        fields = ['product', 'quantity']
+        fields = ['quantity', 'customer_name', 'customer_phone']
 
         widgets = {
-            'product': forms.HiddenInput(),
+            'quantity': forms.NumberInput(attrs={'class': 'form-control', 'min': '1', 'value': '1'}),
+            'customer_name': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Your name'}),
+            'customer_phone': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Phone number'}),
         }
+
+    def clean_customer_phone(self):
+        phone = self.cleaned_data.get('customer_phone')
+        if not phone.isdigit():
+            raise forms.ValidationError("Phone number should contain only digits.")
+        return phone
