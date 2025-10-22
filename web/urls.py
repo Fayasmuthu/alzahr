@@ -9,9 +9,8 @@ urlpatterns = [
     path("shop/", views.shopView.as_view(), name="shop"),
     path('coming-soon/', views.coming_soon, name='coming_soon'),
     path("product-detail/<slug:slug>/",views.ProductDetailView.as_view(),name="product_detail"),
-    path('search/', views.search_view, name='search'),
-    # path('order/<slug:product_slug>/whatsapp/', views.order_via_whatsapp, name='order_via_whatsapp'),
     path('save-whatsapp-order/', views.save_whatsapp_order, name='save_whatsapp_order'),
+    path('search/', views.search_view, name='search'),
     path('coming-soon/', views.coming_soon, name='coming_soon'),
     path('cn/', views.cn, name='cn'),
 

@@ -22347,9 +22347,9 @@ header .header-nav .header-nav-left .dropdown-category {
     }
 }
 
-.header-nav-sm-off{
+/* .header-nav-sm-off{
     border-bottom:inset;
-}
+} */
 
 header .header-nav .header-nav-left .dropdown-category-2 {
     background: linear-gradient(93.33deg, #222221 12.35%, #2f2f2d 99.38%)

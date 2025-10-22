@@ -1,6 +1,7 @@
-{% load static %}
+{% load static i18n %}
+{% get_current_language as LANGUAGE_CODE %}
 <!DOCTYPE html>
-<html lang="en">
+<html lang="{{ request.LANGUAGE_CODE }}" >
 
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
@@ -44,7 +45,40 @@
 
 {% include "registration/partials/header.html" %}
 {% block content %}{% endblock  %}
-
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            var activeLang = "{{ request.LANGUAGE_CODE }}"; // Correct context-aware language code
+        
+            var rightBtn = document.getElementById("rightLangBtn");
+        
+            // Update button label based on current language
+            if (activeLang === "ar") {
+            rightBtn.textContent = "English";
+            } else {
+            rightBtn.textContent = "العربية";
+            }
+        
+            // Toggle Arabic <-> English on click
+            rightBtn.addEventListener("click", function () {
+            var newLang = (activeLang === "ar") ? "en" : "ar";
+            navigateToLanguage(newLang);
+            });
+        
+            function navigateToLanguage(newLang) {
+            var baseUrl = window.location.origin;
+            var path = window.location.pathname;
+        
+            // Replace language in path if it exists
+            if (path.match(/^\/(en|ar)\//)) {
+                path = path.replace(/^\/(en|ar)\//, '/' + newLang + '/');
+            } else {
+                path = '/' + newLang + path;
+            }
+        
+            window.location.href = baseUrl + path;
+            }
+        });
+    </script>
 
 
 

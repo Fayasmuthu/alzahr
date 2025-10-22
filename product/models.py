@@ -416,7 +416,6 @@ class Available(models.Model):
     def __str__(self):
         return f"{self.product}"
     
-
 class AvailableSize(models.Model):
     product = models.ForeignKey(Product, on_delete=models.CASCADE)
     available = models.ForeignKey(Available, on_delete=models.CASCADE, null=True, blank=True)
@@ -446,7 +445,6 @@ class AvailableSize(models.Model):
 
     def __str__(self):
         return f"{self.product} - {self.unit} "
-
 
 class Review(models.Model):
     product = models.ForeignKey(

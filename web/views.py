@@ -203,20 +203,20 @@ class ProductDetailView(DetailView):
     template_name = "web/product-image.html"
 
     def get_context_data(self, **kwargs):
-            context = super().get_context_data(**kwargs)
-            current_product = self.get_object()
-            product_ratings = [
-                {"value": 5, "percentage": int(current_product.five_rating())},
-                {"value": 4, "percentage": int(current_product.four_rating())},
-                {"value": 3, "percentage": int(current_product.three_rating())},
-                {"value": 2, "percentage": int(current_product.two_rating())},
-                {"value": 1, "percentage": int(current_product.one_rating())},
-            ]
-            context["reviews"] = current_product.reviews.filter(approval=True)
-            context["review_form"] = ReviewForm()
-            context["product_ratings"] = product_ratings
+        context = super().get_context_data(**kwargs)
+        current_product = self.get_object()
+        product_ratings = [
+            {"value": 5, "percentage": int(current_product.five_rating())},
+            {"value": 4, "percentage": int(current_product.four_rating())},
+            {"value": 3, "percentage": int(current_product.three_rating())},
+            {"value": 2, "percentage": int(current_product.two_rating())},
+            {"value": 1, "percentage": int(current_product.one_rating())},
+        ]
+        context["reviews"] = current_product.reviews.filter(approval=True)
+        context["review_form"] = ReviewForm()
+        context["product_ratings"] = product_ratings
 
-            return context
+        return context
 
     def post(self, request, *args, **kwargs):
         if request.user.is_authenticated:
@@ -225,9 +225,9 @@ class ProductDetailView(DetailView):
             form = ReviewForm(request.POST, request.FILES)
 
             if form.is_valid():
-                review = form.save(commit=False)  # Use commit=False to create a Review instance but not save it yet
+                review = form.save(commit=False)
                 review.product = product
-                review.user = user  # Set the user for the review
+                review.user = user
                 review.save()
 
                 response_data = {
@@ -235,13 +235,12 @@ class ProductDetailView(DetailView):
                     "title": "Successfully Submitted",
                     "message": "Message successfully Submitted",
                 }
-                
             else:
                 print(form.errors)
                 response_data = {
                     "status": "false",
                     "title": "Form validation error",
-                    "message": form.errors,
+                    "message": str(form.errors),
                 }
         else:
             response_data = {
@@ -253,79 +252,59 @@ class ProductDetailView(DetailView):
         return JsonResponse(response_data)
 
 
+# ✅ ADD THIS NEW VIEW FOR WHATSAPP ORDERS
+@require_POST
+def save_whatsapp_order(request):
+    try:
+        product_id = request.POST.get('product_id')
+        quantity = request.POST.get('quantity')
+        variant_type = request.POST.get('variant_type')
+        variant_id = request.POST.get('variant_id')
+
+        # Validate required fields
+        if not all([product_id, quantity, variant_type, variant_id]):
+            return JsonResponse({
+                'status': 'error',
+                'message': 'Missing required fields'
+            }, status=400)
+
+        # Get the product
+        try:
+            product = Product.objects.get(id=product_id)
+        except Product.DoesNotExist:
+            return JsonResponse({
+                'status': 'error',
+                'message': 'Product not found'
+            }, status=404)
+
+        # Save the order (adjust based on your model structure)
+        # Example:
+        whatsapp_order = WhatsAppOrder.objects.create(
+            user=request.user if request.user.is_authenticated else None,
+            product=product,
+            quantity=quantity,
+            variant_type=variant_type,
+            variant_id=variant_id,
+        )
+
+        return JsonResponse({
+            'status': 'success',
+            'message': 'Order saved successfully',
+            'order_id': whatsapp_order.id
+        })
+
+    except Exception as e:
+        print(f"Error saving WhatsApp order: {str(e)}")
+        return JsonResponse({
+            'status': 'error',
+            'message': 'Failed to save order'
+        }, status=500)
+
+
 def coming_soon(request):
     context = {'is_contact': True} 
     return render(request, 'web/coming-soon.html', context)
 
-# @login_required
-# def order_via_whatsapp(request, product_slug):
-#     product = get_object_or_404(Product, slug=product_slug)
-#     user = request.user
-
-#     if request.method == 'POST':
-#         form = WhatsAppOrderForm(request.POST)
-#         if form.is_valid():
-#             quantity = int(form.cleaned_data['quantity'])
-#             size_id = request.POST.get('product_size')  # 👈 get selected variant ID
-
-#             # If a size/variant is selected
-#             if size_id:
-#                 size = get_object_or_404(AvailableSize, id=size_id)
-#                 weight = size.weight
-#                 unit = size.unit
-#                 price = size.sale_price or size.regular_price
-#             else:
-#                 # fallback to main product
-#                 weight = getattr(product, 'weight', 'N/A')
-#                 unit = getattr(product, 'unit', 'N/A')
-#                 price = getattr(product, 'get_sale_price', lambda: 'N/A')()
-
-#             total_price = float(price) * quantity if price not in [None, 'N/A'] else 'N/A'
-
-#             customer_name = user.get_full_name() or user.username
-
-#             message = f"""
-#             Al Zahr
-#             Hello, I would like to order:
-#             Product: {product.title}
-#             Customer: {customer_name}
-#             ⚖️ Weight: {weight} {unit}
-#             💰 Price: {price} AED
-#             🔢 Quantity: {quantity}
-#             💵 Total: {total_price} AED
-#             """
-#             # WhatsApp API link
-#             whatsapp_number = "+916282134481"
-#             whatsapp_url = f"https://wa.me/{whatsapp_number}?text={urllib.parse.quote(message)}"
-
-#             return redirect(whatsapp_url)   
-#     else:
-#         form = WhatsAppOrderForm(initial={'product': product})
-
-#     return render(request, 'web/order_whatsapp.html', {'product': product, 'form': form})
-
-
-
-# @csrf_exempt
-# def save_whatsapp_order(request):
-#     if request.method == 'POST':
-#         product_id = request.POST.get('product_id')
-#         quantity = request.POST.get('quantity')
-#         selected_size = request.POST.get('selected_size')
-#         customer_name = request.POST.get('customer_name', '')
-#         customer_phone = request.POST.get('customer_phone', '')
-
-#         product = get_object_or_404(Product, id=product_id)
-#         WhatsAppOrder.objects.create(
-#             product=product,
-#             quantity=int(quantity),
-#             selected_size=selected_size,
-#             customer_name=customer_name,
-#             customer_phone=customer_phone
-#         )
-
-#         return JsonResponse({'status': 'success'})
-#     return JsonResponse({'status': 'failed'}, status=400)
 
 @csrf_exempt
 def save_whatsapp_order(request):

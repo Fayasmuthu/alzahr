@@ -96,11 +96,17 @@
                                     <del>Aed {{ item.product.regular_price|floatformat:0 }}</del>
                                 </h5>
 
-                                <form action="{% url 'web:order_via_whatsapp' item.product.product.slug %}" method="POST">
-                                    {% csrf_token %}
-                                    <input type="hidden" name="product" value="{{ item.product.product.id }}" />
+                                <form onsubmit="return false;">
+                                <input type="hidden" id="product_id" value="{{ item.product.product.id }}">
                                     <input type="hidden" name="quantity" id="hidden_quantity" value="1" />
-                                    <button type="submit" class="btn mt-3 btn-md bg-green-wp cart-button text-white w-100">Order WhatsApp</button>
+                                    <button 
+                                        type="button"
+                                        class="btn mt-3 btn-md bg-green-wp cart-button text-white w-100 order-whatsapp-btn"
+                                        data-product-id="{{ item.product.product.id }}"
+                                        data-product-name="{{ item.product.product.title }}"
+                                        data-sale-price="{{ item.product.sale_price|floatformat:0 }}">
+                                        Order WhatsApp
+                                    </button>
                                 </form>
                             </div>
                         </div>
@@ -124,7 +130,60 @@
     <!-- Wishlist Section End -->
 
     <!-- Location Modal Start -->
+     <script>
+document.addEventListener("DOMContentLoaded", function () {
+    const whatsappButtons = document.querySelectorAll('.order-whatsapp-btn');
+
+    whatsappButtons.forEach(button => {
+        button.addEventListener('click', function () {
+            const productId = this.dataset.productId;
+            const productName = this.dataset.productName;
+            const salePrice = this.dataset.salePrice;
+            const quantity = 1; // You can make this dynamic if needed
+            const number = "971583330297"; // ✅ your WhatsApp number
+
+            // 1️⃣ Save order to DB using AJAX
+            fetch("{% url 'web:save_whatsapp_order' %}", {
+                method: 'POST',
+                headers: {
+                    'X-CSRFToken': '{{ csrf_token }}',
+                    'Content-Type': 'application/x-www-form-urlencoded',
+                },
+                body: new URLSearchParams({
+                    'product_id': productId,
+                    'quantity': quantity,
+                    'variant_type': '',
+                    'variant_id': ''
+                })
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.status === 'success') {
+                    // 2️⃣ Open WhatsApp
+                    const total = parseFloat(salePrice) * quantity;
+                    const message = `Hello, I want to order:
+Product: ${productName}
+Price: AED ${salePrice}
+Quantity: ${quantity}
+Total: AED ${total}`;
+                    const whatsappUrl = `https://wa.me/${number}?text=${encodeURIComponent(message)}`;
+                    window.open(whatsappUrl, '_blank');
+                } else {
+                    alert('❌ Failed to save order.');
+                }
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                alert('⚠️ Something went wrong.');
+            });
+        });
+    });
+});
+</script>
+
 {% endblock  %}
+
 {% block js %}
+
 <script src="{% static 'web/assets/js/wishlist.js' %}"></script>
 {% endblock %}

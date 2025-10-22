@@ -1,6 +1,7 @@
-{% load static %}
+{% load static i18n %}
+{% get_current_language as LANGUAGE_CODE %}
 <!DOCTYPE html>
-<html lang="en">
+<html lang="{{ request.LANGUAGE_CODE }}">
 
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
@@ -275,21 +276,8 @@
                                 </div>
                                 <!-- cart end -->
 
-                                <div class="note-box product-package">
-                                    {% comment %} <div class="cart_qty qty-box product-qty">
-                                        <div class="input-group">
-                                            <button type="button" class="qty-left-minus" data-type="minus" data-field="">
-                                                <i class="fa fa-minus"></i>
-                                            </button>
-                                            <input class="form-control input-number qty-input" type="text" name="quantity" value="1" id="quantity">
-                                            <button type="button" class="qty-right-plus" data-type="plus" data-field="">
-                                                <i class="fa fa-plus"></i>
-                                            </button>
-                                        </div>
-                                    </div> {% endcomment %}
-                                
-
-                                      <div class="note-box product-package">
+                                <div class="note-box product-package">                           
+                                      <div class="note-box product-package" data-stock="5">
                                             <div class="cart_qty qty-box product-qty">
                                             <div class="input-group">
                                                 <button type="button" class="qty-left-minus"><i class="fa fa-minus"></i></button>
@@ -298,14 +286,16 @@
                                             </div>
                                             </div>
                                         </div>
-                                    {% comment %} <form action="{% url 'web:order_via_whatsapp' product.slug %}" method="POST">
-                                        {% csrf_token %} {% endcomment %}
-                                        <input type="hidden" name="product" value="{{ product.id }}">
-                                        <input type="hidden" name="quantity" id="hidden_quantity" value="1">
-                                        <button type="button" onclick="orderAndOpenWhatsApp()" class="btn btn-md bg-green-wp cart-button text-white w-100">
-                                            Order WhatsApp
-                                        </button>
-                                    {% comment %} </form> {% endcomment %}
+                                        <div class="order-section">
+                                            <input type="hidden" id="product_id" name="product" value="{{ product.id }}">
+                                            <input type="hidden" name="quantity" id="quantity" value="1">
+                                            
+                                            <!-- Your variant selection radio buttons here -->
+                                            
+                                            <button type="button" onclick="orderAndOpenWhatsApp()" class="btn btn-md bg-green-wp cart-button text-white w-100">
+                                                Order WhatsApp
+                                            </button>
+                                        </div>
                                 </div>
                                 
 
@@ -323,7 +313,7 @@
                                         <ul class="product-info-list product-info-list-2">
                                             {% comment %} <li>Type : <a href="javascript:void(0)">{{product.title}}</a></li> {% endcomment %}
                                             <li>Model Number : <a href="javascript:void(0)">{{product.model_number}}</a></li>
-                                            <li>Stock : <a href="javascript:void(0)">{{product.stock}}</a></li>
+                                            <li>Stock : <a href="javascript:void(0)" data-stock="{{ product.stock }}">{{product.stock}}</a></li>
                                         </ul>
                                     </div>
                                 </div>
@@ -765,7 +755,7 @@
         
       </script>
 
-    <script>
+    {% comment %} <script>
         function orderAndOpenWhatsApp() {
             const productId = document.getElementById('product_id').value;
             const quantity = document.getElementById('quantity').value;
@@ -824,8 +814,182 @@
                 alert('⚠️ Something went wrong');
             });
         }
-    </script>
+    </script> {% endcomment %}
 
+    <script>
+    // WhatsApp Order Function
+  function orderAndOpenWhatsApp() {
+    const productId = document.getElementById('product_id').value;
+    const quantity = document.getElementById('quantity').value;
+    const selected = document.querySelector('input[name="variant"]:checked');
+    
+    // ✅ Validate variant selection
+    if (!selected) {
+        alert('⚠️ Please select a variant first');
+        return;
+    }
+    
+    const selectedValue = selected.value;
+    const salePrice = selected.dataset.sale_price;
+    const label = selected.dataset.label;
+    const productName = "{{ product.title|escapejs }}";
+    const number = "916282134481";
+
+    let variantType = '';
+    let variantId = '';
+
+    // Detect variant type
+    if (selectedValue.startsWith('size-')) {
+        variantType = 'size';
+        variantId = selectedValue.replace('size-', '');
+    } else if (selectedValue.startsWith('available-')) {
+        variantType = 'available';
+        variantId = selectedValue.replace('available-', '');
+    }
+
+    // ✅ Show loading state
+    const button = event.target;
+    const originalText = button.innerHTML;
+    button.disabled = true;
+    button.innerHTML = 'Processing...';
+
+    // Save order in Django
+    fetch("{% url 'web:save_whatsapp_order' %}", {
+        method: 'POST',
+        headers: {
+            'X-CSRFToken': '{{ csrf_token }}',
+            'Content-Type': 'application/x-www-form-urlencoded',
+        },
+        body: new URLSearchParams({
+            'product_id': productId,
+            'quantity': quantity,
+            'variant_type': variantType,
+            'variant_id': variantId
+        })
+    })
+    .then(response => {
+        // ✅ Check if response is OK
+        if (!response.ok) {
+            throw new Error(`HTTP error! status: ${response.status}`);
+        }
+        return response.json();
+    })
+    .then(data => {
+        console.log('Response:', data); // ✅ Debug log
+        
+        if (data.status === 'success') {
+            // Calculate total
+            const total = (parseFloat(salePrice) * parseInt(quantity)).toFixed(2);
+
+            // Construct message using \n for new lines
+            const message = `Hello, I want to order:
+            Product: ${productName}
+            Size ID: ${label}
+            Price: AED ${salePrice}
+            Quantity: ${quantity}
+            Total: AED ${total}`;
+            // WhatsApp URL
+            const whatsappUrl = `https://api.whatsapp.com/send?phone=${number}&text=${encodeURIComponent(message)}`;
+
+            // Open in new tab
+            window.open(whatsappUrl, '_blank');
+        } else {
+            alert('❌ Failed to save order: ' + (data.message || 'Unknown error'));
+        }
+    })
+    .catch(error => {
+        console.error('Error:', error); // ✅ Debug log
+        alert('⚠️ Something went wrong: ' + error.message);
+    })
+    .finally(() => {
+        // ✅ Re-enable button
+        button.disabled = false;
+        button.innerHTML = originalText;
+    });
+}
+
+    // Review Form AJAX Submission
+    document.addEventListener('DOMContentLoaded', function() {
+        const reviewForm = document.getElementById('review-form');
+        
+        if (reviewForm) {
+            reviewForm.addEventListener('submit', function(e) {
+                e.preventDefault(); // Prevent normal form submission
+                
+                const formData = new FormData(this);
+                const submitButton = this.querySelector('button[type="submit"]');
+                
+                // Disable button during submission
+                submitButton.disabled = true;
+                submitButton.textContent = 'Submitting...';
+                
+                fetch(window.location.href, {
+                    method: 'POST',
+                    headers: {
+                        'X-Requested-With': 'XMLHttpRequest',
+                        'X-CSRFToken': '{{ csrf_token }}',
+                    },
+                    body: formData
+                })
+                .then(response => response.json())
+                .then(data => {
+                    if (data.status === 'true') {
+                        alert('✅ ' + data.message);
+                        // Reset form and reload page to show new review
+                        reviewForm.reset();
+                        location.reload();
+                    } else {
+                        alert('❌ ' + data.title + ': ' + data.message);
+                    }
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                    alert('⚠️ Something went wrong. Please try again.');
+                })
+                .finally(() => {
+                    // Re-enable button
+                    submitButton.disabled = false;
+                    submitButton.textContent = 'Submit Review';
+                });
+            });
+        }
+    });
+</script>
+
+    <script>
+      document.addEventListener("DOMContentLoaded", function () {
+        var activeLang = "{{ request.LANGUAGE_CODE }}"; // Correct context-aware language code
+    
+        var rightBtn = document.getElementById("rightLangBtn");
+    
+        // Update button label based on current language
+        if (activeLang === "ar") {
+          rightBtn.textContent = "English";
+        } else {
+          rightBtn.textContent = "العربية";
+        }
+    
+        // Toggle Arabic <-> English on click
+        rightBtn.addEventListener("click", function () {
+          var newLang = (activeLang === "ar") ? "en" : "ar";
+          navigateToLanguage(newLang);
+        });
+    
+        function navigateToLanguage(newLang) {
+          var baseUrl = window.location.origin;
+          var path = window.location.pathname;
+    
+          // Replace language in path if it exists
+          if (path.match(/^\/(en|ar)\//)) {
+            path = path.replace(/^\/(en|ar)\//, '/' + newLang + '/');
+          } else {
+            path = '/' + newLang + path;
+          }
+    
+          window.location.href = baseUrl + path;
+        }
+      });
+    </script>
 
       {% block js %}
       <script src="{% static 'web/assets/js/index.js' %}"></script>
