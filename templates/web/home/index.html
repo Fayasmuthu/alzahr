@@ -135,7 +135,9 @@
         <div class="col-12">
           <div class="title title-flex">
             <div>
-                <h2>{% trans "New Arried" %}</h2>
+                <a href="{% url "web:arrived" %}">
+                <h2>{% trans "New Arrived" %}</h2>
+                </a>
                 <span class="title-leaf">
                       <img src="{% static 'web/assets/svg/zahr.jpg' %}" style="width: 35px; , height: 35px;" alt="">
                 </span>

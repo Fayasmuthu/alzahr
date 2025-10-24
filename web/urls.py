@@ -24,6 +24,7 @@ urlpatterns = [
     path("seed/", views.seedView.as_view(), name="seed"),
     path("non-salt/", views.nonsaltView.as_view(), name="non_salt"),
     path("health/", views.healthView.as_view(), name="health"),
+    path("arrived/", views.arrivedView.as_view(), name="arrived"),
 
 
 

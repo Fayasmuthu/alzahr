@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-10-24 12:10+0530\n"
+"POT-Creation-Date: 2025-10-24 18:11+0530\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -424,42 +424,44 @@ msgstr ""
 msgid "Resend Activation Email"
 msgstr ""
 
-#: templates/web/home/index.html:138
-msgid "New Arried"
+#: templates/web/home/index.html:139
+#, fuzzy
+#| msgid "New Arried"
+msgid "New Arrived"
 msgstr "متزوج جديد"
 
-#: templates/web/home/index.html:145 templates/web/home/index.html:252
-#: templates/web/home/index.html:362 templates/web/home/index.html:469
-#: templates/web/home/index.html:578 templates/web/home/index.html:687
-#: templates/web/home/index.html:796 templates/web/home/index.html:905
+#: templates/web/home/index.html:147 templates/web/home/index.html:254
+#: templates/web/home/index.html:364 templates/web/home/index.html:471
+#: templates/web/home/index.html:580 templates/web/home/index.html:689
+#: templates/web/home/index.html:798 templates/web/home/index.html:907
 msgid "More Products"
 msgstr "المنتجات الكاملة"
 
-#: templates/web/home/index.html:244
+#: templates/web/home/index.html:246
 msgid "Dried Products"
 msgstr "المنتجات المجففة"
 
-#: templates/web/home/index.html:355
+#: templates/web/home/index.html:357
 msgid "Powder Products"
 msgstr "منتجات البودرة"
 
-#: templates/web/home/index.html:461
+#: templates/web/home/index.html:463
 msgid "Incense Products"
 msgstr "منتجات البخور"
 
-#: templates/web/home/index.html:570
+#: templates/web/home/index.html:572
 msgid "Whole Products"
 msgstr "المنتجات الكاملة"
 
-#: templates/web/home/index.html:679
+#: templates/web/home/index.html:681
 msgid "Health Products"
 msgstr "المنتجات الصحية"
 
-#: templates/web/home/index.html:788
+#: templates/web/home/index.html:790
 msgid "slice Products"
 msgstr "منتجات شريحة"
 
-#: templates/web/home/index.html:897
+#: templates/web/home/index.html:899
 msgid "Non Salt Products"
 msgstr "منتجات خالية من الملح"
 
@@ -642,54 +644,89 @@ msgstr "قم بمراجعة هذا المنتج"
 msgid "Let other customers know what you think"
 msgstr "أخبر العملاء الآخرين بما تفكر فيه"
 
-#: templates/web/product-image.html:574
+#: templates/web/product-image.html:501 templates/web/product-image.html:573
 msgid "Write a review"
 msgstr "اكتب مراجعة"
 
-#: templates/web/product-image.html:597
+#: templates/web/product-image.html:596
 msgid "Your Fullname *"
 msgstr "اسمك الكامل *"
 
-#: templates/web/product-image.html:601
+#: templates/web/product-image.html:600
 msgid "Overall rating"
 msgstr "متوسط ​​التقييم"
 
-#: templates/web/product-image.html:612
+#: templates/web/product-image.html:611
 msgid "Your Question *"
 msgstr "سؤالك *"
 
-#: templates/web/product-image.html:617
+#: templates/web/product-image.html:616
 msgid "Close"
 msgstr "يغلق"
 
-#: templates/web/product-image.html:618
+#: templates/web/product-image.html:617
 msgid "Save changes"
 msgstr "حفظ التغييرات"
 
-#: templates/web/shop.html:103
+#: templates/web/shop.html:103 templates/web/shop/Incense.html:100
+#: templates/web/shop/arrived.html:100 templates/web/shop/dried.html:100
+#: templates/web/shop/health.html:100 templates/web/shop/leaf.html:100
+#: templates/web/shop/non-salt.html:100 templates/web/shop/powder.html:100
+#: templates/web/shop/seed.html:100 templates/web/shop/slice.html:100
+#: templates/web/shop/top.html:100 templates/web/shop/whole.html:100
 msgid "Sort By :"
 msgstr "فرز حسب :"
 
-#: templates/web/shop.html:106
+#: templates/web/shop.html:106 templates/web/shop/Incense.html:103
+#: templates/web/shop/arrived.html:103 templates/web/shop/dried.html:103
+#: templates/web/shop/health.html:103 templates/web/shop/leaf.html:103
+#: templates/web/shop/non-salt.html:103 templates/web/shop/powder.html:103
+#: templates/web/shop/seed.html:103 templates/web/shop/slice.html:103
+#: templates/web/shop/top.html:103 templates/web/shop/whole.html:103
 msgid "Sort by: All Products"
 msgstr "المنتجات الكاملة"
 
-#: templates/web/shop.html:107
+#: templates/web/shop.html:107 templates/web/shop/Incense.html:104
+#: templates/web/shop/arrived.html:104 templates/web/shop/dried.html:104
+#: templates/web/shop/health.html:104 templates/web/shop/leaf.html:104
+#: templates/web/shop/non-salt.html:104 templates/web/shop/powder.html:104
+#: templates/web/shop/seed.html:104 templates/web/shop/slice.html:104
+#: templates/web/shop/top.html:104 templates/web/shop/whole.html:104
 msgid "Low - High"
 msgstr "منخفض - مرتفع"
 
-#: templates/web/shop.html:108
+#: templates/web/shop.html:108 templates/web/shop/Incense.html:105
+#: templates/web/shop/arrived.html:105 templates/web/shop/dried.html:105
+#: templates/web/shop/health.html:105 templates/web/shop/leaf.html:105
+#: templates/web/shop/non-salt.html:105 templates/web/shop/powder.html:105
+#: templates/web/shop/seed.html:105 templates/web/shop/slice.html:105
+#: templates/web/shop/top.html:105 templates/web/shop/whole.html:105
 msgid "High - Low"
 msgstr "مرتفع - منخفض"
 
-#: templates/web/shop.html:109
+#: templates/web/shop.html:109 templates/web/shop/Incense.html:106
+#: templates/web/shop/arrived.html:106 templates/web/shop/dried.html:106
+#: templates/web/shop/health.html:106 templates/web/shop/leaf.html:106
+#: templates/web/shop/non-salt.html:106 templates/web/shop/powder.html:106
+#: templates/web/shop/seed.html:106 templates/web/shop/slice.html:106
+#: templates/web/shop/top.html:106 templates/web/shop/whole.html:106
 msgid "Average Rating"
 msgstr "متوسط ​​التقييم"
 
-#: templates/web/shop.html:110
+#: templates/web/shop.html:110 templates/web/shop/Incense.html:107
+#: templates/web/shop/arrived.html:107 templates/web/shop/dried.html:107
+#: templates/web/shop/health.html:107 templates/web/shop/leaf.html:107
+#: templates/web/shop/non-salt.html:107 templates/web/shop/powder.html:107
+#: templates/web/shop/seed.html:107 templates/web/shop/slice.html:107
+#: templates/web/shop/top.html:107 templates/web/shop/whole.html:107
 msgid "A Z order"
 msgstr "طلب A Z"
 
-#: templates/web/shop.html:111
+#: templates/web/shop.html:111 templates/web/shop/Incense.html:108
+#: templates/web/shop/arrived.html:108 templates/web/shop/dried.html:108
+#: templates/web/shop/health.html:108 templates/web/shop/leaf.html:108
+#: templates/web/shop/non-salt.html:108 templates/web/shop/powder.html:108
+#: templates/web/shop/seed.html:108 templates/web/shop/slice.html:108
+#: templates/web/shop/top.html:108 templates/web/shop/whole.html:108
 msgid "Z A order"
 msgstr "طلب Z A"

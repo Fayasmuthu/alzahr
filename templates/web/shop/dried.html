@@ -96,15 +96,15 @@
 
             <div class="top-filter-menu">
               <div class="category-dropdown">
-                <h5 class="text-content">Sort By :</h5>
+                <h5 class="text-content">{% trans 'Sort By :' %}</h5>
                 <form method="get" action="">
                   <select name="sort_by" class="form-select " style="border: 1px solid #0baf9a;" onchange="this.form.submit()">
-                      <option  value="all_products" {% if request.GET.sort_by == 'all_products' %}selected{% endif %}>Sort by: All Products</option>
-                      <option value="low_to_high" {% if request.GET.sort_by == 'low_to_high' %}selected{% endif %}>Low - High</option>
-                      <option value="high_to_low" {% if request.GET.sort_by == 'high_to_low' %}selected{% endif %}>High - Low</option>
-                      <option value="rating" {% if request.GET.sort_by == 'rating' %}selected{% endif %}>Average Rating</option>
-                      <option value="a_to_z" {% if request.GET.sort_by == 'a_to_z' %}selected{% endif %}>A Z order</option>
-                      <option value="z_to_a" {% if request.GET.sort_by == 'z_to_a' %}selected{% endif %}>Z A order</option>
+                      <option  value="all_products" {% if request.GET.sort_by == 'all_products' %}selected{% endif %}>{% trans 'Sort by: All Products' %}</option>
+                      <option value="low_to_high" {% if request.GET.sort_by == 'low_to_high' %}selected{% endif %}>{% trans 'Low - High' %}</option>
+                      <option value="high_to_low" {% if request.GET.sort_by == 'high_to_low' %}selected{% endif %}>{% trans 'High - Low' %}</option>
+                      <option value="rating" {% if request.GET.sort_by == 'rating' %}selected{% endif %}>{% trans 'Average Rating' %}</option>
+                      <option value="a_to_z" {% if request.GET.sort_by == 'a_to_z' %}selected{% endif %}>{% trans 'A Z order' %}</option>
+                      <option value="z_to_a" {% if request.GET.sort_by == 'z_to_a' %}selected{% endif %}>{% trans 'Z A order' %}</option>
                   </select>
               </form>
               </div>
@@ -186,7 +186,7 @@
                 </div>
               </div>
               {% empty %}
-             <p>No refrigerators available.</p>
+             <p>No available.</p>
              {% endfor %}
           </div>
           {% else %}

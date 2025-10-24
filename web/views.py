@@ -405,7 +405,87 @@ def cn(request):
    
     return render(request, 'web/cn.html', context)
 
+class arrivedView(ListView):
+    model = Product
+    template_name = "web/shop/arrived.html"
+    context_object_name = "products"
+    paginate_by = 16
 
+    def get_queryset(self):
+            products = Product.objects.filter(is_active=True, is_arrive=True)
+            # subcategories = Subcategory.objects.filter(active=True)
+            sort_by = self.request.GET.get("sort_by")
+            category_slugs = self.request.GET.get("categories")  # Updated query parameter for consistency
+            subcategory_slugs = self.request.GET.get("subcategories")
+            product_type_slugs = self.request.GET.get("product_type")
+            category_title = None
+            subcategory_title = None
+            producttype_title = None
+
+
+            # Filter by category
+            if category_slugs:
+                categories = Category.objects.filter(slug__in=category_slugs.split(","))
+                subcategories = Subcategory.objects.filter(category__in=categories)
+                producttypes = Producttype.objects.filter(Subcategory__in=subcategories)
+                products = products.filter(product_type__in=producttypes)
+
+            # Filter by Subcategory
+            if subcategory_slugs:
+                subcategories = Subcategory.objects.filter(slug__in=subcategory_slugs.split(","))
+                producttypes = Producttype.objects.filter(Subcategory__in=subcategories)
+                products = products.filter(product_type__in=producttypes)
+
+            # Filter by Product Type
+            if product_type_slugs:
+                producttypes = Producttype.objects.filter(slug__in=product_type_slugs.split(","))
+                # subcategories = Subcategory.objects.filter(producttype__in=producttypes)
+                products = products.filter(product_type__in=producttypes)
+            
+                
+            if sort_by:
+                if sort_by == "low_to_high":
+                    annotated_queryset = products.annotate(
+                        min_sale_price_size=Min("available__sale_price"),
+                        # min_sale_price_t=Min("available__sale_price")
+                    )
+                    products = annotated_queryset.order_by("min_sale_price_size")
+
+                elif sort_by == "high_to_low":
+                    annotated_queryset = products.annotate(
+                        max_sale_price_size=Max("available__sale_price"),
+                        # max_sale_price_t=Max("available__sale_price")
+                    )
+                    products = annotated_queryset.order_by("-max_sale_price_size")
+
+                elif sort_by == "rating":
+                    products = products.order_by("-rating")
+
+                elif sort_by == "a_to_z":
+                    products = products.order_by("title")
+
+                elif sort_by == "z_to_a":
+                    products = products.order_by("-title")
+
+                else:
+                    products = products.order_by("-id")
+
+            self.category_title = category_title if category_title else None
+            self.subcategory_title = subcategory_title if subcategory_title else None
+            self.producttype_title = producttype_title if producttype_title else None
+
+            return products
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context["categories"] = Category.objects.prefetch_related('subcategories').filter(status='Published')
+        context["subcategories"] = Subcategory.objects.filter(active=True).prefetch_related('product_types')
+        context["product_type"] = Producttype.objects.filter(active=True)
+        context["title"] = self.category_title
+        context["sub_title"] = self.subcategory_title
+        wishlist_count = Wishlist.objects.filter(user=self.request.user.id).count()
+        context["wishlist_count"] = wishlist_count
+        return context
 
 class driedView(ListView):
     model = Product
