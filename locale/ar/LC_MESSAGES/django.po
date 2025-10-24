@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-10-21 10:16+0530\n"
+"POT-Creation-Date: 2025-10-24 12:10+0530\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -51,15 +51,25 @@ msgstr ""
 msgid "Order Items"
 msgstr ""
 
+#: orders/models.py:197
+msgid "Whatsapp order"
+msgstr ""
+
+#: orders/models.py:198
+msgid "Whatsapp Order"
+msgstr ""
+
 #: product/models.py:26 product/models.py:27
 msgid "Banner"
 msgstr ""
 
-#: product/models.py:66
+#: product/models.py:66 templates/web/product-image.html:68
 msgid "Category"
 msgstr ""
 
-#: product/models.py:67 templates/web/partials/header.html:128
+#: product/models.py:67 templates/web/partials/footer.html:53
+#: templates/web/partials/header.html:135
+#: templates/web/partials/header.html:140
 msgid "Categories"
 msgstr "فئات"
 
@@ -91,11 +101,11 @@ msgstr ""
 msgid "Available"
 msgstr ""
 
-#: product/models.py:433
+#: product/models.py:432
 msgid "Available Size"
 msgstr ""
 
-#: product/models.py:434
+#: product/models.py:433
 msgid "Available Sizes"
 msgstr ""
 
@@ -266,11 +276,11 @@ msgstr ""
 msgid "Account approval on"
 msgstr ""
 
-#: templates/registration/login.html:6 templates/registration/login.html:41
+#: templates/registration/login.html:7 templates/registration/login.html:42
 msgid "Log in"
 msgstr ""
 
-#: templates/registration/login.html:37
+#: templates/registration/login.html:38
 msgid "Forgot your password?"
 msgstr ""
 
@@ -418,6 +428,13 @@ msgstr ""
 msgid "New Arried"
 msgstr "متزوج جديد"
 
+#: templates/web/home/index.html:145 templates/web/home/index.html:252
+#: templates/web/home/index.html:362 templates/web/home/index.html:469
+#: templates/web/home/index.html:578 templates/web/home/index.html:687
+#: templates/web/home/index.html:796 templates/web/home/index.html:905
+msgid "More Products"
+msgstr "المنتجات الكاملة"
+
 #: templates/web/home/index.html:244
 msgid "Dried Products"
 msgstr "المنتجات المجففة"
@@ -445,3 +462,234 @@ msgstr "منتجات شريحة"
 #: templates/web/home/index.html:897
 msgid "Non Salt Products"
 msgstr "منتجات خالية من الملح"
+
+#: templates/web/partials/base.html:11
+msgid "Al Zahr"
+msgstr "الزهر"
+
+#: templates/web/partials/footer.html:59
+msgid "Home Fragrance"
+msgstr "معطرات المنزل"
+
+#: templates/web/partials/footer.html:62
+msgid "Food Beverage"
+msgstr "طعام ومشروبات"
+
+#: templates/web/partials/footer.html:65
+msgid "Patio, Lawn & Garden"
+msgstr "الفناء والعشب والحديقة"
+
+#: templates/web/partials/footer.html:68
+msgid "Gardening care"
+msgstr "العناية بالحديقة"
+
+#: templates/web/partials/footer.html:71
+msgid "Noon Seller"
+msgstr "بائع الظهيرة"
+
+#: templates/web/partials/footer.html:74
+msgid "Amazan Seller"
+msgstr "بائع أمازون"
+
+#: templates/web/partials/footer.html:82
+msgid "Useful Links"
+msgstr "روابط مفيدة"
+
+#: templates/web/partials/footer.html:88 templates/web/partials/header.html:203
+#: templates/web/partials/header.html:241 templates/web/product-image.html:61
+msgid "Home"
+msgstr "بيت"
+
+#: templates/web/partials/footer.html:91 templates/web/partials/header.html:206
+#: templates/web/partials/header.html:262 templates/web/product-image.html:89
+msgid "Shop"
+msgstr "محل"
+
+#: templates/web/partials/footer.html:95
+msgid "Blog"
+msgstr "مدونة"
+
+#: templates/web/partials/footer.html:98 templates/web/partials/footer.html:133
+msgid "Contact Us"
+msgstr "اتصل بنا"
+
+#: templates/web/partials/footer.html:106
+msgid "Help Center"
+msgstr "مركز المساعدة"
+
+#: templates/web/partials/footer.html:116
+msgid "Team of Sale"
+msgstr "فريق المبيعات"
+
+#: templates/web/partials/footer.html:119
+msgid "Privacy Policy"
+msgstr "سياسة الخصوصية"
+
+#: templates/web/partials/footer.html:122
+#: templates/web/partials/header.html:248 templates/web/product-image.html:75
+msgid "Search"
+msgstr "يبحث"
+
+#: templates/web/partials/footer.html:125
+msgid "FAQ"
+msgstr "التعليمات"
+
+#: templates/web/partials/footer.html:142
+msgid "Address"
+msgstr "عنوان"
+
+#: templates/web/partials/footer.html:143
+msgid "Ajman - UAE"
+msgstr "عجمان - الإمارات العربية المتحدة"
+
+#: templates/web/partials/footer.html:152
+msgid "Hotline 24/7 :"
+msgstr "الخط الساخن 24/7 :"
+
+#: templates/web/partials/footer.html:162
+msgid "Email Address :"
+msgstr "عنوان"
+
+#: templates/web/partials/footer.html:177
+msgid "AL ZAHR All Right Reserved"
+msgstr "جميع الحقوق محفوظة لشركة الزهر"
+
+#: templates/web/partials/header.html:36
+msgid "I am searching for..."
+msgstr "انا ابحث عن..."
+
+#: templates/web/partials/header.html:52
+msgid "Search here.."
+msgstr "ابحث هنا.."
+
+#: templates/web/partials/header.html:93
+msgid "Hello,"
+msgstr "مرحبًا،"
+
+#: templates/web/partials/header.html:102
+msgid "My Account"
+msgstr "حسابي"
+
+#: templates/web/partials/header.html:109
+msgid "Logout"
+msgstr "تسجيل الخروج"
+
+#: templates/web/partials/header.html:113
+msgid "Log In"
+msgstr "تسجيل الدخول"
+
+#: templates/web/partials/header.html:255 templates/web/product-image.html:82
+msgid "My Wish"
+msgstr "أمنيتي"
+
+#: templates/web/product-image.html:14
+msgid "Product Details"
+msgstr "تفاصيل المنتج"
+
+#: templates/web/product-image.html:210
+msgid "Customer Review"
+msgstr "مراجعة العميل"
+
+#: templates/web/product-image.html:293
+msgid "Order WhatsApp"
+msgstr "اطلب واتساب"
+
+#: templates/web/product-image.html:302
+msgid "Add To Wishlist"
+msgstr "أضف إلى قائمة الرغبات"
+
+#: templates/web/product-image.html:310
+msgid "Type : "
+msgstr "يكتب :"
+
+#: templates/web/product-image.html:333
+msgid "AL ZAHR"
+msgstr "الزهر"
+
+#: templates/web/product-image.html:361
+msgid "Address: "
+msgstr "عنوان"
+
+#: templates/web/product-image.html:361
+msgid "AJMAN - UAE"
+msgstr "عجمان - الإمارات العربية المتحدة"
+
+#: templates/web/product-image.html:368
+msgid "Contact Seller: "
+msgstr "بائع الظهيرة"
+
+#: templates/web/product-image.html:400
+msgid "Description"
+msgstr "وصف"
+
+#: templates/web/product-image.html:414
+msgid "Features"
+msgstr "سمات"
+
+#: templates/web/product-image.html:420
+msgid "Review"
+msgstr "مراجعة"
+
+#: templates/web/product-image.html:476
+msgid "Overall Rating"
+msgstr "متوسط ​​التقييم"
+
+#: templates/web/product-image.html:498
+msgid "Review this product"
+msgstr "قم بمراجعة هذا المنتج"
+
+#: templates/web/product-image.html:499
+msgid "Let other customers know what you think"
+msgstr "أخبر العملاء الآخرين بما تفكر فيه"
+
+#: templates/web/product-image.html:574
+msgid "Write a review"
+msgstr "اكتب مراجعة"
+
+#: templates/web/product-image.html:597
+msgid "Your Fullname *"
+msgstr "اسمك الكامل *"
+
+#: templates/web/product-image.html:601
+msgid "Overall rating"
+msgstr "متوسط ​​التقييم"
+
+#: templates/web/product-image.html:612
+msgid "Your Question *"
+msgstr "سؤالك *"
+
+#: templates/web/product-image.html:617
+msgid "Close"
+msgstr "يغلق"
+
+#: templates/web/product-image.html:618
+msgid "Save changes"
+msgstr "حفظ التغييرات"
+
+#: templates/web/shop.html:103
+msgid "Sort By :"
+msgstr "فرز حسب :"
+
+#: templates/web/shop.html:106
+msgid "Sort by: All Products"
+msgstr "المنتجات الكاملة"
+
+#: templates/web/shop.html:107
+msgid "Low - High"
+msgstr "منخفض - مرتفع"
+
+#: templates/web/shop.html:108
+msgid "High - Low"
+msgstr "مرتفع - منخفض"
+
+#: templates/web/shop.html:109
+msgid "Average Rating"
+msgstr "متوسط ​​التقييم"
+
+#: templates/web/shop.html:110
+msgid "A Z order"
+msgstr "طلب A Z"
+
+#: templates/web/shop.html:111
+msgid "Z A order"
+msgstr "طلب Z A"

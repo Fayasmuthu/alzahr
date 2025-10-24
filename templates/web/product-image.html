@@ -11,7 +11,7 @@
     <meta name="keywords" content="Bluetower">
     <meta name="author" content="Bluetower">
     <link rel="icon" href="{% static 'web/assets/images/logo/favicon.ico' %}" type="image/x-icon">
-    <title>Product Details</title>
+    <title>{% trans 'Product Details' %}</title>
 
     <!-- Google font -->
     <link rel="preconnect" href="https://fonts.gstatic.com/">
@@ -58,35 +58,35 @@
             <li class="active">
                 <a href="{% url "web:index" %}">
                     <i class="iconly-Home icli"></i>
-                    <span>Home</span>
+                    <span>{% trans 'Home' %}</span>
                 </a>
             </li>
 
             <li class="mobile-category d-none">
                 <a href="javascript:void(0)">
                     <i class="iconly-Category icli js-link"></i>
-                    <span>Category</span>
+                    <span>{% trans 'Category' %}</span>
                 </a>
             </li>
 
             <li class="d-none">
                 <a href="{% url "web:search" %}" class="search-box">
                     <i class="iconly-Search icli"></i>
-                    <span>Search</span>
+                    <span>{% trans 'Search' %}</span>
                 </a>
             </li>
 
             <li>
                 <a href="{% url "orders:wishlist" %}" class="notifi-wishlist">
                     <i class="iconly-Heart icli"></i>
-                    <span>My Wish</span>
+                    <span>{% trans 'My Wish' %}</span>
                 </a>
             </li>
 
             <li>
                 <a href="{% url "web:shop" %}">
                     <i class="iconly-Bag-2 icli fly-cate"></i>
-                    <span>Shop</span>
+                    <span>{% trans 'Shop' %}</span>
                 </a>
             </li>
         </ul>
@@ -207,7 +207,7 @@
                                                 {% endif %}
                                             {% endfor %}
                                         </ul>
-                                        <span class="review">{{ product.num_of_reviews }} Customer Review</span>
+                                        <span class="review">{{ product.num_of_reviews }} {% trans 'Customer Review' %}</span>
                                     </div>
                                 </div>
 
@@ -290,7 +290,7 @@
                                             <!-- Your variant selection radio buttons here -->
                                             
                                             <button type="button" onclick="orderAndOpenWhatsApp()" class="btn btn-md bg-green-wp cart-button text-white w-100">
-                                                Order WhatsApp
+                                                {% trans 'Order WhatsApp' %}
                                             </button>
                                         </div>
                                 </div>
@@ -299,16 +299,19 @@
                                 <div class="buy-box">
                                     <a href="{% url "orders:wishlist" %}" class="btn-action-wishlist" data-product_id="{{ product.id }}">
                                         <i data-feather="heart"></i>
-                                        <span>Add To Wishlist</span>
+                                        <span>{% trans 'Add To Wishlist' %}</span>
                                     </a> 
                                 </div>
 
                                 <div class="pickup-box">        
                                     <div class="product-info">
                                         <ul class="product-info-list product-info-list-2">
-                                            {% comment %} <li>Type : <a href="javascript:void(0)">{{product.title}}</a></li> {% endcomment %}
-                                            <li>Model Number : <a href="javascript:void(0)">{{product.model_number}}</a></li>
-                                            <li>Stock : <a href="javascript:void(0)" data-stock="{{ product.stock }}">{{product.stock}}</a></li>
+                                            
+                                            <li>{% trans 'Type : ' %}<a href="javascript:void(0)">{{product.title}}</a></li> 
+                                            {% if product.model_number %}                                                
+                                            <li>Model Number : <a href="javascript:void(0)">{{product.model_number|default:""}}</a></li>
+                                            {% endif %}
+                                            {% comment %} <li>Stock : <a href="javascript:void(0)" data-stock="{{ product.stock }}">{{product.stock}}</a></li> {% endcomment %}
                                         </ul>
                                     </div>
                                 </div>
@@ -326,7 +329,7 @@
                                     <img src="{% static 'web/assets/images/logo/logo-blue-png.png' %}" class="blur-up lazyload" alt="">
                                 </div>
                                 <div class="vendor-name">
-                                    <h5 class="fw-500">AL ZAHR</h5>
+                                    <h5 class="fw-500">{% trans 'AL ZAHR' %}</h5>
 
                                     <div class="product-rating mt-1">
                                         <ul class="rating">
@@ -354,14 +357,14 @@
                                     <li>
                                         <div class="address-contact">
                                             <i data-feather="map-pin"></i>
-                                            <h5>Address: <span class="text-content">AJMAN - UAE</span></h5>
+                                            <h5>{% trans 'Address: ' %}<span class="text-content">{% trans 'AJMAN - UAE' %}</span></h5>
                                         </div>
                                     </li>
 
                                     <li>
                                         <div class="address-contact">
                                             <i data-feather="headphones"></i>
-                                            <h5>Contact Seller: <span class="text-content">(+971) 58 333 0297</span></h5>
+                                            <h5>{% trans 'Contact Seller: ' %}<span class="text-content">(+971) 58 333 0297</span></h5>
                                         </div>
                                     </li>
                                 </ul>
@@ -393,27 +396,27 @@
                             {% if product.description %}
                             <li class="nav-item" role="presentation">
                                 <button class="nav-link active" id="description-tab" data-bs-toggle="tab"
-                                    data-bs-target="#description" type="button" role="tab">Description</button>
+                                    data-bs-target="#description" type="button" role="tab">{% trans 'Description' %}</button>
                             </li>
                             {% endif %}
                             {% if product.get_infrom %}
                             <li class="nav-item" role="presentation">
                                 <button class="nav-link" id="info-tab" data-bs-toggle="tab" data-bs-target="#info"
-                                    type="button" role="tab">Additional
-                                    info</button>
+                                    type="button" role="tab">{% trans 'Additional
+                                    info' %}</button>
                             </li>
                             {% endif %}
 
                             {% if product.get_features %}
                             <li class="nav-item" role="presentation">
                                 <button class="nav-link" id="care-tab" data-bs-toggle="tab" data-bs-target="#care"
-                                    type="button" role="tab">Features</button>
+                                    type="button" role="tab">{% trans 'Features' %}</button>
                             </li>
                             {% endif %}
 
                             <li class="nav-item" role="presentation">
                                 <button class="nav-link" id="review-tab" data-bs-toggle="tab" data-bs-target="#review"
-                                    type="button" role="tab">Review</button>
+                                    type="button" role="tab">{% trans 'Review' %}</button>
                             </li>
                         </ul>
 
@@ -469,7 +472,7 @@
                                                                 <i data-feather="star"></i>
                                                             </h2>
 
-                                                            <h5>{{product.num_of_reviews}} Overall Rating</h5>
+                                                            <h5>{{product.num_of_reviews}} {% trans 'Overall Rating' %}</h5>
                                                         </div>
                                                     </div>
 
@@ -491,11 +494,10 @@
                                                         </ul>
 
                                                         <div class="review-title-2">
-                                                            <h4 class="fw-bold">Review this product</h4>
-                                                            <p>Let other customers know what you think</p>
+                                                            <h4 class="fw-bold">{% trans 'Review this product' %}</h4>
+                                                            <p>{% trans 'Let other customers know what you think' %}</p>
                                                             <button class="btn" type="button" data-bs-toggle="modal"
-                                                                data-bs-target="#writereview">Write a
-                                                                review</button>
+                                                                data-bs-target="#writereview">{% trans 'Write a review' %}</button>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -567,7 +569,7 @@
         <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h1 class="modal-title fs-5" id="exampleModalLabel">Write a review</h1>
+                    <h1 class="modal-title fs-5" id="exampleModalLabel">{% trans 'Write a review' %}</h1>
                     <button type="button" class="btn-close" data-bs-dismiss="modal">
                         <i class="fa-solid fa-xmark"></i>
                     </button>
@@ -590,11 +592,11 @@
                             </div>
                         </div>
                         <div class="review-box">
-                            <label for="fullname" class="form-label">Your Fullname *</label>
+                            <label for="fullname" class="form-label">{% trans 'Your Fullname *' %}</label>
                             {{ review_form.fullname }}
                         </div>
                         <div class="review-box">
-                            <h5 class="mb-3">Overall rating</h5>
+                            <h5 class="mb-3">{% trans 'Overall rating' %}</h5>
                             <div id="rater" class="rating" data-rating="0">
                                 <span data-value="1">★</span>
                                 <span data-value="2">★</span>
@@ -605,13 +607,13 @@
                             <input type="hidden" name="rating" id="rating" value="">
                         </div>
                         <div class="review-box">
-                            <label for="content" class="form-label">Your Question *</label>
+                            <label for="content" class="form-label">{% trans 'Your Question *' %}</label>
                             {{ review_form.content }}
                         </div>
                     </div>
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-md btn-theme-outline fw-bold" data-bs-dismiss="modal">Close</button>
-                        <button type="submit" class="btn btn-md fw-bold text-light theme-bg-color">Save changes</button>
+                        <button type="button" class="btn btn-md btn-theme-outline fw-bold" data-bs-dismiss="modal">{% trans 'Close' %}</button>
+                        <button type="submit" class="btn btn-md fw-bold text-light theme-bg-color">{% trans 'Save changes' %}</button>
                     </div>
                 </form>
                 
@@ -826,7 +828,7 @@
     const salePrice = selected.dataset.sale_price;
     const label = selected.dataset.label;
     const productName = "{{ product.title|escapejs }}";
-    const number = "916282134481";
+    const number = "971583330297";
 
     let variantType = '';
     let variantId = '';

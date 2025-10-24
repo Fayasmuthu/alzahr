@@ -1,0 +1,24 @@
+[Unit]
+Description=gunicorn daemon for alzahr
+After=network.target
+
+[Service]
+User=bluetower
+Group=www-data
+WorkingDirectory=/home/bluetower/home/srv/alzahr
+Environment="PATH=/home/bluetower/home/srv/alzahr/venv/bin"
+ExecStart=/home/bluetower/home/srv/alzahr/venv/bin/gunicorn \
+    --workers 3 \
+    --timeout 60 \
+    --access-logfile - \
+    --error-logfile - \
+    --bind unix:/run/gunicorn/alzahr.sock alzahr.wsgi:application
+
+# ✅ Ensure correct permissions on the socket
+RuntimeDirectoryMode=775
+UMask=0007
+
+Restart=always
+
+[Install]
+WantedBy=multi-user.target
